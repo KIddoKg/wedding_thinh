@@ -107691,13 +107691,13 @@ case 1:return new A.Q3()
 case 2:return new A.YZ()
 default:return new A.Jv()}}}
 A.Jv.prototype={
-gtU(){return" http://54.179.94.142:8081/api/v1"},
+gtU(){return"https://api.braintrainhcmiu.com/api/v1"},
 $itz:1}
 A.Q3.prototype={
-gtU(){return"http://54.179.94.142:8081/api/v1"},
+gtU(){return"https://api.braintrainhcmiu.com/api/v1"},
 $itz:1}
 A.YZ.prototype={$itz:1,
-gtU(){return"http://54.179.94.142:8081/api/v1"}}
+gtU(){return"https://api.braintrainhcmiu.com/api/v1"}}
 A.aQg.prototype={
 $0(){return new A.bJ(null,t.Ik)},
 $S:224}
