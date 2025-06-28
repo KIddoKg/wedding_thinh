@@ -47,7 +47,7 @@ abstract class Env {
 
 class UatEnv implements Env {
   @override
-  String get baseUrl => ' http://54.179.94.142:8081/api/v1';
+  String get baseUrl => 'https://api.braintrainhcmiu.com/api/v1';
   @override
   String get apiKey => 'xJL86Xe4owFAq68IVlVSYUGJ4IirntBUUD0KnTB9';
   @override
@@ -56,7 +56,7 @@ class UatEnv implements Env {
 
 class BetaEnv implements Env {
   @override
-  String get baseUrl => 'http://54.179.94.142:8081/api/v1';
+  String get baseUrl => 'https://api.braintrainhcmiu.com/api/v1';
   @override
   String get apiKey => 'xJL86Xe4owFAq68IVlVSYUGJ4IirntBUUD0KnTB9';
   @override
@@ -65,7 +65,7 @@ class BetaEnv implements Env {
 
 class ProdEnv implements Env {
   @override
-  String baseUrl = 'http://54.179.94.142:8081/api/v1';
+  String baseUrl = 'https://api.braintrainhcmiu.com/api/v1';
   @override
   String apiKey = 'xJL86Xe4owFAq68IVlVSYUGJ4IirntBUUD0KnTB9';
   @override
