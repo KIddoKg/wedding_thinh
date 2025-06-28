@@ -231,7 +231,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                       key: vm.panelKey,
                       blackLottieAsset: Assets.json.jsonMenu,
                       whiteLottieAsset: Assets.json.jsonMenuWhite,
-                      targetHeight: 650,
+                      targetHeight: 750,
                       content: Padding(
                         padding: const EdgeInsets.only(left: 24.0, top: 16),
                         child: Column(
