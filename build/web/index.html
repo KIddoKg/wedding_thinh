@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+    <!--    <meta name="description" content="Thiệp cưới online của Gia Thịnh & Bảo Hân, cùng đếm ngược đến ngày trọng đại!">-->
+
+    <meta name="description"
+          content="Thiệp cưới online của Gia Thịnh & Bảo Hân, cùng đếm ngược đến ngày trọng đại!">
+
+
+    <base href="/">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- App Info -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="wedding_hkn">
+    <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+    <title>Thiệp cưới 💍</title>
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Imperial+Script&family=Cormorant+Infant:wght@400;600&display=swap"
+          rel="stylesheet">
+
+
+    <!-- Meta thumbnail preview for Messenger, Facebook, Zalo, etc. -->
+    <!-- 👇 THÊM vào trong <head> -->
+    <meta property="og:title" content="Gia Thịnh & Bảo Hân - Wedding Invitation"/>
+    <meta property="og:description" content="Cùng chúng mình đếm ngược tới ngày cưới nhé!"/>
+    <meta property="og:image" content="https://hanthinhwedding.com/assets/png_one.png"/>
+    <meta property="og:url" content="https://hanthinhwedding.com"/>
+    <meta property="og:type" content="website"/>
+
+    <!-- Cho Twitter preview nếu muốn -->
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:title" content="Gia Thịnh & Bảo Hân - Wedding Invitation"/>
+    <meta name="twitter:description" content="Cùng chúng mình đếm ngược tới ngày cưới nhé!"/>
+    <meta name="twitter:image" content="https://hanthinhwedding.com/assets/png_one.png"/>
+
+
+    <!-- Splash Styles -->
+    <style>
+        #loading-splash {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          background-color: white;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          z-index: 9999;
+          opacity: 1;
+          transition: opacity 0.5s ease-out;
+
+          /* Dành cho mobile GPU rendering */
+          transform: none;
+          animation: none;
+          will-change: opacity;
+          backface-visibility: hidden;
+          -webkit-transform: translateZ(0); /* Tối ưu cho Safari mobile */
+        }
+#loading-splash img,
+#loading-text,
+#loading-date {
+  transform: none;
+  animation: none;
+  backface-visibility: hidden;
+  -webkit-transform: translateZ(0); /* Tắt phóng to tự động Safari */
+}
+
+
+                 #loading-splash img {
+                   width: 80px;
+                   height: 80px;
+                   margin-bottom: 16px;
+                 }
+
+              #loading-text {
+          font-family: 'Imperial Script', cursive;
+          font-size: 50px;
+          color: #1E2B20;
+          margin-bottom: 4px;
+          text-align: center; /* 👈 Cái này là để chữ canh giữa theo chiều ngang */
+        }
+
+
+                 #loading-date {
+                   font-family: 'Cormorant Infant', serif;
+                   font-size: 25px;
+                   color: #333;
+                 }
+
+
+    </style>
+</head>
+
+<body>
+<!--<script>-->
+<!--    const splash = document.getElementById('loading-splash');-->
+
+<!--    // Ẩn splash ban đầu-->
+<!--    splash.style.opacity = '0';-->
+<!--    splash.style.display = 'none';-->
+
+<!--    // Khi font tải xong thì mới hiện splash-->
+<!--    document.fonts.ready.then(() => {-->
+<!--      splash.style.display = 'flex';-->
+<!--      setTimeout(() => {-->
+<!--        splash.style.opacity = '1';-->
+<!--      }, 10); // delay nhẹ để đảm bảo transition-->
+<!--    });-->
+<!--</script>-->
+
+
+<!-- Flutter bootstrap -->
+<script src="flutter_bootstrap.js" async></script>
+
+<!-- Splash screen -->
+<div id="loading-splash">
+    <img src="/assets/json_gif.gif" alt="Logo"/>
+    <div id="loading-text">Gia Thịnh & Bảo Hân</div>
+    <div id="loading-date">14/07/2025</div>
+</div>
+</body>
+</html>
