@@ -2109,8 +2109,14 @@ class _FlyingChatBubbleState extends State<FlyingChatBubble>
           const SizedBox(height: 8),
           Text(
             data.message,
-            style: const TextStyle(color: Colors.black54),
-          ),
+            style: TextStyle(
+              fontFamily: GoogleFonts.cormorantInfant().fontFamily, // hoặc GoogleFonts.roboto().fontFamily
+              fontFamilyFallback: ['NotoColorEmoji'],
+              fontSize: 16,
+              color: Colors.black87,
+            ),
+          )
+
         ],
       ),
     );
