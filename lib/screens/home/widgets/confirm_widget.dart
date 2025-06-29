@@ -38,7 +38,7 @@ class _ConfirmWidgetState extends State<_ConfirmWidget> {
                       children: [
                         Expanded(
                           child: AspectRatio(
-                            aspectRatio: 16 / 9,
+                            aspectRatio: 16 / 9, // hoặc 2 / 3
                             child: Stack(
                               children: [
                                 // Ảnh nền toàn khung
@@ -186,6 +186,9 @@ class _ConfirmWidgetState extends State<_ConfirmWidget> {
                                         color: AppStyle.primaryGrayB8C1B2)),
                             SizedBox(height: 8,),
                             TextField(
+                              onTap: (){
+                                EmojiPopupController().hide();
+                              },
                               controller: vm.nameController,
                               decoration: InputDecoration(
                                 hintText: "Họ và Tên",
@@ -272,6 +275,7 @@ class _ConfirmWidgetState extends State<_ConfirmWidget> {
                                 );
                               }).toList(),
                               onChanged: (value) {
+                                EmojiPopupController().hide();
                                 vm.selected = value;
                               },
                             ),
@@ -294,60 +298,40 @@ class _ConfirmWidgetState extends State<_ConfirmWidget> {
                                     .copyWith(
                                     color: AppStyle.primaryGrayB8C1B2)),
                             SizedBox(height: 8,),
-                            TextField(
-                              controller: vm.noteContoller,
-                              minLines: 5,
-                              maxLines: 7,
-                              decoration: InputDecoration(
-                                hintText: "Nhập lời chúc của bạn",
-                                filled: true,
-                                hintStyle: KSTextStyle()
-                                    .style(
-                                      15,
-                                      FontWeight.w400,
-                                      fontBuilder: GoogleFonts.cormorantInfant,
-                                    )
-                                    .copyWith(
-                                        color: AppStyle.primaryGray8D8D8D),
-                                fillColor: Colors.white,
-                                contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 12),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                  borderSide:
-                                      BorderSide.none, // 👈 không có viền
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                  borderSide:
-                                      const BorderSide(color: Colors.black),
-                                ),
-                              ),
-                              style: KSTextStyle()
-                                  .style(
-                                    15,
-                                    FontWeight.w400,
-                                    fontBuilder: GoogleFonts.cormorantInfant,
-                                  )
-                                  .copyWith(color: AppStyle.primaryGray8D8D8D),
-                            ),
+                            EmojiTextField(onChanged: (String x){
+
+                              vm.noteContoller.text = x;
+                            },),
+
                             SizedBox(
                               height: 64,
                             ),
-                            Container(
+                            MouseRegion(
+                              hitTestBehavior: HitTestBehavior.translucent,
+                              onEnter: (_) => vm.setHover(true),
+                              onExit: (_) => vm.setHover(false),
+                              child:    AnimatedScale(
+                                duration: const Duration(milliseconds: 200),
+                                scale:  vm.isHover ? 1.1 : 1.0,
+                                child:  Container(
 
 
-                                width: 100,
-                                height: 35,
-                                child: KSButton(
-                                  onTap: (){
+                                    width: 100,
+                                    height: 35,
+                                    child: KSButton(
+                                      onTap: (){
+                                        EmojiPopupController().hide();
+                                        vm.postInvitation(context);
+                                      },
+                                      "Gửi ngay",
+                                      backgroundColor: AppStyle.primaryColorBlack,
 
-                                    vm.postInvitation(context);
-                                  },
-                                  "Gửi ngay",
-                                  backgroundColor: AppStyle.primaryColorBlack,
+                                    ))
+                              ),
 
-                                ))
+                            ),
+
+
                           ],
                         ),
                       ],

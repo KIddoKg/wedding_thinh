@@ -9,9 +9,10 @@ import 'package:wedding_hkn/screens/home/viewModel/home_screen_vm.dart';
 import 'package:wedding_hkn/share/size_configs.dart';
 import 'package:sizer/sizer.dart';
 import 'package:wedding_hkn/share/text_style.dart';
-
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'app_imports.dart';
 import 'package:lottie/lottie.dart';
+import 'package:flutter/foundation.dart' as foundation;
 
 class KSIconTextButton extends StatelessWidget {
   final String iconAsset;
@@ -313,6 +314,7 @@ class _GroupedFocusCarouselState extends State<GroupedFocusCarousel> {
 
 
   void _next() {
+
     _resetTimer();
     // _precacheCurrentAndNextGroup();
     setState(() {
@@ -349,6 +351,7 @@ class _GroupedFocusCarouselState extends State<GroupedFocusCarousel> {
   }
 
   void _prev() {
+
     _resetTimer();
     // _precacheCurrentAndNextGroup();
     setState(() {
@@ -463,14 +466,20 @@ class _GroupedFocusCarouselState extends State<GroupedFocusCarousel> {
           left: 16,
           child: _ArrowButton(
             icon: Icons.arrow_back_ios_new,
-            onPressed: _prev,
+            onPressed: (){
+              _prev();
+              EmojiPopupController().hide();
+            },
           ),
         ),
         Positioned(
           right: 16,
           child: _ArrowButton(
             icon: Icons.arrow_forward_ios,
-            onPressed: _next,
+            onPressed: (){
+              EmojiPopupController().hide();
+              _next();
+            },
           ),
         ),
       ],
@@ -511,13 +520,31 @@ class _GroupedFocusCarouselMobileState extends State<GroupedFocusCarouselMobile>
   void initState() {
     super.initState();
     _startAutoPlay();
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   print("objectA");
+    //
+    //   _precacheAllImages();
+    // });
   }
 
   void _startAutoPlay() {
     _timer = Timer.periodic(widget.autoPlayInterval, (_) => _next());
   }
 
-  void _resetTimer() {
+
+
+void _precacheAllImages() async {
+    print(widget.imagePaths.length);
+  for (final url in widget.imagePaths) {
+    print('📦 Precaching: $url');
+    await precacheImage(NetworkImage(url), context);
+  }
+
+  print('✅ All images precached!');
+}
+
+
+void _resetTimer() {
     _timer?.cancel();
     _startAutoPlay();
   }
@@ -538,7 +565,15 @@ class _GroupedFocusCarouselMobileState extends State<GroupedFocusCarouselMobile>
               widget.imagePaths.length;
     });
   }
+  // @override
+  // void didUpdateWidget(covariant GroupedFocusCarouselMobile oldWidget) {
+  //   super.didUpdateWidget(oldWidget);
+  //   if (oldWidget.imagePaths != widget.imagePaths && widget.imagePaths.isNotEmpty) {
+  //     _precacheAllImages();
+  //   }
+  // }
 
+bool _hasPrecached = false;
   @override
   void dispose() {
     _timer?.cancel();
@@ -549,7 +584,13 @@ class _GroupedFocusCarouselMobileState extends State<GroupedFocusCarouselMobile>
   Widget build(BuildContext context) {
     final image = widget.imagePaths[currentFocusIndex];
     final screenWidth = MediaQuery.of(context).size.width;
-
+    // print(widget.imagePaths);
+    if (!_hasPrecached && widget.imagePaths.isNotEmpty) {
+      _hasPrecached = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _precacheAllImages();
+      });
+    }
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -575,16 +616,7 @@ class _GroupedFocusCarouselMobileState extends State<GroupedFocusCarouselMobile>
               width: screenWidth * widget.focusScale,
               height: widget.focusHeight,
               margin: const EdgeInsets.symmetric(horizontal: 8),
-              child: Image.network(
-                image,
-                fit: BoxFit.cover,
-                loadingBuilder: (context, child, loadingProgress) =>
-                loadingProgress == null
-                    ? child
-                    : const Center(child: CircularProgressIndicator()),
-                errorBuilder: (context, error, stackTrace) =>
-                const Center(child: Icon(Icons.broken_image, size: 40)),
-              ),
+              child: NetworkImageSmartLoading(url: image),
             ),
           ),
         ),
@@ -594,14 +626,20 @@ class _GroupedFocusCarouselMobileState extends State<GroupedFocusCarouselMobile>
           child: _ArrowButtonMobile(
             icon: Icons.arrow_back,
 
-            onPressed: _prev,
+            onPressed: (){
+              EmojiPopupController().hide();
+              _prev();
+            },
           ),
         ),
         Positioned(
           right: 16,
           child: _ArrowButtonMobile(
             icon: Icons.arrow_forward,
-            onPressed: _next,
+            onPressed: (){
+              EmojiPopupController().hide();
+              _next();
+            },
           ),
         ),
       ],
@@ -958,6 +996,7 @@ class TimelineItemWidget extends StatelessWidget {
                     .copyWith(color: AppStyle.primaryGreen647B58),
               ),
               const SizedBox(height: 16),
+
               KSInkWellUnFocus(
                 onTap: onTap,
                 radius: 24,
@@ -1054,7 +1093,7 @@ class TimelineItemWidgetMobile extends StatelessWidget {
               children: [
                 KSText(
                   title,
-                  style: KSTheme.of(context).style.ts42w500.copyWith(
+                  style: KSTheme.of(context).style.ts30w500.copyWith(
                     color: Colors.black,
                     height: 1.0,
                   ),
@@ -1201,29 +1240,29 @@ class _CrossScrollDrivenAnimationState extends State<CrossScrollDrivenAnimation>
   void initState() {
     super.initState();
 
-    _mainController = AnimationController(
-      vsync: this,
-      duration: Duration(milliseconds: 1500),
-    );
+    // _mainController = AnimationController(
+    //   vsync: this,
+    //   duration: Duration(milliseconds: 1500),
+    // );
+    //
+    // _redBoxController = AnimationController(
+    //   vsync: this,
+    //   duration: Duration(milliseconds: 500),
+    // );
+    //
+    // _redOpacity = Tween<double>(begin: 1.0, end: 0.0).animate(
+    //   CurvedAnimation(parent: _redBoxController, curve: Curves.easeOut),
+    // );
+    //
+    // _mainController.addStatusListener((status) {
+    //   if (status == AnimationStatus.dismissed) {
+    //     _redBoxPlayed = false;
+    //   }
+    // });
 
-    _redBoxController = AnimationController(
-      vsync: this,
-      duration: Duration(milliseconds: 500),
-    );
-
-    _redOpacity = Tween<double>(begin: 1.0, end: 0.0).animate(
-      CurvedAnimation(parent: _redBoxController, curve: Curves.easeOut),
-    );
-
-    _mainController.addStatusListener((status) {
-      if (status == AnimationStatus.dismissed) {
-        _redBoxPlayed = false;
-      }
-    });
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      widget.scrollController.addListener(_handleScroll);
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   widget.scrollController.addListener(_handleScroll);
+    // });
   }
 
   void _handleScroll() {
@@ -1287,226 +1326,218 @@ class _CrossScrollDrivenAnimationState extends State<CrossScrollDrivenAnimation>
 
   @override
   void dispose() {
-    widget.scrollController.removeListener(_handleScroll);
-    _mainController.dispose();
-    _redBoxController.dispose();
+    // widget.scrollController.removeListener(_handleScroll);
+    // _mainController.dispose();
+    // _redBoxController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    final width = MediaQuery.of(context).size.width;
+    // final width = MediaQuery.of(context).size.width;
+    //
+    // final leftTween = Tween<double>(
+    //   begin: 0,
+    //   end: width - widget.leftBoxWidth,
+    // ).animate(_mainController);
+    //
+    // final rightTween = Tween<double>(
+    //   begin: width - widget.rightBoxWidth,
+    //   end: 0,
+    // ).animate(_mainController);
 
-    final leftTween = Tween<double>(
-      begin: 0,
-      end: width - widget.leftBoxWidth,
-    ).animate(_mainController);
+    return Container(
+      key: _key,
+      height: 700,
+      child: Stack(
+        children: [
+          Container(
+            child: Stack(
+              children: [
+                Positioned(
+                  left: 20,
+                  top: 20,
+                  width: widget.leftBoxWidth,
 
-    final rightTween = Tween<double>(
-      begin: width - widget.rightBoxWidth,
-      end: 0,
-    ).animate(_mainController);
-
-    return NotificationListener<ScrollNotification>(
-      onNotification: (_) => true,
-      child: Container(
-        key: _key,
-        height: 700,
-        child: Stack(
-          children: [
-            Container(
-              child: AnimatedBuilder(
-                animation: _mainController,
-                builder: (_, __) {
-                  return Stack(
+                  child: Column(
                     children: [
-                      Positioned(
-                        left: leftTween.value,
-                        top: 20,
+                      Container(
                         width: widget.leftBoxWidth,
-
-                        child: Column(
-                          children: [
-                            Container(
-                              width: widget.leftBoxWidth,
-                              height: widget.leftBoxHeight,
-                              child: widget.leftBox,
-                            ),
-                            AutoSizeText("Nguyễn Thị Bảo Hân",
-                                maxLines: 1,
-                                minFontSize: 10,
-                                style: KSTextStyle()
-                                    .style(
-                                  20.sp,
-                                  FontWeight.w400,
-                                  fontBuilder: GoogleFonts.imperialScript,
-                                )
-                                    .copyWith(color: AppStyle.whiteBg)),
-                            KSText(
-                              textAlign: TextAlign.center,
-                              'Út Nữ',
-                              style: KSTextStyle()
-                                  .style(
-                                    20,
-                                    FontWeight.w400,
-                                    fontBuilder: GoogleFonts.cormorantInfant,
-                                  )
-                                  .copyWith(color: AppStyle.whiteBg),
-                            ),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.rectangle,
-                                        color: AppStyle.whiteBg),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(4.0),
-                                      child: SvgPicture.asset(
-                                        Assets.svg.svgPhone.keyName,
-                                        width: 20,
-                                        color: Colors.black,
-                                      ),
-                                    )),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.rectangle,
-                                          color: AppStyle.whiteBg),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(4.0),
-                                        child: Image.asset(
-                                            Assets.png.pngZalo.keyName,
-                                            width: 20,
-                                            color: Colors.black),
-                                      )),
-                                ),
-                                Container(
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.rectangle,
-                                        color: AppStyle.whiteBg),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(4.0),
-                                      child: SvgPicture.asset(
-                                          Assets.svg.svgFace.keyName,
-                                          width: 20,
-                                          color: Colors.black),
-                                    ))
-                              ],
-                            )
-                          ],
-                        ),
+                        height: widget.leftBoxHeight,
+                        child: widget.leftBox,
                       ),
-                      Positioned(
-                        left: rightTween.value,
-                        top: 20,
-                        width: widget.rightBoxWidth,
-
-                        child: Column(
-                          children: [
-                            Container(
-                              width: widget.rightBoxWidth,
-                              height: widget.rightBoxHeight,
-                              child: widget.rightBox,
-                            ),
-                            AutoSizeText("Lê Gia Thịnh",
-                                maxLines: 1,
-                                minFontSize: 10,
-                                style: KSTextStyle()
-                                    .style(
-                                  20.sp,
-                                  FontWeight.w400,
-                                  fontBuilder: GoogleFonts.imperialScript,
-                                )
-                                    .copyWith(color: AppStyle.whiteBg)),
-                            KSText(
-                              textAlign: TextAlign.center,
-                              'Út Nam',
-                              style: KSTextStyle()
-                                  .style(
-                                    20,
-                                    FontWeight.w400,
-                                    fontBuilder: GoogleFonts.cormorantInfant,
-                                  )
-                                  .copyWith(color: AppStyle.whiteBg),
-                            ),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.rectangle,
-                                        color: AppStyle.whiteBg),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(4.0),
-                                      child: SvgPicture.asset(
-                                        Assets.svg.svgPhone.keyName,
-                                        width: 20,
-                                        color: Colors.black,
-                                      ),
-                                    )),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.rectangle,
-                                          color: AppStyle.whiteBg),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(4.0),
-                                        child: Image.asset(
-                                            Assets.png.pngZalo.keyName,
-                                            width: 20,
-                                            color: Colors.black),
-                                      )),
-                                ),
-                                Container(
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.rectangle,
-                                        color: AppStyle.whiteBg),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(4.0),
-                                      child: SvgPicture.asset(
-                                          Assets.svg.svgFace.keyName,
-                                          width: 20,
-                                          color: Colors.black),
-                                    ))
-                              ],
+                      AutoSizeText("Nguyễn Thị Bảo Hân",
+                          maxLines: 1,
+                          minFontSize: 10,
+                          style: KSTextStyle()
+                              .style(
+                            20.sp,
+                            FontWeight.w400,
+                            fontBuilder: GoogleFonts.imperialScript,
+                          )
+                              .copyWith(color: AppStyle.whiteBg)),
+                      KSText(
+                        textAlign: TextAlign.center,
+                        'Út Nữ',
+                        style: KSTextStyle()
+                            .style(
+                              20,
+                              FontWeight.w400,
+                              fontBuilder: GoogleFonts.cormorantInfant,
                             )
-                          ],
-                        ),
+                            .copyWith(color: AppStyle.whiteBg),
                       ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      // Row(
+                      //   crossAxisAlignment: CrossAxisAlignment.center,
+                      //   mainAxisAlignment: MainAxisAlignment.center,
+                      //   children: [
+                      //     Container(
+                      //         decoration: BoxDecoration(
+                      //             shape: BoxShape.rectangle,
+                      //             color: AppStyle.whiteBg),
+                      //         child: Padding(
+                      //           padding: const EdgeInsets.all(4.0),
+                      //           child: SvgPicture.asset(
+                      //             Assets.svg.svgPhone.keyName,
+                      //             width: 20,
+                      //             color: Colors.black,
+                      //           ),
+                      //         )),
+                      //     Padding(
+                      //       padding: const EdgeInsets.all(8.0),
+                      //       child: Container(
+                      //           decoration: BoxDecoration(
+                      //               shape: BoxShape.rectangle,
+                      //               color: AppStyle.whiteBg),
+                      //           child: Padding(
+                      //             padding: const EdgeInsets.all(4.0),
+                      //             child: Image.asset(
+                      //                 Assets.png.pngZalo.keyName,
+                      //                 width: 20,
+                      //                 color: Colors.black),
+                      //           )),
+                      //     ),
+                      //     Container(
+                      //         decoration: BoxDecoration(
+                      //             shape: BoxShape.rectangle,
+                      //             color: AppStyle.whiteBg),
+                      //         child: Padding(
+                      //           padding: const EdgeInsets.all(4.0),
+                      //           child: SvgPicture.asset(
+                      //               Assets.svg.svgFace.keyName,
+                      //               width: 20,
+                      //               color: Colors.black),
+                      //         ))
+                      //   ],
+                      // )
                     ],
-                  );
-                },
-              ),
-            ),
-            AnimatedBuilder(
-              animation: _redBoxController,
-              builder: (_, __) {
-                final shouldShowRed = !_redBoxPlayed ||
-                    _redBoxController.isAnimating ||
-                    !_redBoxController.isCompleted;
+                  ),
+                ),
+                Positioned(
+                  right: 20,
+                  top: 20,
+                  width: widget.rightBoxWidth,
 
-                if (!shouldShowRed) return const SizedBox.shrink();
-
-                return Opacity(
-                  opacity: _redOpacity.value,
-                  child: Center(child: widget.redBox),
-                );
-              },
+                  child: Column(
+                    children: [
+                      Container(
+                        width: widget.rightBoxWidth,
+                        height: widget.rightBoxHeight,
+                        child: widget.rightBox,
+                      ),
+                      AutoSizeText("Lê Gia Thịnh",
+                          maxLines: 1,
+                          minFontSize: 10,
+                          style: KSTextStyle()
+                              .style(
+                            20.sp,
+                            FontWeight.w400,
+                            fontBuilder: GoogleFonts.imperialScript,
+                          )
+                              .copyWith(color: AppStyle.whiteBg)),
+                      KSText(
+                        textAlign: TextAlign.center,
+                        'Út Nam',
+                        style: KSTextStyle()
+                            .style(
+                              20,
+                              FontWeight.w400,
+                              fontBuilder: GoogleFonts.cormorantInfant,
+                            )
+                            .copyWith(color: AppStyle.whiteBg),
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      // Row(
+                      //   crossAxisAlignment: CrossAxisAlignment.center,
+                      //   mainAxisAlignment: MainAxisAlignment.center,
+                      //   children: [
+                      //     Container(
+                      //         decoration: BoxDecoration(
+                      //             shape: BoxShape.rectangle,
+                      //             color: AppStyle.whiteBg),
+                      //         child: Padding(
+                      //           padding: const EdgeInsets.all(4.0),
+                      //           child: SvgPicture.asset(
+                      //             Assets.svg.svgPhone.keyName,
+                      //             width: 20,
+                      //             color: Colors.black,
+                      //           ),
+                      //         )),
+                      //     Padding(
+                      //       padding: const EdgeInsets.all(8.0),
+                      //       child: Container(
+                      //           decoration: BoxDecoration(
+                      //               shape: BoxShape.rectangle,
+                      //               color: AppStyle.whiteBg),
+                      //           child: Padding(
+                      //             padding: const EdgeInsets.all(4.0),
+                      //             child: Image.asset(
+                      //                 Assets.png.pngZalo.keyName,
+                      //                 width: 20,
+                      //                 color: Colors.black),
+                      //           )),
+                      //     ),
+                      //     Container(
+                      //         decoration: BoxDecoration(
+                      //             shape: BoxShape.rectangle,
+                      //             color: AppStyle.whiteBg),
+                      //         child: Padding(
+                      //           padding: const EdgeInsets.all(4.0),
+                      //           child: SvgPicture.asset(
+                      //               Assets.svg.svgFace.keyName,
+                      //               width: 20,
+                      //               color: Colors.black),
+                      //         ))
+                      //   ],
+                      // )
+                    ],
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+          // AnimatedBuilder(
+          //   animation: _redBoxController,
+          //   builder: (_, __) {
+          //     final shouldShowRed = !_redBoxPlayed ||
+          //         _redBoxController.isAnimating ||
+          //         !_redBoxController.isCompleted;
+          //
+          //     if (!shouldShowRed) return const SizedBox.shrink();
+          //
+          //     return Opacity(
+          //       opacity: _redOpacity.value,
+          //       child: Center(child: widget.redBox),
+          //     );
+          //   },
+          // ),
+        ],
       ),
     );
   }
@@ -1561,29 +1592,29 @@ class _CrossScrollDrivenAnimationMobileState extends State<CrossScrollDrivenAnim
   void initState() {
     super.initState();
 
-    _mainController = AnimationController(
-      vsync: this,
-      duration: Duration(milliseconds: 1500),
-    );
-
-    _redBoxController = AnimationController(
-      vsync: this,
-      duration: Duration(milliseconds: 500),
-    );
-
-    _redOpacity = Tween<double>(begin: 1.0, end: 0.0).animate(
-      CurvedAnimation(parent: _redBoxController, curve: Curves.easeOut),
-    );
-
-    _mainController.addStatusListener((status) {
-      if (status == AnimationStatus.dismissed) {
-        _redBoxPlayed = false;
-      }
-    });
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      widget.scrollController.addListener(_handleScroll);
-    });
+    // _mainController = AnimationController(
+    //   vsync: this,
+    //   duration: Duration(milliseconds: 1500),
+    // );
+    //
+    // _redBoxController = AnimationController(
+    //   vsync: this,
+    //   duration: Duration(milliseconds: 500),
+    // );
+    //
+    // _redOpacity = Tween<double>(begin: 1.0, end: 0.0).animate(
+    //   CurvedAnimation(parent: _redBoxController, curve: Curves.easeOut),
+    // );
+    //
+    // _mainController.addStatusListener((status) {
+    //   if (status == AnimationStatus.dismissed) {
+    //     _redBoxPlayed = false;
+    //   }
+    // });
+    //
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   widget.scrollController.addListener(_handleScroll);
+    // });
   }
 
   void _handleScroll() {
@@ -1647,228 +1678,142 @@ class _CrossScrollDrivenAnimationMobileState extends State<CrossScrollDrivenAnim
 
   @override
   void dispose() {
-    widget.scrollController.removeListener(_handleScroll);
-    _mainController.dispose();
-    _redBoxController.dispose();
+    // widget.scrollController.removeListener(_handleScroll);
+    // _mainController.dispose();
+    // _redBoxController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    final width = MediaQuery.of(context).size.width;
-
-    final leftTween = Tween<double>(
-      begin: 0,
-      end: width - widget.leftBoxWidth,
-    ).animate(_mainController);
-
-    final rightTween = Tween<double>(
-      begin: width - widget.rightBoxWidth,
-      end: 0,
-    ).animate(_mainController);
+    // final width = MediaQuery.of(context).size.width;
+    //
+    // final leftTween = Tween<double>(
+    //   begin: 0,
+    //   end: width - widget.leftBoxWidth,
+    // ).animate(_mainController);
+    //
+    // final rightTween = Tween<double>(
+    //   begin: width - widget.rightBoxWidth,
+    //   end: 0,
+    // ).animate(_mainController);
 
     return NotificationListener<ScrollNotification>(
       onNotification: (_) => true,
       child: Container(
         key: _key,
         // color: AppStyle.greyBg,
-        height: 700,
+        height: 480,
             // MediaQuery.of(context).size.height * 0.2,
         child: Stack(
           children: [
+
             Container(
-              child: AnimatedBuilder(
-                animation: _mainController,
-                builder: (_, __) {
-                  return Stack(
-                    children: [
-                      Positioned(
-                        left: leftTween.value,
-                        top: 20,
-                        width: widget.leftBoxWidth,
-                        // height: widget.leftBoxHeight +
-                        //     128+32,
-                        child: Column(
-                          children: [
-                            Container(
-                              width: widget.leftBoxWidth,
-                              height: widget.leftBoxHeight,
-                              child: widget.leftBox,
-                            ),
-                            AutoSizeText("Nguyễn Thị \nBảo Hân",
-                                maxLines: 2,
-                                minFontSize: 10,
-                                style: KSTextStyle()
-                                    .style(
-                                  20.sp,
-                                  FontWeight.w400,
-                                  fontBuilder: GoogleFonts.imperialScript,
-                                )
-                                    .copyWith(color: AppStyle.whiteBg)),
-                            KSText(
-                              textAlign: TextAlign.center,
-                              'Út Nữ',
-                              style: KSTextStyle()
-                                  .style(
-                                20,
-                                FontWeight.w400,
-                                fontBuilder: GoogleFonts.cormorantInfant,
-                              )
-                                  .copyWith(color: AppStyle.whiteBg),
-                            ),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.rectangle,
-                                        color: AppStyle.whiteBg),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(4.0),
-                                      child: SvgPicture.asset(
-                                        Assets.svg.svgPhone.keyName,
-                                        width: 20,
-                                        color: Colors.black,
-                                      ),
-                                    )),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.rectangle,
-                                          color: AppStyle.whiteBg),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(4.0),
-                                        child: Image.asset(
-                                            Assets.png.pngZalo.keyName,
-                                            width: 20,
-                                            color: Colors.black),
-                                      )),
-                                ),
-                                Container(
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.rectangle,
-                                        color: AppStyle.whiteBg),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(4.0),
-                                      child: SvgPicture.asset(
-                                          Assets.svg.svgFace.keyName,
-                                          width: 20,
-                                          color: Colors.black),
-                                    ))
-                              ],
-                            )
-                          ],
+              child: Stack(
+                children: [
+                  Positioned(
+                    left: 0,
+                    top: 20,
+                    width: widget.leftBoxWidth,
+                    // height: widget.leftBoxHeight +
+                    //     128+32,
+                    child: Column(
+                      children: [
+                        Container(
+                          width: widget.leftBoxWidth,
+                          // height: widget.leftBoxHeight,
+                          child: widget.leftBox,
                         ),
-                      ),
-                      Positioned(
-                        left: rightTween.value,
-                        top: 20,
-                        width: widget.rightBoxWidth,
-                        // height: widget.rightBoxHeight +
-                        //     128+32,
-                        child: Column(
-                          children: [
-                            Container(
-                              width: widget.rightBoxWidth,
-                              height: widget.rightBoxHeight,
-                              child: widget.rightBox,
-                            ),
-                            AutoSizeText("Lê Gia \nThịnh",
-                                maxLines: 2,
-                                minFontSize: 10,
-                                style: KSTextStyle()
-                                    .style(
-                                  20.sp,
-                                  FontWeight.w400,
-                                  fontBuilder: GoogleFonts.imperialScript,
-                                )
-                                    .copyWith(color: AppStyle.whiteBg)),
-                            KSText(
-                              textAlign: TextAlign.center,
-                              'Út Nam',
-                              style: KSTextStyle()
-                                  .style(
-                                20,
-                                FontWeight.w400,
-                                fontBuilder: GoogleFonts.cormorantInfant,
-                              )
-                                  .copyWith(color: AppStyle.whiteBg),
-                            ),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.rectangle,
-                                        color: AppStyle.whiteBg),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(4.0),
-                                      child: SvgPicture.asset(
-                                        Assets.svg.svgPhone.keyName,
-                                        width: 20,
-                                        color: Colors.black,
-                                      ),
-                                    )),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.rectangle,
-                                          color: AppStyle.whiteBg),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(4.0),
-                                        child: Image.asset(
-                                            Assets.png.pngZalo.keyName,
-                                            width: 20,
-                                            color: Colors.black),
-                                      )),
-                                ),
-                                Container(
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.rectangle,
-                                        color: AppStyle.whiteBg),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(4.0),
-                                      child: SvgPicture.asset(
-                                          Assets.svg.svgFace.keyName,
-                                          width: 20,
-                                          color: Colors.black),
-                                    ))
-                              ],
+                        SizedBox(height: 32,),
+                        AutoSizeText("Nguyễn Thị \nBảo Hân",
+                            maxLines: 2,
+                            minFontSize: 10,
+                            style: KSTextStyle()
+                                .style(
+                              20.sp,
+                              FontWeight.w400,
+                              fontBuilder: GoogleFonts.imperialScript,
                             )
-                          ],
+                                .copyWith(color: AppStyle.whiteBg)),
+                        KSText(
+                          textAlign: TextAlign.center,
+                          'Út Nữ',
+                          style: KSTextStyle()
+                              .style(
+                            20,
+                            FontWeight.w400,
+                            fontBuilder: GoogleFonts.cormorantInfant,
+                          )
+                              .copyWith(color: AppStyle.whiteBg),
                         ),
-                      ),
-                    ],
-                  );
-                },
+                        SizedBox(
+                          height: 8,
+                        ),
+
+                      ],
+                    ),
+                  ),
+                  Positioned(
+                    right: 0,
+                    top: 20,
+                    width: widget.rightBoxWidth,
+                    // height: widget.rightBoxHeight +
+                    //     128+32,
+                    child: Column(
+                      children: [
+                        Container(
+                          width: widget.rightBoxWidth,
+                          // height: widget.rightBoxHeight,
+                          child: widget.rightBox,
+                        ),
+                        SizedBox(height: 32,),
+                        AutoSizeText("Lê Gia \nThịnh",
+                            maxLines: 2,
+                            minFontSize: 10,
+                            style: KSTextStyle()
+                                .style(
+                              20.sp,
+                              FontWeight.w400,
+                              fontBuilder: GoogleFonts.imperialScript,
+                            )
+                                .copyWith(color: AppStyle.whiteBg)),
+                        KSText(
+                          textAlign: TextAlign.center,
+                          'Út Nam',
+                          style: KSTextStyle()
+                              .style(
+                            20,
+                            FontWeight.w400,
+                            fontBuilder: GoogleFonts.cormorantInfant,
+                          )
+                              .copyWith(color: AppStyle.whiteBg),
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
-            AnimatedBuilder(
-              animation: _redBoxController,
-              builder: (_, __) {
-                final shouldShowRed = !_redBoxPlayed ||
-                    _redBoxController.isAnimating ||
-                    !_redBoxController.isCompleted;
-
-                if (!shouldShowRed) return const SizedBox.shrink();
-
-                return Opacity(
-                  opacity: _redOpacity.value,
-                  child: Center(child: widget.redBox),
-                );
-              },
-            ),
+            // AnimatedBuilder(
+            //   animation: _redBoxController,
+            //   builder: (_, __) {
+            //     final shouldShowRed = !_redBoxPlayed ||
+            //         _redBoxController.isAnimating ||
+            //         !_redBoxController.isCompleted;
+            //
+            //     if (!shouldShowRed) return const SizedBox.shrink();
+            //
+            //     return Opacity(
+            //       opacity: _redOpacity.value,
+            //       child: Center(child: widget.redBox),
+            //     );
+            //   },
+            // ),
           ],
         ),
       ),
@@ -2461,6 +2406,7 @@ class MessagePopupDialog extends StatelessWidget {
             onTap: () async {
               await loadDataWithLoading(
               action: () async {
+                EmojiPopupController().hide();
                 vm.preImgCMT(  context,); // ✅ Hàm TestBug được chạy sau khi loading hiển thị xong
               },
               );
@@ -2487,6 +2433,7 @@ class MessagePopupDialog extends StatelessWidget {
               child: KSButton(
 
                 onTap: (){
+                  EmojiPopupController().hide();
                   vm.nextImgCMT( context,);
                 },
                 "Tiếp tục",
@@ -2533,6 +2480,9 @@ class MessagePopupDialog extends StatelessWidget {
                     height: 8,
                   ),
                   TextField(
+                    onTap: (){
+                      EmojiPopupController().hide();
+                    },
                     controller: vm.userCMTController,
                     decoration: InputDecoration(
 
@@ -2592,53 +2542,57 @@ class MessagePopupDialog extends StatelessWidget {
                   SizedBox(
                     height: 8,
                   ),
-                  TextField(
-                    controller: vm.noteCMTController,
-                    minLines: 3,
-                    maxLines: 6,
-                    decoration: InputDecoration(
-                      hintText: "Viết lời nhắn",
-                      filled: true,
-                      hintStyle: KSTextStyle()
-                          .style(
-                        15,
-                        FontWeight.w400,
-                        fontBuilder:
-                        GoogleFonts.cormorantInfant,
-                      )
-                          .copyWith(
-                          color:
-                          AppStyle.primaryGray8D8D8D),
-                      fillColor: Colors.white,
-                      contentPadding:
-                      const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 12),
-                      border: OutlineInputBorder(
-                        borderRadius:
-                        BorderRadius.circular(8),
-                          borderSide: const BorderSide(
-                              color: Colors.black87,
-                              width: 0.2),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius:
-                        BorderRadius.circular(8),
-                        borderSide: const BorderSide(
-                            color: Colors.black87,
-                            width: 1),
-                      ),
-                    ),
-                    style: KSTextStyle()
-                        .style(
-                      15,
-                      FontWeight.w400,
-                      fontBuilder:
-                      GoogleFonts.cormorantInfant,
-                    )
-                        .copyWith(
-                        color:
-                        AppStyle.primaryGray8D8D8D),
-                  ),
+                  EmojiTextFieldSmall(onChanged: (String x){
+
+                    vm.noteCMTController.text = x;
+                  },),
+                  // TextField(
+                  //   controller: vm.noteCMTController,
+                  //   minLines: 3,
+                  //   maxLines: 6,
+                  //   decoration: InputDecoration(
+                  //     hintText: "Viết lời nhắn",
+                  //     filled: true,
+                  //     hintStyle: KSTextStyle()
+                  //         .style(
+                  //       15,
+                  //       FontWeight.w400,
+                  //       fontBuilder:
+                  //       GoogleFonts.cormorantInfant,
+                  //     )
+                  //         .copyWith(
+                  //         color:
+                  //         AppStyle.primaryGray8D8D8D),
+                  //     fillColor: Colors.white,
+                  //     contentPadding:
+                  //     const EdgeInsets.symmetric(
+                  //         horizontal: 16, vertical: 12),
+                  //     border: OutlineInputBorder(
+                  //       borderRadius:
+                  //       BorderRadius.circular(8),
+                  //         borderSide: const BorderSide(
+                  //             color: Colors.black87,
+                  //             width: 0.2),
+                  //     ),
+                  //     focusedBorder: OutlineInputBorder(
+                  //       borderRadius:
+                  //       BorderRadius.circular(8),
+                  //       borderSide: const BorderSide(
+                  //           color: Colors.black87,
+                  //           width: 1),
+                  //     ),
+                  //   ),
+                  //   style: KSTextStyle()
+                  //       .style(
+                  //     15,
+                  //     FontWeight.w400,
+                  //     fontBuilder:
+                  //     GoogleFonts.cormorantInfant,
+                  //   )
+                  //       .copyWith(
+                  //       color:
+                  //       AppStyle.primaryGray8D8D8D),
+                  // ),
                 ],
               ),
               SizedBox(
@@ -2647,23 +2601,35 @@ class MessagePopupDialog extends StatelessWidget {
               Row(
                 children: [
                   Spacer(),
-                  Container(
+                  MouseRegion(
+                    hitTestBehavior: HitTestBehavior.translucent,
+                    onEnter: (_) => vm.setHover(true),
+                    onExit: (_) => vm.setHover(false),
+                    child:    AnimatedScale(
+                      duration: const Duration(milliseconds: 200),
+                      scale:  vm.isHover ? 1.1 : 1.0,
+                      child:  Container(
 
 
-                      width: 100,
-                      height: 35,
-                      child: KSButton(
-                        radius: 32,
+                          width: 100,
+                          height: 35,
+                          child: KSButton(
+                            radius: 32,
 
-                        onTap: (){
+                            onTap: (){
+                              EmojiPopupController().hide();
+                              vm.postCMTImage(context);
+                              // vm.postWish(context);
+                            },
+                            "Gửi ngay",
+                            backgroundColor: AppStyle.primaryGreen617855,
 
-vm.postCMTImage(context);
-                          // vm.postWish(context);
-                        },
-                        "Gửi ngay",
-                        backgroundColor: AppStyle.primaryGreen617855,
+                          )),
+                    ),
 
-                      )),
+                  ),
+
+
                 ],
               ),
               SizedBox(
@@ -2985,6 +2951,7 @@ class MessagePopupDialogMobile extends StatelessWidget {
               onTap: () async {
                 await loadDataWithLoading(
                   action: () async {
+                    EmojiPopupController().hide();
                     vm.preImgCMT(  context,); // ✅ Hàm TestBug được chạy sau khi loading hiển thị xong
                   },
                 );
@@ -3007,6 +2974,7 @@ class MessagePopupDialogMobile extends StatelessWidget {
               onTap: () async {
                 await loadDataWithLoading(
                   action: () async {
+                    EmojiPopupController().hide();
                     vm.nextImgCMT( context,); // ✅ Hàm TestBug được chạy sau khi loading hiển thị xong
                   },
                 );
@@ -3041,7 +3009,7 @@ class MessagePopupDialogMobile extends StatelessWidget {
       child: Center(
         child: Padding(
           padding: AppStyle.padding_all_16()
-              .copyWith(left: 32, right: 32),
+              .copyWith(left: 16, right: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -3064,6 +3032,10 @@ class MessagePopupDialogMobile extends StatelessWidget {
                     height: 8,
                   ),
                   TextField(
+                    onTap: (){
+
+                      EmojiPopupController().hide();
+                    },
                     controller: vm.userCMTController,
                     decoration: InputDecoration(
 
@@ -3123,53 +3095,58 @@ class MessagePopupDialogMobile extends StatelessWidget {
                   SizedBox(
                     height: 8,
                   ),
-                  TextField(
-                    controller: vm.noteCMTController,
-                    minLines: 3,
-                    maxLines: 6,
-                    decoration: InputDecoration(
-                      hintText: "Viết lời nhắn",
-                      filled: true,
-                      hintStyle: KSTextStyle()
-                          .style(
-                        11,
-                        FontWeight.w400,
-                        fontBuilder:
-                        GoogleFonts.cormorantInfant,
-                      )
-                          .copyWith(
-                          color:
-                          AppStyle.primaryGray8D8D8D),
-                      fillColor: Colors.white,
-                      contentPadding:
-                      const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 12),
-                      border: OutlineInputBorder(
-                        borderRadius:
-                        BorderRadius.circular(8),
-                        borderSide: const BorderSide(
-                            color: Colors.black87,
-                            width: 0.2),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius:
-                        BorderRadius.circular(8),
-                        borderSide: const BorderSide(
-                            color: Colors.black87,
-                            width: 1),
-                      ),
-                    ),
-                    style: KSTextStyle()
-                        .style(
-                      11,
-                      FontWeight.w400,
-                      fontBuilder:
-                      GoogleFonts.cormorantInfant,
-                    )
-                        .copyWith(
-                        color:
-                        AppStyle.primaryGray8D8D8D),
-                  ),
+
+                  EmojiTextFieldMobile(onChanged: (String x){
+
+                    vm.noteCMTController.text = x;
+                  },),
+                  // TextField(
+                  //   controller: vm.noteCMTController,
+                  //   minLines: 3,
+                  //   maxLines: 6,
+                  //   decoration: InputDecoration(
+                  //     hintText: "Viết lời nhắn",
+                  //     filled: true,
+                  //     hintStyle: KSTextStyle()
+                  //         .style(
+                  //       11,
+                  //       FontWeight.w400,
+                  //       fontBuilder:
+                  //       GoogleFonts.cormorantInfant,
+                  //     )
+                  //         .copyWith(
+                  //         color:
+                  //         AppStyle.primaryGray8D8D8D),
+                  //     fillColor: Colors.white,
+                  //     contentPadding:
+                  //     const EdgeInsets.symmetric(
+                  //         horizontal: 16, vertical: 12),
+                  //     border: OutlineInputBorder(
+                  //       borderRadius:
+                  //       BorderRadius.circular(8),
+                  //       borderSide: const BorderSide(
+                  //           color: Colors.black87,
+                  //           width: 0.2),
+                  //     ),
+                  //     focusedBorder: OutlineInputBorder(
+                  //       borderRadius:
+                  //       BorderRadius.circular(8),
+                  //       borderSide: const BorderSide(
+                  //           color: Colors.black87,
+                  //           width: 1),
+                  //     ),
+                  //   ),
+                  //   style: KSTextStyle()
+                  //       .style(
+                  //     11,
+                  //     FontWeight.w400,
+                  //     fontBuilder:
+                  //     GoogleFonts.cormorantInfant,
+                  //   )
+                  //       .copyWith(
+                  //       color:
+                  //       AppStyle.primaryGray8D8D8D),
+                  // ),
                 ],
               ),
               SizedBox(
@@ -3221,4 +3198,672 @@ class MessagePopupDialogMobile extends StatelessWidget {
     );
 
   }
+}
+
+
+
+
+class EmojiTextField extends StatefulWidget {
+  final void Function(String)? onChanged;
+  final void Function(String)? onSubmitted;
+
+  const EmojiTextField({
+    super.key,
+    this.onChanged,
+    this.onSubmitted,
+  });
+
+  @override
+  State<EmojiTextField> createState() => _EmojiTextFieldState();
+}
+
+class _EmojiTextFieldState extends State<EmojiTextField> {
+  late final EmojiTextEditingController _controller;
+  late final TextStyle _emojiTextStyle;
+
+  final LayerLink _layerLink = LayerLink();
+  OverlayEntry? _emojiOverlay;
+
+  final bool isApple = [TargetPlatform.iOS, TargetPlatform.macOS]
+      .contains(foundation.defaultTargetPlatform);
+
+  @override
+  void initState() {
+    super.initState();
+    _emojiTextStyle = DefaultEmojiTextStyle.copyWith(
+          fontFamily: 'NotoColorEmoji',
+      fontSize: 13 * (isApple ? 1.2 : 1.0),
+    );
+    _controller = EmojiTextEditingController(emojiTextStyle: _emojiTextStyle);
+    _controller.addListener(() {
+      widget.onChanged?.call(_controller.text);
+    });
+  }
+
+  void _showEmojiPopup() {
+    if (_emojiOverlay != null) return;
+
+    _emojiOverlay = OverlayEntry(
+      builder: (context) => Positioned(
+        width: 400,
+        height: 250,
+        child: CompositedTransformFollower(
+          link: _layerLink,
+          offset:   Offset(MediaQuery.of(context).size.width/2 + -300,20 ), // điều chỉnh vị trí popup
+          showWhenUnlinked: false,
+          child: Material(
+            elevation: 4,
+            borderRadius: BorderRadius.circular(8),
+            child: EmojiPicker(
+              textEditingController: _controller,
+              config: Config(
+                emojiTextStyle: _emojiTextStyle,
+                checkPlatformCompatibility: true,
+                emojiViewConfig: const EmojiViewConfig(
+                  emojiSizeMax: 13,
+                  // crossAxisCount: 8,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+
+    Overlay.of(context).insert(_emojiOverlay!);
+  }
+
+  void _hideEmojiPopup() {
+    EmojiPopupController().hide();
+  }
+
+  void _toggleEmojiPopup() {
+    if (EmojiPopupController().isShowing) {
+      EmojiPopupController().hide();
+    } else {
+      EmojiPopupController().show(
+        context: context,
+        layerLink: _layerLink,
+        offset:  Offset(MediaQuery.of(context).size.width/2 + -270,60 ),
+        width: 400,
+        height: 250,
+        child: EmojiPicker(
+          textEditingController: _controller,
+          config: Config(
+            emojiTextStyle: _emojiTextStyle,
+            checkPlatformCompatibility: false,
+            emojiViewConfig: const EmojiViewConfig(
+              emojiSizeMax: 13,
+            ),
+            locale: Locale('vi', 'VN'),
+            bottomActionBarConfig: const BottomActionBarConfig(
+              showBackspaceButton: false,
+              showSearchViewButton: false,
+              backgroundColor: Colors.transparent, // hoặc bỏ qua nếu cần
+            ),
+          ),
+        ),
+      );
+    }
+  }
+
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    _hideEmojiPopup();
+    super.dispose();
+  }
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   return CompositedTransformTarget(
+  //     link: _layerLink,
+  //     child: TextField(
+  //       controller: _controller,
+  //       style: const TextStyle(fontSize: 20.0, color: Colors.black87),
+  //       maxLines: 1,
+  //       decoration: InputDecoration(
+  //         hintText: 'Type a message...',
+  //         filled: true,
+  //         fillColor: Colors.white,
+  //         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+  //         border: OutlineInputBorder(
+  //           borderRadius: BorderRadius.circular(50),
+  //         ),
+  //         suffixIcon: IconButton(
+  //           icon: const Icon(Icons.emoji_emotions_outlined),
+  //           onPressed: _toggleEmojiPopup,
+  //         ),
+  //       ),
+  //       onTap: _hideEmojiPopup,
+  //     ),
+  //   );
+  // }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return CompositedTransformTarget(
+      link: _layerLink,
+      child:    Stack(
+        children: [
+          // ValueListenableBuilder(
+          //   valueListenable: _controller,
+          //   builder: (context, value, _) {
+          //     return Text('Nội dung hiện tại: ${_controller.text}');
+          //   },
+          // ),
+          TextField(
+            onTap: _hideEmojiPopup,
+            controller: _controller,
+            minLines: 5,
+            maxLines: 7,
+            onChanged: widget.onChanged,
+            onSubmitted: widget.onSubmitted,
+            decoration: InputDecoration(
+
+              // suffix: Align(
+              //   alignment: Alignment.topRight,
+              //   child: Container(color: AppStyle.primaryColorBlack,
+              //     child: IconButton(
+              //       icon: const Icon(Icons.emoji_emotions_outlined),
+              //       onPressed: _toggleEmojiPopup,
+              //     ),
+              //   ),
+              // ),
+              hintText: "Nhập lời muốn nói",
+              filled: true,
+              hintStyle: KSTextStyle()
+                  .style(
+                15,
+                FontWeight.w400,
+                fontBuilder: GoogleFonts.cormorantInfant,
+              )
+                  .copyWith(
+                  color: AppStyle.primaryGray8D8D8D),
+              fillColor: Colors.white,
+              contentPadding: const EdgeInsets.fromLTRB(16, 16, 56, 16),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide:
+                const BorderSide(color: Colors.black87),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide:
+                const BorderSide(color: Colors.black),
+              ),
+            ),
+            style: KSTextStyle()
+                .style(
+              15,
+              FontWeight.w400,
+              fontBuilder: GoogleFonts.cormorantInfant,
+            )
+                .copyWith(color: AppStyle.primaryGray8D8D8D),
+          ),
+          Positioned(
+            top: 4,
+            right: 4,
+            child: IconButton(
+              icon: const Icon(Icons.emoji_emotions_outlined),
+              onPressed: _toggleEmojiPopup,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+
+class EmojiTextFieldMobile extends StatefulWidget {
+  final void Function(String)? onChanged;
+  final void Function(String)? onSubmitted;
+
+  const EmojiTextFieldMobile({
+    super.key,
+    this.onChanged,
+    this.onSubmitted,
+  });
+
+  @override
+  State<EmojiTextFieldMobile> createState() => _EmojiTextFieldMobileState();
+}
+
+class _EmojiTextFieldMobileState extends State<EmojiTextFieldMobile> {
+  late final EmojiTextEditingController _controller;
+  late final TextStyle _emojiTextStyle;
+
+  final LayerLink _layerLink = LayerLink();
+  OverlayEntry? _emojiOverlay;
+
+  final bool isApple = [TargetPlatform.iOS, TargetPlatform.macOS]
+      .contains(foundation.defaultTargetPlatform);
+
+  @override
+  void initState() {
+    super.initState();
+    _emojiTextStyle = DefaultEmojiTextStyle.copyWith(
+          fontFamily: 'NotoColorEmoji',
+      fontSize: 13 * (isApple ? 1.2 : 1.0),
+    );
+    _controller = EmojiTextEditingController(emojiTextStyle: _emojiTextStyle);
+    _controller.addListener(() {
+      widget.onChanged?.call(_controller.text);
+    });
+  }
+
+  void _showEmojiPopup() {
+    if (_emojiOverlay != null) return;
+
+    _emojiOverlay = OverlayEntry(
+      builder: (context) => Positioned(
+        width: 400,
+        height: 250,
+        child: CompositedTransformFollower(
+          link: _layerLink,
+          offset:   Offset(MediaQuery.of(context).size.width/2 + -300,20 ), // điều chỉnh vị trí popup
+          showWhenUnlinked: false,
+          child: Material(
+            elevation: 4,
+            borderRadius: BorderRadius.circular(8),
+            child: EmojiPicker(
+              textEditingController: _controller,
+              config: Config(
+                emojiTextStyle: _emojiTextStyle,
+                checkPlatformCompatibility: true,
+                emojiViewConfig: const EmojiViewConfig(
+                  emojiSizeMax: 13,
+                  // crossAxisCount: 8,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+
+    Overlay.of(context).insert(_emojiOverlay!);
+  }
+
+  void _hideEmojiPopup() {
+    EmojiPopupController().hide();
+  }
+
+  void _toggleEmojiPopup() {
+    if (EmojiPopupController().isShowing) {
+      EmojiPopupController().hide();
+    } else {
+      EmojiPopupController().show(
+        context: context,
+        layerLink: _layerLink,
+        offset:  Offset(0,60 ),
+        width: MediaQuery.of(context).size.width -100,
+        height: 250,
+        child: EmojiPicker(
+          textEditingController: _controller,
+          config: Config(
+            emojiTextStyle: _emojiTextStyle,
+            checkPlatformCompatibility: false,
+            emojiViewConfig: const EmojiViewConfig(
+              emojiSizeMax: 13,
+            ),
+            locale: Locale('vi', 'VN'),
+            bottomActionBarConfig: const BottomActionBarConfig(
+              showBackspaceButton: false,
+              showSearchViewButton: false,
+              backgroundColor: Colors.transparent, // hoặc bỏ qua nếu cần
+            ),
+          ),
+        ),
+      );
+    }
+  }
+
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    _hideEmojiPopup();
+    super.dispose();
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return CompositedTransformTarget(
+      link: _layerLink,
+      child:    Stack(
+        children: [
+          // ValueListenableBuilder(
+          //   valueListenable: _controller,
+          //   builder: (context, value, _) {
+          //     return Text('Nội dung hiện tại: ${_controller.text}');
+          //   },
+          // ),
+          TextField(
+            onTap: _hideEmojiPopup,
+            controller: _controller,
+            minLines: 5,
+            maxLines: 7,
+            onChanged: widget.onChanged,
+            onSubmitted: widget.onSubmitted,
+            decoration: InputDecoration(
+
+              // suffix: Align(
+              //   alignment: Alignment.topRight,
+              //   child: Container(color: AppStyle.primaryColorBlack,
+              //     child: IconButton(
+              //       icon: const Icon(Icons.emoji_emotions_outlined),
+              //       onPressed: _toggleEmojiPopup,
+              //     ),
+              //   ),
+              // ),
+              hintText: "Nhập lời muốn nói",
+              filled: true,
+              hintStyle: KSTextStyle()
+                  .style(
+                15,
+                FontWeight.w400,
+                fontBuilder: GoogleFonts.cormorantInfant,
+              )
+                  .copyWith(
+                  color: AppStyle.primaryGray8D8D8D),
+              fillColor: Colors.white,
+              contentPadding: const EdgeInsets.fromLTRB(16, 16, 56, 16),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide:
+                const BorderSide(color: Colors.black87),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide:
+                const BorderSide(color: Colors.black),
+              ),
+            ),
+            style: KSTextStyle()
+                .style(
+              15,
+              FontWeight.w400,
+              fontBuilder: GoogleFonts.cormorantInfant,
+            )
+                .copyWith(color: AppStyle.primaryGray8D8D8D),
+          ),
+          Positioned(
+            top: 4,
+            right: 4,
+            child: IconButton(
+              icon: const Icon(Icons.emoji_emotions_outlined),
+              onPressed: _toggleEmojiPopup,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+
+class EmojiTextFieldSmall extends StatefulWidget {
+  final void Function(String)? onChanged;
+  final void Function(String)? onSubmitted;
+
+  const EmojiTextFieldSmall({
+    super.key,
+    this.onChanged,
+    this.onSubmitted,
+  });
+
+  @override
+  State<EmojiTextFieldSmall> createState() => _EmojiTextFieldSmallState();
+}
+
+class _EmojiTextFieldSmallState extends State<EmojiTextFieldSmall> {
+  late final EmojiTextEditingController _controller;
+  late final TextStyle _emojiTextStyle;
+
+  final LayerLink _layerLink = LayerLink();
+  OverlayEntry? _emojiOverlay;
+
+  final bool isApple = [TargetPlatform.iOS, TargetPlatform.macOS]
+      .contains(foundation.defaultTargetPlatform);
+
+  @override
+  void initState() {
+    super.initState();
+    _emojiTextStyle = DefaultEmojiTextStyle.copyWith(
+          fontFamily: 'NotoColorEmoji',
+      fontSize: 13 * (isApple ? 1.2 : 1.0),
+    );
+    _controller = EmojiTextEditingController(emojiTextStyle: _emojiTextStyle);
+    _controller.addListener(() {
+      widget.onChanged?.call(_controller.text);
+    });
+  }
+
+  void _showEmojiPopup() {
+    if (_emojiOverlay != null) return;
+
+    _emojiOverlay = OverlayEntry(
+      builder: (context) => Positioned(
+        width: 400,
+        height: 250,
+        child: CompositedTransformFollower(
+          link: _layerLink,
+          offset:   Offset(MediaQuery.of(context).size.width/2 + -300,20 ), // điều chỉnh vị trí popup
+          showWhenUnlinked: false,
+          child: Material(
+            elevation: 4,
+            borderRadius: BorderRadius.circular(8),
+            child: EmojiPicker(
+              textEditingController: _controller,
+              config: Config(
+                emojiTextStyle: _emojiTextStyle,
+                checkPlatformCompatibility: true,
+                emojiViewConfig: const EmojiViewConfig(
+                  emojiSizeMax: 13,
+                  // crossAxisCount: 8,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+
+    Overlay.of(context).insert(_emojiOverlay!);
+  }
+
+  void _hideEmojiPopup() {
+    EmojiPopupController().hide();
+  }
+
+  void _toggleEmojiPopup() {
+    if (EmojiPopupController().isShowing) {
+      EmojiPopupController().hide();
+    } else {
+      EmojiPopupController().show(
+        context: context,
+        layerLink: _layerLink,
+        offset:  Offset(MediaQuery.of(context).size.width/2 + -500,60 ),
+        width: 400,
+        height: 250,
+        child: EmojiPicker(
+          textEditingController: _controller,
+          config: Config(
+            emojiTextStyle: _emojiTextStyle,
+            checkPlatformCompatibility: false,
+            emojiViewConfig: const EmojiViewConfig(
+              emojiSizeMax: 13,
+            ),
+            locale: Locale('vi', 'VN'),
+            bottomActionBarConfig: const BottomActionBarConfig(
+              showBackspaceButton: false,
+              showSearchViewButton: false,
+              backgroundColor: Colors.transparent, // hoặc bỏ qua nếu cần
+            ),
+
+          ),
+
+        ),
+      );
+    }
+  }
+
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    _hideEmojiPopup();
+    super.dispose();
+  }
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   return CompositedTransformTarget(
+  //     link: _layerLink,
+  //     child: TextField(
+  //       controller: _controller,
+  //       style: const TextStyle(fontSize: 20.0, color: Colors.black87),
+  //       maxLines: 1,
+  //       decoration: InputDecoration(
+  //         hintText: 'Type a message...',
+  //         filled: true,
+  //         fillColor: Colors.white,
+  //         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+  //         border: OutlineInputBorder(
+  //           borderRadius: BorderRadius.circular(50),
+  //         ),
+  //         suffixIcon: IconButton(
+  //           icon: const Icon(Icons.emoji_emotions_outlined),
+  //           onPressed: _toggleEmojiPopup,
+  //         ),
+  //       ),
+  //       onTap: _hideEmojiPopup,
+  //     ),
+  //   );
+  // }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return CompositedTransformTarget(
+      link: _layerLink,
+      child:    Stack(
+        children: [
+          // ValueListenableBuilder(
+          //   valueListenable: _controller,
+          //   builder: (context, value, _) {
+          //     return Text('Nội dung hiện tại: ${_controller.text}');
+          //   },
+          // ),
+          TextField(
+            onTap: _hideEmojiPopup,
+            controller: _controller,
+            minLines: 5,
+            maxLines: 7,
+            onChanged: widget.onChanged,
+            onSubmitted: widget.onSubmitted,
+            decoration: InputDecoration(
+
+              // suffix: Align(
+              //   alignment: Alignment.topRight,
+              //   child: Container(color: AppStyle.primaryColorBlack,
+              //     child: IconButton(
+              //       icon: const Icon(Icons.emoji_emotions_outlined),
+              //       onPressed: _toggleEmojiPopup,
+              //     ),
+              //   ),
+              // ),
+              hintText: "Nhập lời muốn nói",
+              filled: true,
+              hintStyle: KSTextStyle()
+                  .style(
+                15,
+                FontWeight.w400,
+                fontBuilder: GoogleFonts.cormorantInfant,
+              )
+                  .copyWith(
+                  color: AppStyle.primaryGray8D8D8D),
+              fillColor: Colors.white,
+              contentPadding: const EdgeInsets.fromLTRB(16, 16, 56, 16),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide:
+                const BorderSide(color: Colors.black87),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide:
+                const BorderSide(color: Colors.black),
+              ),
+            ),
+            style: KSTextStyle()
+                .style(
+              15,
+              FontWeight.w400,
+              fontBuilder: GoogleFonts.cormorantInfant,
+            )
+                .copyWith(color: AppStyle.primaryGray8D8D8D),
+          ),
+          Positioned(
+            top: 4,
+            right: 4,
+            child: IconButton(
+              icon: const Icon(Icons.emoji_emotions_outlined),
+              onPressed: _toggleEmojiPopup,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class EmojiPopupController {
+  static final EmojiPopupController _instance = EmojiPopupController._internal();
+  factory EmojiPopupController() => _instance;
+  EmojiPopupController._internal();
+
+  OverlayEntry? _overlayEntry;
+
+  void show({
+    required BuildContext context,
+    required LayerLink layerLink,
+    required Widget child,
+    Offset offset = Offset.zero,
+    double width = 300,
+    double height = 250,
+  }) {
+    hide(); // đảm bảo chỉ 1 popup tồn tại
+
+    _overlayEntry = OverlayEntry(
+      builder: (_) => Positioned(
+        width: width,
+        height: height,
+        child: CompositedTransformFollower(
+          link: layerLink,
+          offset: offset,
+          showWhenUnlinked: false,
+          child: Material(
+            elevation: 4,
+            borderRadius: BorderRadius.circular(8),
+            child: child,
+          ),
+        ),
+      ),
+    );
+
+    Overlay.of(context).insert(_overlayEntry!);
+  }
+
+  void hide() {
+    _overlayEntry?.remove();
+    _overlayEntry = null;
+  }
+
+  bool get isShowing => _overlayEntry != null;
 }

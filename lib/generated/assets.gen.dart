@@ -82,6 +82,10 @@ class $AssetsPngGen {
   AssetGenImage get pngChinha =>
       const AssetGenImage('assets/png/png_chinha.png');
 
+  /// File path: assets/png/png_coanfirm.png
+  AssetGenImage get pngCoanfirm =>
+      const AssetGenImage('assets/png/png_coanfirm.png');
+
   /// File path: assets/png/png_confirm.png
   AssetGenImage get pngConfirm =>
       const AssetGenImage('assets/png/png_confirm.png');
@@ -126,6 +130,7 @@ class $AssetsPngGen {
         pngAddress3,
         pngAnhthinh,
         pngChinha,
+        pngCoanfirm,
         pngConfirm,
         pngFlower,
         pngMobile,

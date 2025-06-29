@@ -224,6 +224,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "emoji_picker_flutter",
+      "rootUri": "file:///Users/kiddo/.pub-cache/hosted/pub.dev/emoji_picker_flutter-4.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.4"
+    },
+    {
       "name": "expandable",
       "rootUri": "file:///Users/kiddo/.pub-cache/hosted/pub.dev/expandable-5.0.1",
       "packageUri": "lib/",
@@ -1166,6 +1172,12 @@
       "languageVersion": "3.5"
     },
     {
+      "name": "universal_io",
+      "rootUri": "file:///Users/kiddo/.pub-cache/hosted/pub.dev/universal_io-2.2.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "url_launcher",
       "rootUri": "file:///Users/kiddo/.pub-cache/hosted/pub.dev/url_launcher-6.3.1",
       "packageUri": "lib/",
@@ -1304,7 +1316,7 @@
       "languageVersion": "3.6"
     }
   ],
-  "generated": "2025-06-29T07:08:54.971065Z",
+  "generated": "2025-06-29T21:12:42.538704Z",
   "generator": "pub",
   "generatorVersion": "3.6.0",
   "flutterRoot": "file:///Volumes/Work/Flutter/FlutterDev-v/flutter",

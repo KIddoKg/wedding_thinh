@@ -52,7 +52,7 @@ class _ConfirmWidgetState extends State<_ConfirmWidget> {
                         ),
                         child: Padding(
                           padding: AppStyle.padding_all_16()
-                              .copyWith(left: 32, right: 32),
+                              .copyWith(left: 16, right: 16),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
@@ -110,14 +110,14 @@ class _ConfirmWidgetState extends State<_ConfirmWidget> {
                             textAlign: TextAlign.center,
                             style: KSTheme.of(context)
                                 .style
-                                .ts60w500
+                                .ts42w500
                                 .copyWith(color: AppStyle.whiteBg)),
                         KSText(
                           textAlign: TextAlign.center,
                           'Hạnh phúc của tụi mình sẽ trọn vẹn hơn nếu có bạn bên cạnh. Bạn vui lòng cho tụi mình biết liệu bạn có thể đến chung vui không nhé!',
                           style: KSTextStyle()
                               .style(
-                                18,
+                                15,
                                 FontWeight.w400,
                                 fontBuilder: GoogleFonts.cormorantInfant,
                               )
@@ -140,7 +140,7 @@ class _ConfirmWidgetState extends State<_ConfirmWidget> {
                               KSText("Họ và Tên",
                                   style: KSTextStyle()
                                       .style(
-                                    23,
+                                    18,
                                     FontWeight.w400,
                                     fontBuilder: GoogleFonts.cormorantInfant,
                                   )
@@ -148,6 +148,10 @@ class _ConfirmWidgetState extends State<_ConfirmWidget> {
                                           color: AppStyle.primaryGrayB8C1B2)),
                               SizedBox(height: 8,),
                               TextField(
+                                onTap: (){
+
+                                  EmojiPopupController().hide();
+                                },
                                 controller: vm.nameController,
                                 decoration: InputDecoration(
                                   hintText: "Họ và Tên",
@@ -186,7 +190,7 @@ class _ConfirmWidgetState extends State<_ConfirmWidget> {
                               KSText("Bạn sẽ đi cùng bao nhiêu người?",
                                   style: KSTextStyle()
                                       .style(
-                                    23,
+                                    18,
                                     FontWeight.w400,
                                     fontBuilder: GoogleFonts.cormorantInfant,
                                   )
@@ -194,6 +198,9 @@ class _ConfirmWidgetState extends State<_ConfirmWidget> {
                                       color: AppStyle.primaryGrayB8C1B2)),
                               SizedBox(height: 8,),
                               DropdownButtonFormField<String>(
+                                onTap: (){
+                                  EmojiPopupController().hide();
+                                },
                                 value: vm.selected,
                                 hint: Text(
                                   "Vd: 1",
@@ -234,6 +241,7 @@ class _ConfirmWidgetState extends State<_ConfirmWidget> {
                                   );
                                 }).toList(),
                                 onChanged: (value) {
+                                  EmojiPopupController().hide();
                                   vm.selected = value;
                                 },
                               ),
@@ -249,50 +257,59 @@ class _ConfirmWidgetState extends State<_ConfirmWidget> {
                               KSText("Gửi gắm điều muốn nói ?",
                                   style: KSTextStyle()
                                       .style(
-                                    23,
+                                    18,
                                     FontWeight.w400,
                                     fontBuilder: GoogleFonts.cormorantInfant,
                                   )
                                       .copyWith(
                                       color: AppStyle.primaryGrayB8C1B2)),
                               SizedBox(height: 8,),
-                              TextField(
-                                controller: vm.noteContoller,
-                                minLines: 5,
-                                maxLines: 7,
-                                decoration: InputDecoration(
-                                  hintText: "Nhập lời chúc của bạn",
-                                  filled: true,
-                                  hintStyle: KSTextStyle()
-                                      .style(
-                                        15,
-                                        FontWeight.w400,
-                                        fontBuilder: GoogleFonts.cormorantInfant,
-                                      )
-                                      .copyWith(
-                                          color: AppStyle.primaryGray8D8D8D),
-                                  fillColor: Colors.white,
-                                  contentPadding: const EdgeInsets.symmetric(
-                                      horizontal: 16, vertical: 12),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                    borderSide:
-                                        BorderSide.none, // 👈 không có viền
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                    borderSide:
-                                        const BorderSide(color: Colors.black),
-                                  ),
-                                ),
-                                style: KSTextStyle()
-                                    .style(
-                                      15,
-                                      FontWeight.w400,
-                                      fontBuilder: GoogleFonts.cormorantInfant,
-                                    )
-                                    .copyWith(color: AppStyle.primaryGray8D8D8D),
-                              ),
+                              EmojiTextFieldMobile(onChanged: (String x){
+
+                                vm.noteContoller.text = x;
+                              },),
+                              // TextField(
+                              //   onTap: (){
+                              //
+                              //     EmojiPopupController().hide();
+                              //   },
+                              //   controller: vm.noteContoller,
+                              //   minLines: 5,
+                              //   maxLines: 7,
+                              //   decoration: InputDecoration(
+                              //     hintText: "Nhập lời chúc của bạn",
+                              //     filled: true,
+                              //     hintStyle: KSTextStyle()
+                              //         .style(
+                              //           15,
+                              //           FontWeight.w400,
+                              //           fontBuilder: GoogleFonts.cormorantInfant,
+                              //         )
+                              //         .copyWith(
+                              //             color: AppStyle.primaryGray8D8D8D),
+                              //     fillColor: Colors.white,
+                              //     contentPadding: const EdgeInsets.symmetric(
+                              //         horizontal: 16, vertical: 12),
+                              //     border: OutlineInputBorder(
+                              //       borderRadius: BorderRadius.circular(8),
+                              //       borderSide:
+                              //           BorderSide.none, // 👈 không có viền
+                              //     ),
+                              //     focusedBorder: OutlineInputBorder(
+                              //       borderRadius: BorderRadius.circular(8),
+                              //       borderSide:
+                              //           const BorderSide(color: Colors.black),
+                              //     ),
+                              //   ),
+                              //   style: KSTextStyle()
+                              //       .style(
+                              //         15,
+                              //         FontWeight.w400,
+                              //         fontBuilder: GoogleFonts.cormorantInfant,
+                              //       )
+                              //       .copyWith(color: AppStyle.primaryGray8D8D8D),
+                              // ),
+
                               SizedBox(
                                 height: 64,
                               ),
@@ -303,7 +320,7 @@ class _ConfirmWidgetState extends State<_ConfirmWidget> {
                                   height: 35,
                                   child: KSButton(
                                     onTap: (){
-
+                                      EmojiPopupController().hide();
                                       vm.postInvitation(context);
                                     },
                                     "Gửi ngay",

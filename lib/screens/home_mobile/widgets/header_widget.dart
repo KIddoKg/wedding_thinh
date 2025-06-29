@@ -153,33 +153,21 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                                         ),
                                       ),
                                       SizedBox(width: 8,),
-                                      KSInkWellUnFocus(
-                                        radius: 360,
-                                        onTap: (){
-                                          vm.toggleAudioLottie();
-                                        },
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              border: Border.all(
-                                                color: Colors.black,
-
-                                                width: 1.0,
-                                              )
-                                          ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Lottie.asset(
-                                              Assets.json.jsonVolume,
-                                              controller: vm.lottieController,
-                                              onLoaded: (composition) {
-                                                vm.setLottieDuration(composition.duration); // rất quan trọng
-                                              },
-
-                                            ),
-                                          ),
+                                      MouseRegion(
+                                        onEnter: (_) => vm.setHover(true),
+                                        onExit: (_) => vm.setHover(false),
+                                        child: AnimatedSwitcher(
+                                          duration: const Duration(milliseconds: 300),
+                                          switchInCurve: Curves.easeInOut,
+                                          switchOutCurve: Curves.easeInOut,
+                                          transitionBuilder: (child, animation) {
+                                            return FadeTransition(opacity: animation, child: child);
+                                          },
+                                          child: vm.isb
+                                              ? _buildLottieButton(key: const ValueKey('lottie'), hovered: vm.isHover, vm:vm)
+                                              : _buildPlayButton(key: const ValueKey('icon'), hovered: vm.isHover, vm:vm),
                                         ),
-                                      ),
+                                      )
                                     ],
                                   ),
                                   SizedBox(height: 16,),
@@ -433,345 +421,310 @@ class _HeaderWidgetState extends State<_HeaderWidget>
           ),
         Column(
           children: [
-            Container(
-              // height: 600,
-              width: width,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    AppStyle.primaryGreen11150F,
-                    AppStyle.primaryGreen11150F,
-                    AppStyle.primaryGreen647B58,
-                    AppStyle.primaryGreen647B58,
-                    AppStyle.whiteBg,
-                  ],
+            Transform.translate(
+              offset: Offset(0, -1),
+              child: Container(
+                // height: 600,
+                width: width,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      AppStyle.primaryGreen11150F,
+                      AppStyle.primaryGreen11150F,
+                      AppStyle.primaryGreen647B58,
+                      AppStyle.primaryGreen647B58,
+                      AppStyle.whiteBg,
+                    ],
+                  ),
                 ),
-              ),
-              child: Padding(
-                padding: AppStyle.padding_LR_16(),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Column(
-                      children: [
-                        SizedBox(
-                          height: 128,
-                        ),
-                        KSText("Đếm ngược tới ngày cưới",
-                            maxLines: 2,
-                            textAlign: TextAlign.center,
-                            style: KSTheme.of(context)
-                                .style
-                                .ts60w500
-                                .copyWith(color: AppStyle.whiteBg)),
-                        KSText(
-                          textAlign: TextAlign.center,
-                          'Hân hoan thông báo lễ thành hôn của chúng mình! Rất mong bạn sẽ đến chung vui vào ngày trọng đại.hời gian đang đếm ngược đến khoảnh khắc thiêng liêng nhất của tụi mình. Đừng bỏ lỡ nhé! ',
-                          style: KSTextStyle()
-                              .style(
-                            18,
-                            FontWeight.w400,
-                            fontBuilder: GoogleFonts.cormorantInfant,
-                          )
-                              .copyWith(color: AppStyle.primaryGray90998B),
-                        ),
-                        // KSText(
-                        //   textAlign: TextAlign.center,
-                        //   '',
-                        //   style: KSTextStyle()
-                        //       .style(
-                        //         18,
-                        //         FontWeight.w400,
-                        //         fontBuilder: GoogleFonts.cormorantInfant,
-                        //       )
-                        //       .copyWith(color: AppStyle.primaryGray90998B),
-                        // ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 64,
-                    ),
-                    if(MediaQuery.of(context).size.width >400)
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        TimeColumn(
-                        size: 25.sp,
-                          ver: 6,
-                          topLeft: vm.dayTens.toString(),
-                          topRight: vm.dayUnits.toString(),
-                          label: 'Ngày',
-                        ),
-                        const SizedBox(width: 16),
-                        TimeColumn(
-                          ver: 6,
-                          size: 25.sp,
-                          topLeft: vm.hourTens.toString(),
-                          topRight: vm.hourUnits.toString(),
-                          label: 'Giờ',
-                        ),
-                        const SizedBox(width: 16),
-                        TimeColumn(
-                          ver: 6,
-                          size: 25.sp,
-                          topLeft: vm.minuteTens.toString(),
-                          topRight: vm.minuteUnits.toString(),
-                          label: 'Phút',
-                        ),
-                      ],
-                    ),
-                    if(MediaQuery.of(context).size.width <400)
+                child: Padding(
+                  padding: AppStyle.padding_LR_16(),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
                       Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              TimeColumn(
-                                size: 25.sp,
-                                ver: 6,
-                                topLeft: vm.dayTens.toString(),
-                                topRight: vm.dayUnits.toString(),
-                                label: 'Ngày',
-                              ),
-                              const SizedBox(width: 16),
-                              TimeColumn(
-                                ver: 6,
-                                size: 25.sp,
-                                topLeft: vm.hourTens.toString(),
-                                topRight: vm.hourUnits.toString(),
-                                label: 'Giờ',
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 16),
-
-                          /// 👇 Sửa ở đây: bọc bằng Row để canh giữa
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              TimeColumn(
-                                ver: 6,
-                                size: 25.sp,
-                                topLeft: vm.minuteTens.toString(),
-                                topRight: vm.minuteUnits.toString(),
-                                label: 'Phút',
-                              ),
-                            ],
-                          ),
-                        ],
-                      )
-,
-                    Container(
-                      key: vm.infoKey,
-                      child: Column(
                         children: [
                           SizedBox(
                             height: 128,
                           ),
-                          KSText("Kết duyên trăm năm",textAlign: TextAlign.center,
+                          KSText("Đếm ngược tới ngày cưới",
+                              maxLines: 2,
+                              textAlign: TextAlign.center,
                               style: KSTheme.of(context)
                                   .style
-                                  .ts60w500
+                                  .ts42w500
                                   .copyWith(color: AppStyle.whiteBg)),
                           KSText(
                             textAlign: TextAlign.center,
-                            'Hai con người, một hành trình. Tụi mình đã tìm thấy nhau và giờ đây sẵn sàng bước vào một chương mới – hôn nhân.',
+                            'Hân hoan thông báo lễ thành hôn của chúng mình! Rất mong bạn sẽ đến chung vui vào ngày trọng đại.hời gian đang đếm ngược đến khoảnh khắc thiêng liêng nhất của tụi mình. Đừng bỏ lỡ nhé! ',
                             style: KSTextStyle()
                                 .style(
-                              18,
+                              15,
                               FontWeight.w400,
                               fontBuilder: GoogleFonts.cormorantInfant,
                             )
                                 .copyWith(color: AppStyle.primaryGray90998B),
                           ),
+                          // KSText(
+                          //   textAlign: TextAlign.center,
+                          //   '',
+                          //   style: KSTextStyle()
+                          //       .style(
+                          //         18,
+                          //         FontWeight.w400,
+                          //         fontBuilder: GoogleFonts.cormorantInfant,
+                          //       )
+                          //       .copyWith(color: AppStyle.primaryGray90998B),
+                          // ),
                         ],
                       ),
-                    ),
-                    CrossScrollDrivenAnimationMobile(
-                      onScrollLockChanged: vm.setScrollLock,
-                      scrollController: vm.scrollController,
-                      leftBoxWidth: 0.5 * width,
-                      leftBoxHeight: 500,
-                      rightBoxWidth: 0.5 * width,
-                      rightBoxHeight: 500,
-                      // redBox: Image.asset(
-                      //   Assets.png.pngMobile.keyName,
-                      // ),
-                      redBox: Container(),
-                      rightBox: Image.asset(
-                        Assets.png.pngAnhthinh.keyName,
+                      SizedBox(
+                        height: 64,
                       ),
-                      leftBox: Image.asset(
-                        Assets.png.pngChinha.keyName,
-                      ),
-                    ),
-                    Container(
-                      color: Colors.transparent,
-                      height: 128 + 128 + 128,
-                      child: Stack(
-                        children: vm.bubbles.map((bubble) {
-                          return FlyingChatBubble(
-                            key: ValueKey(bubble),
-                            // Để đảm bảo widget không bị tái sử dụng sai
-                            data: bubble,
-                            onCompleted: () {
-                              setState(() => vm.bubbles.remove(bubble));
-                            },
-                          );
-                        }).toList(),
-                      ),
-                    ),
-                    Container(
-                      child: Column(
+                      if(MediaQuery.of(context).size.width >400)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          // KSButton("f",onTap: (){
-                          //   _addManyBubbles();
-                          // },),
-                          SizedBox(
-                            height: 128,
+                          TimeColumn(
+                          size: 25.sp,
+                            ver: 6,
+                            topLeft: vm.dayTens.toString(),
+                            topRight: vm.dayUnits.toString(),
+                            label: 'Ngày',
                           ),
-                          Column(
-                            children: [
-                              KSText("Lời chúc từ những người thương yêu",
-                                  textAlign: TextAlign.center,
-                                  style: KSTheme.of(context)
-                                      .style
-                                      .ts60w500
-                                      .copyWith(color: AppStyle.primaryColorBlack)),
-                              SizedBox(
-                                height: 16,
-                              ),
-                              KSText(
-                                textAlign: TextAlign.center,
-                                'Mỗi lời chúc là một món quà tinh thần quý giá mà tụi mình sẽ luôn ghi nhớ.',
-                                style: KSTextStyle()
-                                    .style(
-                                  18,
-                                  FontWeight.w400,
-                                  fontBuilder: GoogleFonts.cormorantInfant,
-                                )
-                                    .copyWith(color: AppStyle.primaryColorBlack),
-                              ),
-                              KSText(
-                                textAlign: TextAlign.center,
-                                'Cảm ơn vì đã gửi đến tụi mình những tình cảm chân thành và ngọt ngào nhất trong ngày đặc biệt này.',
-                                style: KSTextStyle()
-                                    .style(
-                                  18,
-                                  FontWeight.w400,
-                                  fontBuilder: GoogleFonts.cormorantInfant,
-                                )
-                                    .copyWith(color: AppStyle.primaryColorBlack),
-                              ),
-                            ],
+                          const SizedBox(width: 16),
+                          TimeColumn(
+                            ver: 6,
+                            size: 25.sp,
+                            topLeft: vm.hourTens.toString(),
+                            topRight: vm.hourUnits.toString(),
+                            label: 'Giờ',
                           ),
-                          SizedBox(
-                            height: 32,
+                          const SizedBox(width: 16),
+                          TimeColumn(
+                            ver: 6,
+                            size: 25.sp,
+                            topLeft: vm.minuteTens.toString(),
+                            topRight: vm.minuteUnits.toString(),
+                            label: 'Phút',
                           ),
-                          Container(
-                            width:   width,
-                            decoration: BoxDecoration(
-                              color: AppStyle.primaryGrayB8C1B2,
-                              border: Border.all(width: 1, color: Colors.black),
-                              // borderRadius: BorderRadius.circular(24),
+                        ],
+                      ),
+                      if(MediaQuery.of(context).size.width <400)
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                TimeColumn(
+                                  size: 25.sp,
+                                  ver: 6,
+                                  topLeft: vm.dayTens.toString(),
+                                  topRight: vm.dayUnits.toString(),
+                                  label: 'Ngày',
+                                ),
+                                const SizedBox(width: 16),
+                                TimeColumn(
+                                  ver: 6,
+                                  size: 25.sp,
+                                  topLeft: vm.hourTens.toString(),
+                                  topRight: vm.hourUnits.toString(),
+                                  label: 'Giờ',
+                                ),
+                              ],
                             ),
-                            child: Center(
-                              child: Padding(
-                                padding: AppStyle.padding_all_16()
-                                    .copyWith(left: 32, right: 32),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        KSText("Ai đang gửi yêu thương vậy nè?",
-                                            style: KSTextStyle()
-                                                .style(
-                                              23,
-                                              FontWeight.w600,
-                                              fontBuilder:
-                                              GoogleFonts.cormorantInfant,
-                                            )
-                                                .copyWith(
-                                                color: AppStyle
-                                                    .primaryGreen41483D)),
-                                        SizedBox(
-                                          height: 8,
-                                        ),
-                                        TextField(
-                                          controller: vm.usernameController,
-                                          decoration: InputDecoration(
-                                            hintText:
-                                            "Vd: Cô Út, Chú 6, Bảo Bảo nè,...",
-                                            filled: true,
-                                            fillColor: Colors.white,
-                                            contentPadding:
-                                            const EdgeInsets.symmetric(
-                                                horizontal: 16, vertical: 14),
-                                            enabledBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(
-                                                  8), // 👈 Bo tròn
-                                              borderSide: BorderSide.none,
-                                            ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderRadius:
-                                              BorderRadius.circular(8),
-                                              borderSide: const BorderSide(
-                                                  color: Colors.black87,
-                                                  width: 1.5),
-                                            ),
+                            const SizedBox(height: 16),
+
+                            /// 👇 Sửa ở đây: bọc bằng Row để canh giữa
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                TimeColumn(
+                                  ver: 6,
+                                  size: 25.sp,
+                                  topLeft: vm.minuteTens.toString(),
+                                  topRight: vm.minuteUnits.toString(),
+                                  label: 'Phút',
+                                ),
+                              ],
+                            ),
+                          ],
+                        )
+              ,
+                      Container(
+                        key: vm.infoKey,
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 128,
+                            ),
+                            KSText("Kết duyên trăm năm",textAlign: TextAlign.center,
+                                style: KSTheme.of(context)
+                                    .style
+                                    .ts42w500
+                                    .copyWith(color: AppStyle.whiteBg)),
+                            KSText(
+                              textAlign: TextAlign.center,
+                              'Hai con người, một hành trình. Tụi mình đã tìm thấy nhau và giờ đây sẵn sàng bước vào một chương mới – hôn nhân.',
+                              style: KSTextStyle()
+                                  .style(
+                                15,
+                                FontWeight.w400,
+                                fontBuilder: GoogleFonts.cormorantInfant,
+                              )
+                                  .copyWith(color: AppStyle.primaryGray90998B),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 64,),
+                      CrossScrollDrivenAnimationMobile(
+                        onScrollLockChanged: vm.setScrollLock,
+                        scrollController: vm.scrollController,
+                        leftBoxWidth: 0.5 * width,
+                        leftBoxHeight: 500,
+                        rightBoxWidth: 0.5 * width,
+                        rightBoxHeight: 500,
+                        // redBox: Image.asset(
+                        //   Assets.png.pngMobile.keyName,
+                        // ),
+                        redBox: Container(),
+                        rightBox: Image.asset(
+                          Assets.png.pngAnhthinh.keyName,
+                        ),
+                        leftBox: Image.asset(
+                          Assets.png.pngChinha.keyName,
+                        ),
+                      ),
+                      Container(
+                        color: Colors.transparent,
+                        height: 128 + 128 + 128,
+                        child: Stack(
+                          children: vm.bubbles.map((bubble) {
+                            return FlyingChatBubble(
+                              key: ValueKey(bubble),
+                              // Để đảm bảo widget không bị tái sử dụng sai
+                              data: bubble,
+                              onCompleted: () {
+                                setState(() => vm.bubbles.remove(bubble));
+                              },
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                      Container(
+                        child: Column(
+                          children: [
+                            // KSButton("f",onTap: (){
+                            //   _addManyBubbles();
+                            // },),
+                            SizedBox(
+                              height: 128,
+                            ),
+                            Column(
+                              children: [
+                                KSText("Lời chúc từ những người thương yêu",
+                                    textAlign: TextAlign.center,
+                                    style: KSTheme.of(context)
+                                        .style
+                                        .ts42w500
+                                        .copyWith(color: AppStyle.primaryColorBlack)),
+                                SizedBox(
+                                  height: 16,
+                                ),
+                                KSText(
+                                  textAlign: TextAlign.center,
+                                  'Mỗi lời chúc là một món quà tinh thần quý giá mà tụi mình sẽ luôn ghi nhớ.',
+                                  style: KSTextStyle()
+                                      .style(
+                                    15,
+                                    FontWeight.w400,
+                                    fontBuilder: GoogleFonts.cormorantInfant,
+                                  )
+                                      .copyWith(color: AppStyle.primaryColorBlack),
+                                ),
+                                KSText(
+                                  textAlign: TextAlign.center,
+                                  'Cảm ơn vì đã gửi đến tụi mình những tình cảm chân thành và ngọt ngào nhất trong ngày đặc biệt này.',
+                                  style: KSTextStyle()
+                                      .style(
+                                    15,
+                                    FontWeight.w400,
+                                    fontBuilder: GoogleFonts.cormorantInfant,
+                                  )
+                                      .copyWith(color: AppStyle.primaryColorBlack),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 32,
+                            ),
+                            Container(
+                              width:   width,
+                              decoration: BoxDecoration(
+                                color: AppStyle.primaryGrayB8C1B2,
+                                border: Border.all(width: 1, color: Colors.black),
+                                // borderRadius: BorderRadius.circular(24),
+                              ),
+                              child: Center(
+                                child: Padding(
+                                  padding: AppStyle.padding_all_16()
+                                      .copyWith(left: 32, right: 32),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          KSText("Ai đang gửi yêu thương vậy nè?",
+                                              style: KSTextStyle()
+                                                  .style(
+                                                18,
+                                                FontWeight.w600,
+                                                fontBuilder:
+                                                GoogleFonts.cormorantInfant,
+                                              )
+                                                  .copyWith(
+                                                  color: AppStyle
+                                                      .primaryGreen41483D)),
+                                          SizedBox(
+                                            height: 8,
                                           ),
-                                          style: KSTextStyle()
-                                              .style(
-                                            15,
-                                            FontWeight.w400,
-                                            fontBuilder:
-                                            GoogleFonts.cormorantInfant,
-                                          )
-                                              .copyWith(
-                                              color:
-                                              AppStyle.primaryGray8D8D8D),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 32,
-                                    ),
-                                    Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        KSText(
-                                            "Ghi lời chúc hoặc một mẩu chuyện bạn nhớ về tụi mình cũng được nè!",
+                                          TextField(
+                                            onTap: (){
+
+                                              EmojiPopupController().hide();
+                                            },
+                                            controller: vm.usernameController,
+                                            decoration: InputDecoration(
+                                              hintText:
+                                              "Vd: Cô Út, Chú 6, Bảo Bảo nè,...",
+                                              filled: true,
+                                              fillColor: Colors.white,
+                                              contentPadding:
+                                              const EdgeInsets.symmetric(
+                                                  horizontal: 16, vertical: 14),
+                                              enabledBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(
+                                                    8), // 👈 Bo tròn
+                                                borderSide: BorderSide.none,
+                                              ),
+                                              focusedBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(8),
+                                                borderSide: const BorderSide(
+                                                    color: Colors.black87,
+                                                    width: 1.5),
+                                              ),
+                                            ),
                                             style: KSTextStyle()
-                                                .style(
-                                              23,
-                                              FontWeight.w600,
-                                              fontBuilder:
-                                              GoogleFonts.cormorantInfant,
-                                            )
-                                                .copyWith(
-                                                color: AppStyle
-                                                    .primaryGreen41483D)),
-                                        SizedBox(
-                                          height: 8,
-                                        ),
-                                        TextField(
-                                          controller: vm.cmtContoller,
-                                          minLines: 5,
-                                          maxLines: 7,
-                                          decoration: InputDecoration(
-                                            hintText: "Nhập lời chúc của bạn",
-                                            filled: true,
-                                            hintStyle: KSTextStyle()
                                                 .style(
                                               15,
                                               FontWeight.w400,
@@ -781,105 +734,166 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                                                 .copyWith(
                                                 color:
                                                 AppStyle.primaryGray8D8D8D),
-                                            fillColor: Colors.white,
-                                            contentPadding:
-                                            const EdgeInsets.symmetric(
-                                                horizontal: 16, vertical: 12),
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                              BorderRadius.circular(8),
-                                              borderSide: BorderSide
-                                                  .none, // 👈 không có viền
-                                            ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderRadius:
-                                              BorderRadius.circular(8),
-                                              borderSide: const BorderSide(
-                                                  color: Colors.black),
-                                            ),
                                           ),
-                                          style: KSTextStyle()
-                                              .style(
-                                            15,
-                                            FontWeight.w400,
-                                            fontBuilder:
-                                            GoogleFonts.cormorantInfant,
-                                          )
-                                              .copyWith(
-                                              color:
-                                              AppStyle.primaryGray8D8D8D),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 32,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          KSText(
+                                              "Ghi lời chúc hoặc một mẩu chuyện bạn nhớ về tụi mình cũng được nè!",
+                                              style: KSTextStyle()
+                                                  .style(
+                                                18,
+                                                FontWeight.w600,
+                                                fontBuilder:
+                                                GoogleFonts.cormorantInfant,
+                                              )
+                                                  .copyWith(
+                                                  color: AppStyle
+                                                      .primaryGreen41483D)),
+                                          SizedBox(
+                                            height: 8,
+                                          ),
+
+                                          EmojiTextFieldMobile(onChanged: (String x){
+
+                                            vm.cmtContoller.text = x;
+                                          },),
+                                          // TextField(
+                                          //   controller: vm.cmtContoller,
+                                          //   minLines: 5,
+                                          //   maxLines: 7,
+                                          //   decoration: InputDecoration(
+                                          //     hintText: "Nhập lời chúc của bạn",
+                                          //     filled: true,
+                                          //     hintStyle: KSTextStyle()
+                                          //         .style(
+                                          //       15,
+                                          //       FontWeight.w400,
+                                          //       fontBuilder:
+                                          //       GoogleFonts.cormorantInfant,
+                                          //     )
+                                          //         .copyWith(
+                                          //         color:
+                                          //         AppStyle.primaryGray8D8D8D),
+                                          //     fillColor: Colors.white,
+                                          //     contentPadding:
+                                          //     const EdgeInsets.symmetric(
+                                          //         horizontal: 16, vertical: 12),
+                                          //     border: OutlineInputBorder(
+                                          //       borderRadius:
+                                          //       BorderRadius.circular(8),
+                                          //       borderSide: BorderSide
+                                          //           .none, // 👈 không có viền
+                                          //     ),
+                                          //     focusedBorder: OutlineInputBorder(
+                                          //       borderRadius:
+                                          //       BorderRadius.circular(8),
+                                          //       borderSide: const BorderSide(
+                                          //           color: Colors.black),
+                                          //     ),
+                                          //   ),
+                                          //   style: KSTextStyle()
+                                          //       .style(
+                                          //     15,
+                                          //     FontWeight.w400,
+                                          //     fontBuilder:
+                                          //     GoogleFonts.cormorantInfant,
+                                          //   )
+                                          //       .copyWith(
+                                          //       color:
+                                          //       AppStyle.primaryGray8D8D8D),
+                                          // ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 32,
+                                      ),
+                                      MouseRegion(
+                                        hitTestBehavior: HitTestBehavior.translucent,
+                                        onEnter: (_) => vm.setHover(true),
+                                        onExit: (_) => vm.setHover(false),
+                                        child:    AnimatedScale(
+                                          duration: const Duration(milliseconds: 200),
+                                          scale:  vm.isHover ? 1.1 : 1.0,
+                                          child: SizedBox(
+                                              width: 100,
+                                              height: 35,
+                                              child: KSButton(
+                                                onTap: () {
+                                                  EmojiPopupController().hide();
+                                                  vm.postWish(context);
+                                                },
+                                                "Gửi ngay",
+                                                backgroundColor:
+                                                AppStyle.primaryColorBlack,
+                                              )),
                                         ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 32,
-                                    ),
-                                    Container(
-                                        width: 100,
-                                        height: 35,
-                                        child: KSButton(
-                                          onTap: () {
-                                            vm.postWish(context);
-                                          },
-                                          "Gửi ngay",
-                                          backgroundColor:
-                                          AppStyle.primaryColorBlack,
-                                        )),
-                                    SizedBox(
-                                      height: 16,
-                                    ),
-                                  ],
+
+                                      ),
+
+                                      SizedBox(
+                                        height: 16,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                    Container(
-                      key: vm.loveKey,
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: 128,
-                          ),
-                          KSText("Khoảnh khắc tình yêu",textAlign: TextAlign.center,
-                              maxLines: 2,
-                              style: KSTheme.of(context)
-                                  .style
-                                  .ts60w500
-                                  .copyWith(color: AppStyle.whiteBg)),
-                          KSText(
-                            textAlign: TextAlign.center,
-                            'Mời bạn cùng ngắm nhìn những thước ảnh ghi lại hành trình yêu thương của tụi mình.',
-                            style: KSTextStyle()
-                                .style(
-                              18,
-                              FontWeight.w400,
-                              fontBuilder: GoogleFonts.cormorantInfant,
-                            )
-                                .copyWith(color: AppStyle.whiteBg),
-                          ),
-                          SizedBox(
-                            height: 64,
-                          ),
-                          Container(
-                            child: GroupedFocusCarouselMobile(
-                              onTap: (int index) async {
-                                await vm.findImg(index, context);
-
-                                showMessagePopupMobile(
-                                  context,
-                                  vm,
-                                );
-                              },
-                              imagePaths: vm.listImg.map((e) => e.url).toList(),
+                      Container(
+                        key: vm.loveKey,
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 128,
                             ),
-                          ),
-                        ],
+                            KSText("Khoảnh khắc tình yêu",textAlign: TextAlign.center,
+                                maxLines: 2,
+                                style: KSTheme.of(context)
+                                    .style
+                                    .ts42w500
+                                    .copyWith(color: AppStyle.whiteBg)),
+                            KSText(
+                              textAlign: TextAlign.center,
+                              'Mời bạn cùng ngắm nhìn những thước ảnh ghi lại hành trình yêu thương của tụi mình.',
+                              style: KSTextStyle()
+                                  .style(
+                                15,
+                                FontWeight.w400,
+                                fontBuilder: GoogleFonts.cormorantInfant,
+                              )
+                                  .copyWith(color: AppStyle.whiteBg),
+                            ),
+                            SizedBox(
+                              height: 64,
+                            ),
+                            if(vm.listImg.isNotEmpty)
+                            Container(
+                              child: GroupedFocusCarouselMobile(
+                                onTap: (int index) async {
+                                  await vm.findImg(index, context);
+
+                                  showMessagePopupMobile(
+                                    context,
+                                    vm,
+                                  );
+                                },
+                                imagePaths: vm.listImg.map((e) => e.url).toList(),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -896,7 +910,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                           textAlign: TextAlign.center,
                           style: KSTheme.of(context)
                               .style
-                              .ts60w500
+                              .ts42w500
                               .copyWith(color: AppStyle.primaryColorBlack)),
                       SizedBox(
                         height: 16,
@@ -906,7 +920,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                         'Cùng xem các mốc quan trọng trong lễ cưới – từ lễ đón dâu, lễ nhà thờ đến tiệc cưới tại nhà hàng.',
                         style: KSTextStyle()
                             .style(
-                          18,
+                          15,
                           FontWeight.w400,
                           fontBuilder: GoogleFonts.cormorantInfant,
                         )
@@ -980,7 +994,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                     TimelineItemWidgetMobile(
                       title: "Lễ Cưới Nhà Hàng",
                       date: "11h30 Ngày 14/07/2025",
-                      location: "56 Quang Trung, Phường 9, Đà Lạt",
+                      location: "19 Nguyễn Du, Phường 9, Đà Lạt",
                       description: "Bữa tiệc ấm áp bên bạn bè và người thân.",
                       imagePath: Assets.png.pngAddress3.keyName,
                       onTap: () {
@@ -1000,6 +1014,58 @@ class _HeaderWidgetState extends State<_HeaderWidget>
         ],
       );
     });
+  }
+  Widget _buildLottieButton({required Key key, required bool hovered,  required HomeScreenVm vm}) {
+    return KSInkWellUnFocus(
+      key: key,
+      radius: 360,
+      onTap: () {
+        vm.toggleAudioLottie();
+      },
+      child: AnimatedScale(
+        duration: const Duration(milliseconds: 200),
+        scale: hovered ? 1.1 : 1.0,
+        child: Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(color: Colors.black, width: 1.0),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Lottie.asset(
+              Assets.json.jsonVolume,
+              controller: vm.lottieController,
+              onLoaded: (composition) {
+                vm.setLottieDuration(composition.duration);
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+  Widget _buildPlayButton({required Key key, required bool hovered , required HomeScreenVm vm}) {
+    return KSInkWellUnFocus(
+      key: key,
+      radius: 360,
+      onTap: () {
+        vm.setPlay();
+      },
+      child: AnimatedScale(
+        duration: const Duration(milliseconds: 200),
+        scale: hovered ? 1.1 : 1.0,
+        child: Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(color: Colors.black, width: 1.0),
+          ),
+          child: const Padding(
+            padding: EdgeInsets.all(6.0),
+            child: Icon(Icons.play_arrow_outlined),
+          ),
+        ),
+      ),
+    );
   }
 }
 

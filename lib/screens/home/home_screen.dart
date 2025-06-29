@@ -54,16 +54,11 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
       final vm = Provider.of<HomeScreenVm>(context, listen: false);
       vm.getWishCMT(context);
 
-
     });
 
-    // html.document.addEventListener('visibilitychange', (event) {
-    //   if (html.document.hidden!) {
-    //     _audio.pause(); // tab bị ẩn
-    //   } else {
-    //     _audio.play(); // tab được focus lại
-    //   }
-    // });
+
+
+
     super.initState();
   }
   @override
@@ -72,16 +67,20 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
       builder: (context, vm, child) {
         return KSScaffold(
           onTap: (){
-            // vm.setPlay();
+            vm.setPlay();
+            EmojiPopupController().hide();
           },
           child: CustomScrollView(
-            physics: vm.lockScroll
-                ? const NeverScrollableScrollPhysics()
-                : const ClampingScrollPhysics(),
+            // physics: vm.lockScroll
+            //     ? const NeverScrollableScrollPhysics()
+            //     : const ClampingScrollPhysics(),
             controller: vm.scrollController,
             slivers: [
 
+              // const SliverToBoxAdapter(child: Text("😂"  /, style: TextStyle(fontFamily: 'NotoColorEmoji'))
+
               const SliverToBoxAdapter(child: _HeaderWidget()),
+
               const SliverToBoxAdapter(child: _ConfirmWidget()),
               const SliverToBoxAdapter(child: _FooterWidget()),
             ],

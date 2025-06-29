@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+import 'dart:developer' as deb;
 import 'dart:html' as html;
 
 import 'package:flutter/services.dart';
@@ -72,6 +73,7 @@ class HomeScreenVm extends ChangeNotifier {
       GlobalKey<ExpandableRevealPanelState>();
 
   Future<void> scrollToTarget(GlobalKey key) async {
+    EmojiPopupController().hide();
     final context = key.currentContext;
     if (context != null) {
       Scrollable.ensureVisible(
@@ -230,6 +232,7 @@ class HomeScreenVm extends ChangeNotifier {
   Future<void> postInvitation(
     BuildContext context,
   ) async {
+
     if (nameController.text.isEmpty || noteContoller.text.isEmpty) {
       // showAlertIOS(context, 'Thông báo', "Vui lòng điền đầy đủ thông tin");
       showCustomDialog(
@@ -267,6 +270,8 @@ class HomeScreenVm extends ChangeNotifier {
   Future<void> postWish(
     BuildContext context,
   ) async {
+    deb.log("${cmtContoller.text}");
+    deb.log("${cmtContoller.text.isEmpty}");
     if (usernameController.text.isEmpty || cmtContoller.text.isEmpty) {
       showCustomDialog(
           context: context,
@@ -369,7 +374,7 @@ class HomeScreenVm extends ChangeNotifier {
         print('🟢 Tab is visible again');
         //Tùy chọn: resume nếu muốn
         // setPlay();
-        _player.play();
+        // _player.play();
       } else {
         print('🔴 Tab is hidden, pause audio');
         _player.pause();
@@ -378,6 +383,14 @@ class HomeScreenVm extends ChangeNotifier {
       }
     });
   }
+
+  bool isHover = false;
+
+  void setHover(bool value) {
+    isHover = value;
+    notifyListeners();
+  }
+
 
   Future<void> toggleAudioLottie() async {
     if (_isAnimating || lottieController.isAnimating) return;
@@ -601,10 +614,4 @@ class HomeScreenVm extends ChangeNotifier {
     await getLinkImg(context);
   }
 
-  void _onScroll() {
-    // Ví dụ: chỉ phát nhạc nếu chưa phát
-    if (!_isPlaying) {
-      setPlay();
-    }
-  }
 }

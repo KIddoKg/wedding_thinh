@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 import 'package:wedding_hkn/services/notification_services.dart';
+import 'package:wedding_hkn/share/share_on_app.dart';
 
 import 'app.dart';
 import 'config/env.dart';
@@ -86,13 +87,14 @@ void main() async {
     // });
     // Lắng nghe khi resize
 
-   await Future.delayed(Duration(seconds: 5), () {
-      showSplashFor(Duration(seconds: 1)); // ẩn lần đầu
+    Future.delayed(Duration(seconds: 3), () {
+      showSplashFor(Duration(seconds: 0)); // ẩn lần đầu
     });
     html.window.onResize.listen((event) {
+      EmojiPopupController().hide();
       showSplashFor(Duration(seconds: 1)); // mỗi lần resize, hiển splash 1s
     });
-    html.document.title = "Thiệp cưới 💍";
+    html.document.title = "Thịnh 💍 Hân";
   }, (error, trace) {
     log('[DEV] Error while running app', time: DateTime.now(), error: error, stackTrace: trace);
   });

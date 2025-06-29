@@ -2449,7 +2449,7 @@ void showCustomDialog({
                         title,
                         maxLines: 2,
                         textAlign: TextAlign.center,
-                        style: KSTheme.of(context).style.ts42w500,
+                        style: KSTheme.of(context).style.ts35w500,
 
                       ),
                       if (detail != null)
@@ -2465,9 +2465,9 @@ void showCustomDialog({
                           )
                               .copyWith(color: AppStyle.primaryGreen647B58),
                         ),
-                      const SizedBox(height: 20),
-                      Image.asset(imageAsset, height: 200, width: 200),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 8),
+                      Image.asset(imageAsset, height: 150, width: 150, fit: BoxFit.cover,),
+                      const SizedBox(height: 8),
 
 
                       if (successMessage != null)
@@ -2492,7 +2492,6 @@ void showCustomDialog({
 
                         ),
 
-                      const SizedBox(height: 16),
                     ],
                   ),
                 ),

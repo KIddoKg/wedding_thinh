@@ -32,13 +32,12 @@ class _HeaderWidgetState extends State<_HeaderWidget>
     return Consumer<HomeScreenVm>(builder: (context, vm, child) {
       return Column(
         children: [
-        Stack(
+          Stack(
             children: [
               SizedBox(
                 height: 720,
                 child: Stack(
                   children: [
-
                     Stack(
                       children: [
                         Row(
@@ -90,12 +89,12 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                               child: Transform.translate(
                                 offset: Offset(-4, 0),
                                 child: Padding(
-                                  padding:
-                                      const EdgeInsets.all(8.0).copyWith(left: 1),
+                                  padding: const EdgeInsets.all(8.0)
+                                      .copyWith(left: 1),
                                   child: Container(
-                                    color: Colors.white ,
-                                    padding:
-                                        const EdgeInsets.symmetric(horizontal: 24),
+                                    color: Colors.white,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 24),
                                   ),
                                 ),
                               ),
@@ -119,8 +118,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                                           .style
                                           .ts70w500
                                           .copyWith(
-                                          color: Colors.black,
-                                          height: 1.0),
+                                              color: Colors.black, height: 1.0),
                                     ),
                                   ],
                                 ),
@@ -128,14 +126,13 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                                   '&',
                                   style: KSTextStyle()
                                       .style(
-                                    40,
-                                    FontWeight.w400,
-                                    fontBuilder:
-                                    GoogleFonts.cormorantInfant,
-                                  )
+                                        40,
+                                        FontWeight.w400,
+                                        fontBuilder:
+                                            GoogleFonts.cormorantInfant,
+                                      )
                                       .copyWith(
-                                      color:
-                                      AppStyle.primaryGray90998B),
+                                          color: AppStyle.primaryGray90998B),
                                 ),
                                 Row(
                                   children: [
@@ -146,8 +143,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                                           .style
                                           .ts70w500
                                           .copyWith(
-                                          color: Colors.black,
-                                          height: 1.0),
+                                              color: Colors.black, height: 1.0),
                                     ),
                                   ],
                                 ),
@@ -158,47 +154,40 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                                   style: KSTextStyle().style(
                                     18,
                                     FontWeight.w400,
-                                    fontBuilder:
-                                    GoogleFonts.cormorantInfant,
+                                    fontBuilder: GoogleFonts.cormorantInfant,
                                   ),
                                 ),
-                                SizedBox(height: 16,),
-
+                                SizedBox(
+                                  height: 16,
+                                ),
                                 Row(
                                   children: [
                                     // Spacer(),
-                                    KSInkWellUnFocus(
-                                      radius: 360,
-                                      onTap: (){
-                                        vm.toggleAudioLottie();
-                                      },
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            border: Border.all(
-                                              color: Colors.black,
 
-                                              width: 1.0,
-                                            )
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Lottie.asset(
-                                            Assets.json.jsonVolume,
-                                            controller: vm.lottieController,
-                                            onLoaded: (composition) {
-                                              vm.setLottieDuration(composition.duration); // rất quan trọng
-                                            },
 
-                                          ),
-                                        ),
+                                    MouseRegion(
+                                      onEnter: (_) => vm.setHover(true),
+                                      onExit: (_) => vm.setHover(false),
+                                      child: AnimatedSwitcher(
+                                        duration: const Duration(milliseconds: 300),
+                                        switchInCurve: Curves.easeInOut,
+                                        switchOutCurve: Curves.easeInOut,
+                                        transitionBuilder: (child, animation) {
+                                          return FadeTransition(opacity: animation, child: child);
+                                        },
+                                        child: vm.isb
+                                            ? _buildLottieButton(key: const ValueKey('lottie'), hovered: vm.isHover, vm:vm)
+                                            : _buildPlayButton(key: const ValueKey('icon'), hovered: vm.isHover, vm:vm),
                                       ),
-                                    ),
+                                    )
+
+
                                   ],
                                 ),
                               ],
                             ),
-                          ),),
+                          ),
+                        ),
                       ],
                     ),
                     Column(
@@ -404,7 +393,6 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                         ),
                       ),
                     ),
-
                   ],
                 ),
               ),
@@ -465,7 +453,6 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                             )
                             .copyWith(color: AppStyle.whiteBg),
                       ),
-
                     ],
                   ),
                 ),
@@ -585,10 +572,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                     leftBoxHeight: 500,
                     rightBoxWidth: 0.5 * width,
                     rightBoxHeight: 500,
-                    redBox: Image.asset(
-                      Assets.png.pngRange.keyName,
-                      fit: BoxFit.cover, // hoặc BoxFit.fill, tùy ý
-                    ),
+                    redBox: Container(),
                     rightBox: Image.asset(
                       Assets.png.pngAnhthinh.keyName,
                     ),
@@ -628,7 +612,8 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                                 style: KSTheme.of(context)
                                     .style
                                     .ts70w500
-                                    .copyWith(color: AppStyle.primaryColorBlack)),
+                                    .copyWith(
+                                        color: AppStyle.primaryColorBlack)),
                             SizedBox(
                               height: 16,
                             ),
@@ -675,7 +660,8 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       KSText("Ai đang gửi yêu thương vậy nè?",
@@ -694,6 +680,9 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                                       ),
                                       TextField(
                                         controller: vm.usernameController,
+                                        onTap: (){
+                                          EmojiPopupController().hide();
+                                        },
                                         decoration: InputDecoration(
                                           hintText:
                                               "Vd: Cô Út, Chú 6, Bảo Bảo nè,...",
@@ -732,7 +721,8 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                                     height: 32,
                                   ),
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       KSText(
@@ -750,67 +740,39 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                                       SizedBox(
                                         height: 8,
                                       ),
-                                      TextField(
-                                        controller: vm.cmtContoller,
-                                        minLines: 5,
-                                        maxLines: 7,
-                                        decoration: InputDecoration(
-                                          hintText: "Nhập lời chúc của bạn",
-                                          filled: true,
-                                          hintStyle: KSTextStyle()
-                                              .style(
-                                                15,
-                                                FontWeight.w400,
-                                                fontBuilder:
-                                                    GoogleFonts.cormorantInfant,
-                                              )
-                                              .copyWith(
-                                                  color:
-                                                      AppStyle.primaryGray8D8D8D),
-                                          fillColor: Colors.white,
-                                          contentPadding:
-                                              const EdgeInsets.symmetric(
-                                                  horizontal: 16, vertical: 12),
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            borderSide: BorderSide
-                                                .none, // 👈 không có viền
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            borderSide: const BorderSide(
-                                                color: Colors.black),
-                                          ),
-                                        ),
-                                        style: KSTextStyle()
-                                            .style(
-                                              15,
-                                              FontWeight.w400,
-                                              fontBuilder:
-                                                  GoogleFonts.cormorantInfant,
-                                            )
-                                            .copyWith(
-                                                color:
-                                                    AppStyle.primaryGray8D8D8D),
-                                      ),
+                                      EmojiTextField(onChanged: (String x){
+
+                                        vm.cmtContoller.text = x;
+                                      },),
                                     ],
                                   ),
                                   SizedBox(
                                     height: 32,
                                   ),
-                                  Container(
-                                      width: 100,
-                                      height: 35,
-                                      child: KSButton(
-                                        onTap: () {
-                                          vm.postWish(context);
-                                        },
-                                        "Gửi ngay",
-                                        backgroundColor:
+                                  MouseRegion(
+                                    hitTestBehavior: HitTestBehavior.translucent,
+                                    onEnter: (_) => vm.setHover(true),
+                                    onExit: (_) => vm.setHover(false),
+                                    child:    AnimatedScale(
+                                      duration: const Duration(milliseconds: 200),
+                                      scale:  vm.isHover ? 1.1 : 1.0,
+                                      child: SizedBox(
+                                          width: 100,
+                                          height: 35,
+                                          child: KSButton(
+                                            onTap: () {
+                                              EmojiPopupController().hide();
+                                              vm.postWish(context);
+                                            },
+                                            "Gửi ngay",
+                                            backgroundColor:
                                             AppStyle.primaryColorBlack,
-                                      )),
+                                          )),
+                                    ),
+
+                                  ),
+
+
                                   SizedBox(
                                     height: 16,
                                   ),
@@ -850,14 +812,12 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                         ),
                         GroupedFocusCarousel(
                           onTap: (int index) async {
-
                             await vm.findImg(index, context);
-
+                            EmojiPopupController().hide();
                             showMessagePopup(
                               context,
                               vm,
                             );
-
                           },
                           imagePaths: vm.listImg.map((e) => e.url).toList(),
                         ),
@@ -966,7 +926,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                     TimelineItemWidget(
                       title: "Lễ Cưới Nhà Hàng",
                       date: "11h30 Ngày 14/07/2025",
-                      location: "56 Quang Trung, Phường 9, Đà Lạt",
+                      location: "19 Nguyễn Du, Phường 9, Đà Lạt",
                       description: "Bữa tiệc ấm áp bên bạn bè và người thân.",
                       imagePath: Assets.png.pngAddress3.keyName,
                       onTap: () {
@@ -985,6 +945,58 @@ class _HeaderWidgetState extends State<_HeaderWidget>
         ],
       );
     });
+  }
+  Widget _buildLottieButton({required Key key, required bool hovered,  required HomeScreenVm vm}) {
+    return KSInkWellUnFocus(
+      key: key,
+      radius: 360,
+      onTap: () {
+        vm.toggleAudioLottie();
+      },
+      child: AnimatedScale(
+        duration: const Duration(milliseconds: 200),
+        scale: hovered ? 1.1 : 1.0,
+        child: Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(color: Colors.black, width: 1.0),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Lottie.asset(
+              Assets.json.jsonVolume,
+              controller: vm.lottieController,
+              onLoaded: (composition) {
+                vm.setLottieDuration(composition.duration);
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+  Widget _buildPlayButton({required Key key, required bool hovered , required HomeScreenVm vm}) {
+    return KSInkWellUnFocus(
+      key: key,
+      radius: 360,
+      onTap: () {
+        vm.setPlay();
+      },
+      child: AnimatedScale(
+        duration: const Duration(milliseconds: 200),
+        scale: hovered ? 1.1 : 1.0,
+        child: Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(color: Colors.black, width: 1.0),
+          ),
+          child: const Padding(
+            padding: EdgeInsets.all(6.0),
+            child: Icon(Icons.play_arrow_outlined),
+          ),
+        ),
+      ),
+    );
   }
 }
 
@@ -1047,4 +1059,6 @@ void showMessagePopup(BuildContext context, HomeScreenVm vm) {
   // Future.delayed(Duration(milliseconds: 300), () {
   //   // vm.setExpandedCMT(true);
   // });
+
+
 }

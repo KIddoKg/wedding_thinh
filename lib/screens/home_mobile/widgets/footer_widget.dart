@@ -85,6 +85,7 @@ class _FooterWidgetState extends State<_FooterWidget> {
             child:      KSInkWellUnFocus(
             radius: 180,
             onTap: (){
+              EmojiPopupController().hide();
               vm.scrollToTop();
             },
             child: Container(

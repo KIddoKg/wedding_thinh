@@ -65,7 +65,8 @@ class _HomeScreenMobileContentState extends State<HomeScreenMobileContent> {
       builder: (context, vm, child) {
         return KSScaffold(
           onTap: (){
-            // vm.setPlay();
+            EmojiPopupController().hide();
+            vm.setPlay();
           },
           child: CustomScrollView(
             physics: vm.lockScroll
