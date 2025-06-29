@@ -50,7 +50,7 @@ class _FooterWidgetState extends State<_FooterWidget> {
                      ),
                      KSText(
                        textAlign: TextAlign.center,
-                       '19 Nguyễn Du, Phường 9, Thành phố Đà Lạt',
+                       '19 Nguyễn Du, Phường 9, Thành phố Đà Lạt.',
                        style: KSTextStyle()
                            .style(
                          15,

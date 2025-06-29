@@ -292,14 +292,29 @@ class _GroupedFocusCarouselState extends State<GroupedFocusCarousel> {
   void initState() {
     super.initState();
     _startAutoPlay();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _precacheAllImages();
+    });
+
   }
 
   void _startAutoPlay() {
     _timer = Timer.periodic(widget.autoPlayInterval, (_) => _next());
   }
 
+  void _precacheAllImages() async {
+    for (final url in widget.imagePaths) {
+      print('📦 Precaching: $url');
+      await precacheImage(NetworkImage(url), context);
+    }
+
+    print('✅ All images precached!');
+  }
+
+
   void _next() {
     _resetTimer();
+    // _precacheCurrentAndNextGroup();
     setState(() {
       currentFocusIndex++;
       if (currentFocusIndex >= widget.itemsPerPage) {
@@ -311,10 +326,31 @@ class _GroupedFocusCarouselState extends State<GroupedFocusCarousel> {
         }
       }
     });
+
+  }
+  void _precacheCurrentAndNextGroup() {
+    final nextStart = (currentGroupIndex + 1) * widget.itemsPerPage;
+    final nextEnd = (nextStart + widget.itemsPerPage <= widget.imagePaths.length)
+        ? nextStart + widget.itemsPerPage
+        : widget.imagePaths.length;
+
+    final current = widget.imagePaths.sublist(
+      currentGroupIndex * widget.itemsPerPage,
+      (currentGroupIndex + 1) * widget.itemsPerPage,
+    );
+
+    final next = nextStart < widget.imagePaths.length
+        ? widget.imagePaths.sublist(nextStart, nextEnd)
+        : [];
+
+    for (final url in {...current, ...next}) {
+      precacheImage(NetworkImage(url), context);
+    }
   }
 
   void _prev() {
     _resetTimer();
+    // _precacheCurrentAndNextGroup();
     setState(() {
       currentFocusIndex--;
       if (currentFocusIndex < 0) {
@@ -363,6 +399,15 @@ class _GroupedFocusCarouselState extends State<GroupedFocusCarousel> {
     return Stack(
       alignment: Alignment.center,
       children: [
+        Offstage(
+          offstage: true, // 👈 không hiển thị nhưng vẫn build và load
+          child: Column(
+            children: widget.imagePaths.map((url) {
+              return Image.network(url, width: 1, height: 1); // ép tải nhưng nhẹ
+            }).toList(),
+          ),
+        ),
+
         AnimatedSwitcher(
           duration: const Duration(milliseconds: 600),
           transitionBuilder: (Widget child, Animation<double> animation) {
@@ -401,25 +446,14 @@ class _GroupedFocusCarouselState extends State<GroupedFocusCarousel> {
                     ),
                     duration: const Duration(milliseconds: 500),
                     margin: const EdgeInsets.symmetric(horizontal: 8),
-
                     width: isFocused
                         ? screenWidth * widget.focusScale
                         : screenWidth * widget.normalScale,
                     height: widget.normalHeight,
-                    child: ClipRect(
-                      child: Image.network(
-                        currentImages[index],
-                        fit: BoxFit.cover,
-                        loadingBuilder: (context, child, loadingProgress) {
-                          if (loadingProgress == null) return child;
-                          return const Center(child: LoadingLottie());
-                        },
-                        errorBuilder: (context, error, stackTrace) =>
-                        const Center(child: Icon(Icons.broken_image, size: 40)),
-                      ),
-                    ),
+                    child: NetworkImageSmartLoading(url: currentImages[index]),
                   ),
                 );
+
               }),
             ),
           ),
@@ -596,6 +630,81 @@ class LoadingLottie extends StatelessWidget {
         width: width,
         height: height,
       ),
+    );
+  }
+}
+class NetworkImageSmartLoading extends StatefulWidget {
+  final String url;
+  final BoxFit fit;
+
+  const NetworkImageSmartLoading({
+    super.key,
+    required this.url,
+    this.fit = BoxFit.cover,
+  });
+
+  @override
+  State<NetworkImageSmartLoading> createState() => _NetworkImageSmartLoadingState();
+}
+
+class _NetworkImageSmartLoadingState extends State<NetworkImageSmartLoading> {
+  bool _isReady = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadImageSmartly(widget.url);
+  }
+
+  Future<void> _loadImageSmartly(String url) async {
+    final completer = Completer<void>();
+    bool isResolvedInstantly = false;
+
+    final image = NetworkImage(url);
+    final stream = image.resolve(const ImageConfiguration());
+
+    final listener = ImageStreamListener(
+          (info, _) {
+        if (!completer.isCompleted) {
+          completer.complete();
+        }
+      },
+      onError: (error, _) {
+        if (!completer.isCompleted) {
+          completer.complete(); // vẫn tiếp tục để tránh đứng
+        }
+      },
+    );
+
+    stream.addListener(listener);
+
+    // Nếu ảnh chưa sẵn, ép delay 1s
+    final stopwatch = Stopwatch()..start();
+    await completer.future;
+    stopwatch.stop();
+
+    stream.removeListener(listener);
+
+    // final durationLeft = 100 - stopwatch.elapsedMilliseconds;
+    // if (durationLeft > 0) {
+    //   await Future.delayed(Duration(milliseconds: durationLeft));
+    // }
+
+    if (mounted) {
+      setState(() => _isReady = true);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        if (!_isReady)
+          const Center(child: LoadingLottie()),
+        if (_isReady)
+          Image.network(widget.url, fit: widget.fit),
+      ],
     );
   }
 }
