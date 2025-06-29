@@ -39,21 +39,21 @@ class _FooterWidgetState extends State<_FooterWidget> {
                                  .copyWith(color: AppStyle.whiteBg)),
                          SizedBox(height: 8,),
                          KSText(
-                           'Khách sạn Túi Ba Gang ( Sảnh La’ Muse )',
+                           'Khách sạn Túi Ba Gang \n( Sảnh La’ Muse )',
                            style: KSTextStyle()
                                .style(
-                             15,
+                             16,
                              FontWeight.w400,
                              fontBuilder: GoogleFonts.cormorantInfant,
                            )
                                .copyWith(color: AppStyle.whiteBg),
                          ),
                          KSText(
-                           textAlign: TextAlign.center,
+                           // textAlign: TextAlign.center,
                            '19 Nguyễn Du, Phường 9, Thành phố Đà Lạt',
                            style: KSTextStyle()
                                .style(
-                             15,
+                             16,
                              FontWeight.w400,
                              fontBuilder: GoogleFonts.cormorantInfant,
                            )

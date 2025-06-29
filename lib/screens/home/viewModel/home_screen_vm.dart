@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+import 'dart:html' as html;
 
 import 'package:flutter/services.dart';
 import 'package:just_audio/just_audio.dart';
@@ -242,6 +243,9 @@ class HomeScreenVm extends ChangeNotifier {
     var res = await Services.instance.setContext(context).postInvitation(
         nameController.text, int.parse(selected ?? "1"), noteContoller.text);
     if (res == true) {
+      nameController.clear();
+      noteContoller.clear();
+      selected =null;
       // cmtWish = res.castList<UserCommentModel>(fromJson: res.data['data']);
       //
       // ab(context);
@@ -276,6 +280,9 @@ class HomeScreenVm extends ChangeNotifier {
         .setContext(context)
         .postWish(usernameController.text, cmtContoller.text);
     if (res == true) {
+      page = 1;
+      usernameController.clear();
+      cmtContoller.clear();
       getWishCMT(context);
       showCustomDialog(
           context: context,
@@ -323,6 +330,7 @@ class HomeScreenVm extends ChangeNotifier {
 
   Future<void> initAudioLottie(TickerProvider vsync) async {
     lottieController = AnimationController(vsync: vsync);
+    monitorTabVisibility();
   }
 
   void disposeAudioLottie() {
@@ -350,6 +358,25 @@ class HomeScreenVm extends ChangeNotifier {
     }
 
     notifyListeners();
+  }
+
+
+  void monitorTabVisibility() {
+    html.document.onVisibilityChange.listen((event) async {
+      final isVisible = !html.document.hidden!;
+
+      if (isVisible) {
+        print('🟢 Tab is visible again');
+        //Tùy chọn: resume nếu muốn
+        // setPlay();
+        _player.play();
+      } else {
+        print('🔴 Tab is hidden, pause audio');
+        _player.pause();
+        _isPlaying = false;
+        notifyListeners();
+      }
+    });
   }
 
   Future<void> toggleAudioLottie() async {
@@ -509,6 +536,8 @@ class HomeScreenVm extends ChangeNotifier {
         .setContext(context)
         .postCMTImage(idImg!, userCMTController.text, noteCMTController.text);
     if (res.isSuccess) {
+      userCMTController.clear();
+      noteCMTController.clear();
       page = 1;
       getListCMTImage(
         context,
@@ -536,8 +565,8 @@ class HomeScreenVm extends ChangeNotifier {
   int indexList = 1;
 
   Future<void> findImg(int i, BuildContext context) async {
-    await Future.delayed(Duration(milliseconds: 300));
-
+    // await Future.delayed(Duration(milliseconds: 300));
+    showCustomLoading();
     MediaFileModel image = listImg[i];
     indexList = i;
     idImg = image.id;
@@ -547,6 +576,7 @@ class HomeScreenVm extends ChangeNotifier {
 
     await getListCMTImage(context);
     await getLinkImg(context);
+    closeCustomLoading();
     notifyListeners();
   }
 

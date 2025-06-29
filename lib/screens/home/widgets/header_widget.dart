@@ -850,12 +850,14 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                         ),
                         GroupedFocusCarousel(
                           onTap: (int index) async {
+
                             await vm.findImg(index, context);
 
                             showMessagePopup(
                               context,
                               vm,
                             );
+
                           },
                           imagePaths: vm.listImg.map((e) => e.url).toList(),
                         ),

@@ -85,7 +85,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                           // left: 0,
                           top: 90,
                           right: 0,
-                          left: 70,
+                          left: MediaQuery.of(context).size.width >350 ? 70 : 0,
 
                           child: Align(
                             alignment: Alignment.center,
@@ -221,7 +221,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                       key: vm.panelKey,
                       blackLottieAsset: Assets.json.jsonMenu,
                       whiteLottieAsset: Assets.json.jsonMenuWhite,
-                      targetHeight: 750,
+                      targetHeight: 950,
                       content: Padding(
                         padding: const EdgeInsets.only(left: 24.0, top: 16),
                         child: Column(
@@ -335,14 +335,15 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                                           TextSpan(
                                             children: [
                                               TextSpan(
-                                                text: 'Bạn có đến không nè? ',
+                                                text: 'Bạn có đến không nè?\n',
                                                 style: KSTheme.of(context)
                                                     .style
                                                     .ts35w500
                                                     .copyWith(color: AppStyle.whiteBg),
                                               ),
+
                                               TextSpan(
-                                                text: '( Gửi xác nhận )',
+                                                text: '  ( Gửi xác nhận )',
                                                 style: KSTheme.of(context)
                                                     .style
                                                     .ts35w500

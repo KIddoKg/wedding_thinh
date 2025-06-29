@@ -6,7 +6,7 @@ import '../helper/di/di.dart';
 import 'dio_helper.dart';
 
 class API {
-  static String identity = di<Env>().baseUrl;
+  static String identity = "https://api.braintrainhcmiu.com/api/v1";
   static Dio dio = Dio();
 
   static NetRequest refreshToken() {
@@ -48,7 +48,7 @@ class API {
 
   static NetRequest getWish(int page, int pageSize) {
     String url =
-        '$identity/wedding/wish/get-list?page=$page&page_size=$pageSize';
+        '$identity/wedding/wish/get-list?page=$page&page_size=$pageSize&sort=-created_at';
     Map<String, String> data = Map();
 
     NetRequest req = NetRequest(url, 'get');

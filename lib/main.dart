@@ -92,6 +92,7 @@ void main() async {
     html.window.onResize.listen((event) {
       showSplashFor(Duration(seconds: 1)); // mỗi lần resize, hiển splash 1s
     });
+    html.document.title = "Thiệp cưới 💍";
   }, (error, trace) {
     log('[DEV] Error while running app', time: DateTime.now(), error: error, stackTrace: trace);
   });

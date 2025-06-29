@@ -381,6 +381,7 @@ class _GroupedFocusCarouselState extends State<GroupedFocusCarousel> {
             );
           },
           child: Container(
+
             key: ValueKey(currentGroupIndex), // 👈 Rất quan trọng để Switcher biết khi nào animate
             width: MediaQuery.of(context).size.width,
             child: Row(
@@ -394,19 +395,28 @@ class _GroupedFocusCarouselState extends State<GroupedFocusCarousel> {
                     widget.onTap?.call(globalIndex);
                   },
                   child: AnimatedContainer(
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      border: Border.all(color: Colors.black45),
+                    ),
                     duration: const Duration(milliseconds: 500),
                     margin: const EdgeInsets.symmetric(horizontal: 8),
+
                     width: isFocused
                         ? screenWidth * widget.focusScale
                         : screenWidth * widget.normalScale,
                     height: widget.normalHeight,
-                    child: Image.network(
-                      currentImages[index],
-                      fit: BoxFit.cover,
-                      loadingBuilder: (context, child, loadingProgress) =>
-                      loadingProgress == null ? child : LoadingLottie(),
-                      errorBuilder: (context, error, stackTrace) =>
-                      const Center(child: Icon(Icons.broken_image, size: 40)),
+                    child: ClipRect(
+                      child: Image.network(
+                        currentImages[index],
+                        fit: BoxFit.cover,
+                        loadingBuilder: (context, child, loadingProgress) {
+                          if (loadingProgress == null) return child;
+                          return const Center(child: LoadingLottie());
+                        },
+                        errorBuilder: (context, error, stackTrace) =>
+                        const Center(child: Icon(Icons.broken_image, size: 40)),
+                      ),
                     ),
                   ),
                 );
@@ -928,7 +938,7 @@ class TimelineItemWidgetMobile extends StatelessWidget {
 
           // Nội dung bên phải
           Container(
-            width: 65.w,
+            width: 70.w,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -962,10 +972,12 @@ class TimelineItemWidgetMobile extends StatelessWidget {
                   runSpacing: 8,
                   children: [
                     Icon(Icons.location_on_outlined, size: 20, color: AppStyle.primaryColorBlack),
-                    KSText(
+                    AutoSizeText(
+                      minFontSize: 10,
                       location,
+                      maxLines: 2,
                       style: KSTextStyle()
-                          .style(14, FontWeight.w700, fontBuilder: GoogleFonts.cormorantInfant)
+                          .style(13, FontWeight.w700, fontBuilder: GoogleFonts.cormorantInfant)
                           .copyWith(color: AppStyle.primaryColorBlack),
                     ),
                   ],
@@ -2182,7 +2194,7 @@ class MessagePopupDialog extends StatelessWidget {
                 hintText: 'Để lại lời nhắn...',
                 hintStyle: KSTextStyle()
                     .style(
-                      12,
+                      18,
                       FontWeight.w700,
                       fontBuilder: GoogleFonts.cormorantInfant,
                     )
@@ -2217,7 +2229,7 @@ class MessagePopupDialog extends StatelessWidget {
                       "Gửi ngay",
                       style: KSTextStyle()
                           .style(
-                            12,
+                            18,
                             FontWeight.w700,
                             fontBuilder: GoogleFonts.cormorantInfant,
                           )
@@ -2401,7 +2413,7 @@ class MessagePopupDialog extends StatelessWidget {
                   KSText("Tên hiển thị",
                       style: KSTextStyle()
                           .style(
-                        13,
+                        18,
                         FontWeight.w700,
                         fontBuilder:
                         GoogleFonts.cormorantInfant,
@@ -2439,7 +2451,7 @@ class MessagePopupDialog extends StatelessWidget {
                     ),
                     style: KSTextStyle()
                         .style(
-                      11,
+                      15,
                       FontWeight.w400,
                       fontBuilder:
                       GoogleFonts.cormorantInfant,
@@ -2461,7 +2473,7 @@ class MessagePopupDialog extends StatelessWidget {
                       "Bình luận của bạn",
                   style: KSTextStyle()
                       .style(
-                    13,
+                    18,
                     FontWeight.w700,
                     fontBuilder:
                     GoogleFonts.cormorantInfant,
@@ -2480,7 +2492,7 @@ class MessagePopupDialog extends StatelessWidget {
                       filled: true,
                       hintStyle: KSTextStyle()
                           .style(
-                        11,
+                        15,
                         FontWeight.w400,
                         fontBuilder:
                         GoogleFonts.cormorantInfant,
@@ -2509,7 +2521,7 @@ class MessagePopupDialog extends StatelessWidget {
                     ),
                     style: KSTextStyle()
                         .style(
-                      11,
+                      15,
                       FontWeight.w400,
                       fontBuilder:
                       GoogleFonts.cormorantInfant,
@@ -2992,7 +3004,7 @@ class MessagePopupDialogMobile extends StatelessWidget {
                       "Bình luận của bạn",
                       style: KSTextStyle()
                           .style(
-                        13,
+                        15,
                         FontWeight.w700,
                         fontBuilder:
                         GoogleFonts.cormorantInfant,

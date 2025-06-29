@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'dart:ui';
-
+import 'dart:html' as html;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -57,6 +57,13 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
 
     });
 
+    // html.document.addEventListener('visibilitychange', (event) {
+    //   if (html.document.hidden!) {
+    //     _audio.pause(); // tab bị ẩn
+    //   } else {
+    //     _audio.play(); // tab được focus lại
+    //   }
+    // });
     super.initState();
   }
   @override
