@@ -1,6 +1,6 @@
 # wedding_hkn
 
-Thiệp cưới online của Gia Thịnh & Bảo Hân, cùng đếm ngược đến ngày trọng đại!
+[//]: # ()
 
 ## Getting Started
 

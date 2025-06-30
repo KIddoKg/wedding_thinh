@@ -98,7 +98,15 @@ class HomeScreenMobileVm extends ChangeNotifier {
     Future.doWhile(() async {
       final data = cmtWish![index];
 
-      final randomLeft = Random().nextDouble() * (widthab - 200);
+      const bubbleWidth = 300.0;
+      const horizontalPadding = 16.0;
+
+      final maxLeft = widthab - bubbleWidth - horizontalPadding * 2;
+      final randomLeft = horizontalPadding + Random().nextDouble() * maxLeft;
+
+
+
+      // final randomLeft = Random().nextDouble() * (widthab - 300);
       final bubble = ChatBubbleData(
         name: data.userName,
         time: formatTimeAgo(int.parse(data.initTime)),
@@ -111,7 +119,7 @@ class HomeScreenMobileVm extends ChangeNotifier {
 
       index = (index + 1) % cmtWish!.length; // quay lại từ đầu nếu hết
 
-      await Future.delayed(const Duration(milliseconds: 1000));
+      await Future.delayed(const Duration(milliseconds: 1500));
       return true; // tiếp tục lặp mãi
     });
     notifyListeners();
@@ -582,7 +590,7 @@ class HomeScreenMobileVm extends ChangeNotifier {
   int indexList = 1;
 
   Future<void> findImg(int i, BuildContext context) async {
-    await Future.delayed(Duration(milliseconds: 300));
+    // await Future.delayed(Duration(milliseconds: 300));
 
     MediaFileModel image = listImg[i];
     indexList = i;

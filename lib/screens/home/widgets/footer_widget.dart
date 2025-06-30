@@ -39,7 +39,7 @@ class _FooterWidgetState extends State<_FooterWidget> {
                              .copyWith(color: AppStyle.whiteBg)),
                      SizedBox(height: 8,),
                      KSText(
-                       'Khách sạn Túi Ba Gang ( Sảnh La’ Muse )',
+                       'Nhà hàng Túi Ba Gang ( Sảnh La’ Muse )',
                        style: KSTextStyle()
                            .style(
                          15,

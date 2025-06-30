@@ -132,7 +132,7 @@ class HomeScreenVm extends ChangeNotifier {
       notifyListeners();
 
       index = (index + 1) % cmtWish!.length;
-      await Future.delayed(const Duration(milliseconds: 700));
+      await Future.delayed(const Duration(milliseconds: 1000));
       return _shouldContinue;
     });
   }

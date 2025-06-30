@@ -89,7 +89,7 @@ void main() async {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       html.document.title = "Thịnh 💍 Hân";
     });
-    await Future.delayed(Duration(seconds: 1), () {
+    await Future.delayed(Duration(seconds: 2), () {
       showSplashFor(Duration(seconds: 0));
     });
     html.window.onResize.listen((event) {

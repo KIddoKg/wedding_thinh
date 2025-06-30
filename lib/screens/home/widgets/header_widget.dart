@@ -1055,7 +1055,7 @@ void showMessagePopup(BuildContext context, HomeScreenVm vm) {
     barrierDismissible: true,
     barrierLabel: "Popup",
     barrierColor: Colors.black.withOpacity(0.5),
-    transitionDuration: const Duration(milliseconds: 700),
+    transitionDuration: const Duration(milliseconds: 500),
     pageBuilder: (_, __, ___) {
       return ChangeNotifierProvider.value(
         value: vm,

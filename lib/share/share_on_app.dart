@@ -273,7 +273,7 @@ class GroupedFocusCarousel extends StatefulWidget {
     super.key,
     required this.imagePaths,
     this.itemsPerPage = 4,
-    this.autoPlayInterval = const Duration(seconds: 3),
+    this.autoPlayInterval = const Duration(seconds: 5),
     this.focusScale = 0.30,
     this.normalScale = 0.14,
     this.focusHeight = 200,
@@ -2686,9 +2686,7 @@ class MessagePopupDialogMobile extends StatelessWidget {
                                       return LoadingLottie();
                                     },
                                     errorBuilder: (context, error, stackTrace) {
-                                      return const Center(
-                                          child: Icon(Icons.broken_image,
-                                              size: 40));
+                                      return LoadingLottie();
                                     },
                                   ),
                                 ),
@@ -2698,6 +2696,7 @@ class MessagePopupDialogMobile extends StatelessWidget {
                                 left: 8,
                                 child: KSInkWellUnFocus(
                                   onTap: () {
+                                    vm.linkUrl = "";
                                     Navigator.pop(context);
                                   },
                                   child: Container(

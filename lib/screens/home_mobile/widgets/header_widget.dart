@@ -893,12 +893,17 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                             Container(
                               child: GroupedFocusCarouselMobile(
                                 onTap: (int index) async {
-                                  await vm.findImg(index, context);
+
+
+
+
+
 
                                   showMessagePopupMobile(
                                     context,
                                     vm,
                                   );
+                                  await vm.findImg(index, context);
                                 },
                                 imagePaths: vm.listImg.map((e) => e.url).toList(),
                               ),
@@ -1146,12 +1151,13 @@ void showMessagePopup(BuildContext context, HomeScreenVm vm) {
 
 
 void showMessagePopupMobile(BuildContext context, HomeScreenMobileVm vm) {
+
   showGeneralDialog(
     context: context,
     barrierDismissible: true,
     barrierLabel: "Popup",
     barrierColor: Colors.black.withOpacity(0.5),
-    transitionDuration: const Duration(milliseconds: 700),
+    transitionDuration: const Duration(milliseconds: 500),
     pageBuilder: (_, __, ___) {
       return ChangeNotifierProvider.value(
         value: vm,
@@ -1161,6 +1167,7 @@ void showMessagePopupMobile(BuildContext context, HomeScreenMobileVm vm) {
     transitionBuilder: (context, animation, secondaryAnimation, child) {
       final curved =
       CurvedAnimation(parent: animation, curve: Curves.easeOutBack);
+
 
       return ScaleTransition(
         scale: curved,
