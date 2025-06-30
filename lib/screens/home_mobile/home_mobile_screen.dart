@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:wedding_hkn/screens/home/viewModel/home_screen_vm.dart';
+import 'package:wedding_hkn/screens/home_mobile/viewModel/home_screen_vm.dart';
 import 'package:wedding_hkn/share/share_on_app.dart';
 import 'package:wedding_hkn/share/size_configs.dart';
 
@@ -27,7 +28,7 @@ class HomeScreenMobile extends StatefulWidget {
 class _HomeScreenMobileState extends State<HomeScreenMobile> {
   @override
   Widget build(BuildContext context) {
-    final HomeScreenVm _vm = di<HomeScreenVm>();
+    final HomeScreenMobileVm _vm = di<HomeScreenMobileVm>();
 
     return ChangeNotifierProvider.value(
       value: _vm, // Provide the same instance from DI to the widget tree
@@ -51,7 +52,7 @@ class _HomeScreenMobileContentState extends State<HomeScreenMobileContent> {
     // TODO: implement initState
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      final vm = Provider.of<HomeScreenVm>(context, listen: false);
+      final vm = Provider.of<HomeScreenMobileVm>(context, listen: false);
       vm.getWishCMT(context);
 
 
@@ -61,7 +62,7 @@ class _HomeScreenMobileContentState extends State<HomeScreenMobileContent> {
   }
   @override
   Widget build(BuildContext context) {
-    return Consumer<HomeScreenVm>(
+    return Consumer<HomeScreenMobileVm>(
       builder: (context, vm, child) {
         return KSScaffold(
           onTap: (){

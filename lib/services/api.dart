@@ -56,13 +56,13 @@ class API {
     return req;
   }
 
-  static NetRequest postInvitation(String name, int guest, String note) {
+  static NetRequest postInvitation(String name, int guest, String note, bool attend) {
     String url = '$identity/wedding/invitation';
     // Map<String, String> data = Map();
 
     Map<String, dynamic> data = {
       "full_name": name,
-      "will_attend": true, // boolea
+      "will_attend": attend, // boolea
       "guests": guest,
       "description": note
     };

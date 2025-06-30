@@ -5,6 +5,7 @@ import 'package:wedding_hkn/screens/home/viewModel/home_screen_vm.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../config/env.dart';
 import '../../router/router_app.dart';
+import '../../screens/home_mobile/viewModel/home_screen_vm.dart';
 import '../widget/util.dart';
 
 
@@ -21,7 +22,8 @@ Future<void> initDI(ENVType env) async {
     ..registerFactory<SharedPreferences>(() => sharedPreferences)
     ..registerLazySingleton<WidgetUtil>(() => WidgetUtil())
     ..registerLazySingleton<AppRoute>(() => AppRoute())
-    ..registerLazySingleton<HomeScreenVm>(() => HomeScreenVm());
+    ..registerLazySingleton<HomeScreenVm>(() => HomeScreenVm())
+    ..registerLazySingleton<HomeScreenMobileVm>(() => HomeScreenMobileVm());
   // ..registerFactory<FlutterSecureStorage>(() => const FlutterSecureStorage());
   // ..registerLazySingleton<CommonInterceptor>(
   //     () => CommonInterceptor(di<ENVType>().toENV()))

@@ -62,9 +62,13 @@ class $AssetsPngGen {
   AssetGenImage get pmgAddress2Mobile =>
       const AssetGenImage('assets/png/pmg_address2_mobile.png');
 
-  /// File path: assets/png/png_address1.png
+  /// File path: assets/png/png_address1.jpg
   AssetGenImage get pngAddress1 =>
-      const AssetGenImage('assets/png/png_address1.png');
+      const AssetGenImage('assets/png/png_address1.jpg');
+
+  /// File path: assets/png/png_address1_mobile.jpg
+  AssetGenImage get pngAddress1Mobile =>
+      const AssetGenImage('assets/png/png_address1_mobile.jpg');
 
   /// File path: assets/png/png_address2.png
   AssetGenImage get pngAddress2 =>
@@ -105,6 +109,10 @@ class $AssetsPngGen {
   /// File path: assets/png/png_one.png
   AssetGenImage get pngOne => const AssetGenImage('assets/png/png_one.png');
 
+  /// File path: assets/png/png_one_mobile.png
+  AssetGenImage get pngOneMobile =>
+      const AssetGenImage('assets/png/png_one_mobile.png');
+
   /// File path: assets/png/png_range.png
   AssetGenImage get pngRange => const AssetGenImage('assets/png/png_range.png');
 
@@ -126,6 +134,7 @@ class $AssetsPngGen {
   List<AssetGenImage> get values => [
         pmgAddress2Mobile,
         pngAddress1,
+        pngAddress1Mobile,
         pngAddress2,
         pngAddress3,
         pngAnhthinh,
@@ -136,6 +145,7 @@ class $AssetsPngGen {
         pngMobile,
         pngNewLogo,
         pngOne,
+        pngOneMobile,
         pngRange,
         pngSuccess,
         pngTest,

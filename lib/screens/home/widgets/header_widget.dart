@@ -429,40 +429,53 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                 bottom: 0,
                 right: 0,
                 left: 0,
-                child: Center(
-                  child: Column(
-                    children: [
-                      Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: Colors.white,
-                              //                   <--- border color
-                              width: 2.0,
-                            ),
-                          ),
-                          child: Padding(
-                            padding: AppStyle.padding_all_8(),
-                            child: SvgPicture.asset(
-                              Assets.svg.svgArrowDown.keyName,
-                              width: 35,
-                            ),
-                          )),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        'Xem ngay',
-                        style: KSTextStyle()
-                            .style(
-                              20,
-                              FontWeight.w400,
-                              fontBuilder: GoogleFonts.cormorantInfant,
-                            )
-                            .copyWith(color: AppStyle.whiteBg),
-                      ),
-                    ],
+                child:  MouseRegion(
+                  hitTestBehavior: HitTestBehavior.translucent,
+                  onEnter: (_) => vm.setHover(true),
+                  onExit: (_) => vm.setHover(false),
+                  child:    AnimatedScale(
+                    duration: const Duration(milliseconds: 200),
+                    scale:  vm.isHover ? 1.1 : 1.0,
+                    child:  Column(
+                      children: [
+                        KSInkWellUnFocus(
+                          onTap: (){
+                            vm.scrollToTarget(vm.timeKey);
+                          },
+                          child: Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: Colors.white,
+                                  //                   <--- border color
+                                  width: 1.0,
+                                ),
+                              ),
+                              child: Padding(
+                                padding: AppStyle.padding_all_8(),
+                                child: SvgPicture.asset(
+                                  Assets.svg.svgArrowDown.keyName,
+                                  width: 35,
+                                ),
+                              )),
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Text(
+                          'Xem ngay',
+                          style: KSTextStyle()
+                              .style(
+                            20,
+                            FontWeight.w400,
+                            fontBuilder: GoogleFonts.cormorantInfant,
+                          )
+                              .copyWith(color: AppStyle.whiteBg),
+                        ),
+                      ],
+                    ),
                   ),
+
                 ),
               ),
             ],
@@ -470,6 +483,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
           Transform.translate(
             offset: Offset(0, -1),
             child: Container(
+              key:vm.timeKey ,
               // height: 600,
               width: width,
               decoration: BoxDecoration(
@@ -586,7 +600,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                   // if(vm.bubbles.isNotEmpty)
                   Container(
                     color: Colors.transparent,
-                    height: 128 + 128 + 128,
+                    height: 128 + 128 + 128 + 64,
                     child: Stack(
                       children: vm.bubbles
                           .where((_) => vm.hide == false)
@@ -609,7 +623,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                         //   _addManyBubbles();
                         // },),
                         SizedBox(
-                          height: 128,
+                          height: 64,
                         ),
                         Column(
                           children: [
@@ -890,7 +904,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                       location: "15 Đ. Trần Phú, Phường 3, Đà Lạt",
                       description:
                           "Nghi thức thiêng liêng dưới sự chứng giám của Chúa.",
-                      imagePath: Assets.png.pngAddress1.keyName,
+                      imagePath: Assets.png.pngAddress1Mobile.keyName,
                       onTap: () {
                         vm.launchMap(
                             'https://www.google.com/maps/place/Th%C3%A1nh+T%C3%A2m+Church/@11.9373552,108.4279243,17z/data=!3m1!4b1!4m6!3m5!1s0x31711332f4b06465:0x7dda4f11c97145b1!8m2!3d11.9373552!4d108.4305046!16s%2Fg%2F1hc4pfztq?entry=ttu&g_ep=EgoyMDI1MDYyMy4yIKXMDSoASAFQAw%3D%3D');

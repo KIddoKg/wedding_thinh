@@ -4,10 +4,10 @@ import 'package:wedding_hkn/generated/fonts.gen.dart';
 // Nếu dùng Google Fonts sau này
 import 'package:google_fonts/google_fonts.dart';
 
-class KSFontFamily {
-  static const String defaultFont = FontFamily.roboto;
-// Sau này nếu chuyển Google Fonts, bạn có thể dùng tên font trong Google Fonts package hoặc thay logic
-}
+// class KSFontFamily {
+//   static const String defaultFont = FontFamily.roboto;
+// // Sau này nếu chuyển Google Fonts, bạn có thể dùng tên font trong Google Fonts package hoặc thay logic
+// }
 
 
 

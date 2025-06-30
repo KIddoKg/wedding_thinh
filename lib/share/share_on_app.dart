@@ -11,6 +11,7 @@ import 'package:sizer/sizer.dart';
 import 'package:wedding_hkn/share/tab_visibility_monitor.dart';
 import 'package:wedding_hkn/share/text_style.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
+import '../screens/home_mobile/viewModel/home_screen_vm.dart';
 import 'app_imports.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter/foundation.dart' as foundation;
@@ -204,9 +205,9 @@ class TimeColumn extends StatelessWidget {
         // dòng chứa [1][1]
         Row(
           children: [
-            TimeBox(value: topLeft, size: size,ver: ver),
+            TimeBox(value: topLeft, size: size, ver: ver),
             const SizedBox(width: 4),
-            TimeBox(value: topRight, size: size,ver: ver),
+            TimeBox(value: topRight, size: size, ver: ver),
           ],
         ),
         const SizedBox(height: 16),
@@ -230,7 +231,7 @@ class TimeBox extends StatelessWidget {
   final String value;
   final double ver;
 
-  const TimeBox({required this.value, this.size = 70,this.ver = 12});
+  const TimeBox({required this.value, this.size = 70, this.ver = 12});
 
   @override
   Widget build(BuildContext context) {
@@ -247,7 +248,7 @@ class TimeBox extends StatelessWidget {
           value,
           style: KSTextStyle()
               .style(
-            size,
+                size,
                 FontWeight.w600,
                 fontBuilder: GoogleFonts.cormorantInfant,
               )
@@ -267,7 +268,6 @@ class GroupedFocusCarousel extends StatefulWidget {
   final double focusHeight;
   final double normalHeight;
   final void Function(int index)? onTap;
-
 
   const GroupedFocusCarousel({
     super.key,
@@ -297,7 +297,6 @@ class _GroupedFocusCarouselState extends State<GroupedFocusCarousel> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _precacheAllImages();
     });
-
   }
 
   void _startAutoPlay() {
@@ -313,9 +312,7 @@ class _GroupedFocusCarouselState extends State<GroupedFocusCarousel> {
     print('✅ All images precached!');
   }
 
-
   void _next() {
-
     _resetTimer();
     // _precacheCurrentAndNextGroup();
     setState(() {
@@ -329,13 +326,14 @@ class _GroupedFocusCarouselState extends State<GroupedFocusCarousel> {
         }
       }
     });
-
   }
+
   void _precacheCurrentAndNextGroup() {
     final nextStart = (currentGroupIndex + 1) * widget.itemsPerPage;
-    final nextEnd = (nextStart + widget.itemsPerPage <= widget.imagePaths.length)
-        ? nextStart + widget.itemsPerPage
-        : widget.imagePaths.length;
+    final nextEnd =
+        (nextStart + widget.itemsPerPage <= widget.imagePaths.length)
+            ? nextStart + widget.itemsPerPage
+            : widget.imagePaths.length;
 
     final current = widget.imagePaths.sublist(
       currentGroupIndex * widget.itemsPerPage,
@@ -352,7 +350,6 @@ class _GroupedFocusCarouselState extends State<GroupedFocusCarousel> {
   }
 
   void _prev() {
-
     _resetTimer();
     // _precacheCurrentAndNextGroup();
     setState(() {
@@ -376,9 +373,6 @@ class _GroupedFocusCarouselState extends State<GroupedFocusCarousel> {
       }
     });
   }
-
-
-
 
   void _resetTimer() {
     _timer?.cancel();
@@ -407,15 +401,16 @@ class _GroupedFocusCarouselState extends State<GroupedFocusCarousel> {
           offstage: true, // 👈 không hiển thị nhưng vẫn build và load
           child: Column(
             children: widget.imagePaths.map((url) {
-              return Image.network(url, width: 1, height: 1); // ép tải nhưng nhẹ
+              return Image.network(url,
+                  width: 1, height: 1); // ép tải nhưng nhẹ
             }).toList(),
           ),
         ),
-
         AnimatedSwitcher(
           duration: const Duration(milliseconds: 600),
           transitionBuilder: (Widget child, Animation<double> animation) {
-            final isForward = true; // bạn có thể thay đổi để phân biệt trái/phải
+            final isForward =
+                true; // bạn có thể thay đổi để phân biệt trái/phải
             final offsetTween = Tween<Offset>(
               begin: Offset(isForward ? 1.0 : -1.0, 0),
               end: Offset.zero,
@@ -430,8 +425,8 @@ class _GroupedFocusCarouselState extends State<GroupedFocusCarousel> {
             );
           },
           child: Container(
-
-            key: ValueKey(currentGroupIndex), // 👈 Rất quan trọng để Switcher biết khi nào animate
+            key: ValueKey(currentGroupIndex),
+            // 👈 Rất quan trọng để Switcher biết khi nào animate
             width: MediaQuery.of(context).size.width,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -457,17 +452,15 @@ class _GroupedFocusCarouselState extends State<GroupedFocusCarousel> {
                     child: NetworkImageSmartLoading(url: currentImages[index]),
                   ),
                 );
-
               }),
             ),
           ),
         ),
-
         Positioned(
           left: 16,
           child: _ArrowButton(
             icon: Icons.arrow_back_ios_new,
-            onPressed: (){
+            onPressed: () {
               _prev();
               EmojiPopupController().hide();
             },
@@ -477,7 +470,7 @@ class _GroupedFocusCarouselState extends State<GroupedFocusCarousel> {
           right: 16,
           child: _ArrowButton(
             icon: Icons.arrow_forward_ios,
-            onPressed: (){
+            onPressed: () {
               EmojiPopupController().hide();
               _next();
             },
@@ -487,11 +480,6 @@ class _GroupedFocusCarouselState extends State<GroupedFocusCarousel> {
     );
   }
 }
-
-
-
-
-
 
 class GroupedFocusCarouselMobile extends StatefulWidget {
   final List<String> imagePaths;
@@ -510,10 +498,12 @@ class GroupedFocusCarouselMobile extends StatefulWidget {
   });
 
   @override
-  State<GroupedFocusCarouselMobile> createState() => _GroupedFocusCarouselMobileState();
+  State<GroupedFocusCarouselMobile> createState() =>
+      _GroupedFocusCarouselMobileState();
 }
 
-class _GroupedFocusCarouselMobileState extends State<GroupedFocusCarouselMobile> {
+class _GroupedFocusCarouselMobileState
+    extends State<GroupedFocusCarouselMobile> {
   int currentFocusIndex = 0;
   Timer? _timer;
 
@@ -532,20 +522,17 @@ class _GroupedFocusCarouselMobileState extends State<GroupedFocusCarouselMobile>
     _timer = Timer.periodic(widget.autoPlayInterval, (_) => _next());
   }
 
-
-
-void _precacheAllImages() async {
+  void _precacheAllImages() async {
     print(widget.imagePaths.length);
-  for (final url in widget.imagePaths) {
-    print('📦 Precaching: $url');
-    await precacheImage(NetworkImage(url), context);
+    for (final url in widget.imagePaths) {
+      print('📦 Precaching: $url');
+      await precacheImage(NetworkImage(url), context);
+    }
+
+    print('✅ All images precached!');
   }
 
-  print('✅ All images precached!');
-}
-
-
-void _resetTimer() {
+  void _resetTimer() {
     _timer?.cancel();
     _startAutoPlay();
   }
@@ -553,19 +540,18 @@ void _resetTimer() {
   void _next() {
     _resetTimer();
     setState(() {
-      currentFocusIndex =
-          (currentFocusIndex + 1) % widget.imagePaths.length;
+      currentFocusIndex = (currentFocusIndex + 1) % widget.imagePaths.length;
     });
   }
 
   void _prev() {
     _resetTimer();
     setState(() {
-      currentFocusIndex =
-          (currentFocusIndex - 1 + widget.imagePaths.length) %
-              widget.imagePaths.length;
+      currentFocusIndex = (currentFocusIndex - 1 + widget.imagePaths.length) %
+          widget.imagePaths.length;
     });
   }
+
   // @override
   // void didUpdateWidget(covariant GroupedFocusCarouselMobile oldWidget) {
   //   super.didUpdateWidget(oldWidget);
@@ -574,7 +560,8 @@ void _resetTimer() {
   //   }
   // }
 
-bool _hasPrecached = false;
+  bool _hasPrecached = false;
+
   @override
   void dispose() {
     _timer?.cancel();
@@ -595,49 +582,52 @@ bool _hasPrecached = false;
     return Stack(
       alignment: Alignment.center,
       children: [
-        AnimatedSwitcher(
-          duration: const Duration(milliseconds: 600),
-          transitionBuilder: (child, animation) {
-            return SlideTransition(
-              position: Tween<Offset>(
-                begin: const Offset(1, 0),
-                end: Offset.zero,
-              ).animate(CurvedAnimation(
-                parent: animation,
-                curve: Curves.easeInOut,
-              )),
-              child: child,
-            );
-          },
-          child: GestureDetector(
-            key: ValueKey(currentFocusIndex),
-            onTap: () => widget.onTap?.call(currentFocusIndex),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 500),
-              width: screenWidth * widget.focusScale,
-              height: widget.focusHeight,
-              margin: const EdgeInsets.symmetric(horizontal: 8),
-              child: NetworkImageSmartLoading(url: image),
+        Padding(
+          padding: const EdgeInsets.all(32.0).copyWith(top: 16, bottom: 16),
+          child: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 600),
+            transitionBuilder: (child, animation) {
+              return SlideTransition(
+                position: Tween<Offset>(
+                  begin: const Offset(1, 0),
+                  end: Offset.zero,
+                ).animate(CurvedAnimation(
+                  parent: animation,
+                  curve: Curves.easeInOut,
+                )),
+                child: child,
+              );
+            },
+            child: GestureDetector(
+              key: ValueKey(currentFocusIndex),
+              onTap: () => widget.onTap?.call(currentFocusIndex),
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 500),
+                // width: screenWidth * widget.focusScale,
+                // height: widget.focusHeight,
+                margin: const EdgeInsets.symmetric(horizontal: 8),
+                child: AspectRatio(
+                    aspectRatio: 2 / 3,
+                    child: NetworkImageSmartLoading(url: image)),
+              ),
             ),
           ),
         ),
-
         Positioned(
-          left: 16,
+          left: 0,
           child: _ArrowButtonMobile(
-            icon: Icons.arrow_back,
-
-            onPressed: (){
+            icon: Icons.arrow_back_ios_new,
+            onPressed: () {
               EmojiPopupController().hide();
               _prev();
             },
           ),
         ),
         Positioned(
-          right: 16,
+          right: 0,
           child: _ArrowButtonMobile(
-            icon: Icons.arrow_forward,
-            onPressed: (){
+            icon: Icons.arrow_forward_ios,
+            onPressed: () {
               EmojiPopupController().hide();
               _next();
             },
@@ -648,18 +638,11 @@ bool _hasPrecached = false;
   }
 }
 
-
-
-
 class LoadingLottie extends StatelessWidget {
   final double width;
   final double height;
 
-  const LoadingLottie({
-    super.key,
-    this.width = 200,
-    this.height = 200
-  });
+  const LoadingLottie({super.key, this.width = 200, this.height = 200});
 
   @override
   Widget build(BuildContext context) {
@@ -672,6 +655,7 @@ class LoadingLottie extends StatelessWidget {
     );
   }
 }
+
 class NetworkImageSmartLoading extends StatefulWidget {
   final String url;
   final BoxFit fit;
@@ -683,7 +667,8 @@ class NetworkImageSmartLoading extends StatefulWidget {
   });
 
   @override
-  State<NetworkImageSmartLoading> createState() => _NetworkImageSmartLoadingState();
+  State<NetworkImageSmartLoading> createState() =>
+      _NetworkImageSmartLoadingState();
 }
 
 class _NetworkImageSmartLoadingState extends State<NetworkImageSmartLoading> {
@@ -703,7 +688,7 @@ class _NetworkImageSmartLoadingState extends State<NetworkImageSmartLoading> {
     final stream = image.resolve(const ImageConfiguration());
 
     final listener = ImageStreamListener(
-          (info, _) {
+      (info, _) {
         if (!completer.isCompleted) {
           completer.complete();
         }
@@ -739,15 +724,12 @@ class _NetworkImageSmartLoadingState extends State<NetworkImageSmartLoading> {
     return Stack(
       fit: StackFit.expand,
       children: [
-        if (!_isReady)
-          const Center(child: LoadingLottie()),
-        if (_isReady)
-          Image.network(widget.url, fit: widget.fit),
+        if (!_isReady) const Center(child: LoadingLottie()),
+        if (_isReady) Image.network(widget.url, fit: widget.fit),
       ],
     );
   }
 }
-
 
 class TimelineIndicator extends StatelessWidget {
   final bool isFirst;
@@ -867,7 +849,6 @@ class _ArrowButton extends StatelessWidget {
   }
 }
 
-
 class _ArrowButtonMobile extends StatelessWidget {
   final IconData icon;
   final VoidCallback onPressed;
@@ -876,18 +857,13 @@ class _ArrowButtonMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipOval(
-      child: Material(
-        color: Colors.white,
-        child: InkWell(
-          splashColor: Colors.grey[300],
-          onTap: onPressed,
-          child: SizedBox(
-            width: 25,
-            height: 25,
-            child: Icon(icon, size: 15),
-          ),
-        ),
+    return InkWell(
+      splashColor: Colors.grey[300],
+      onTap: onPressed,
+      child: Icon(
+        icon,
+        size: 30,
+        color: AppStyle.primaryGreen647B58,
       ),
     );
   }
@@ -913,7 +889,6 @@ class TimelineItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Padding(
       padding: AppStyle.padding_all_8(),
       child: Row(
@@ -921,31 +896,30 @@ class TimelineItemWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           // Ảnh bên trái
-          if(MediaQuery.of(context).size.width > 960)
-          IgnorePointer(
-            ignoring: MediaQuery.of(context).size.width <= 980, // 👈 nếu đang ẩn, không cho bấm
-            child: AnimatedOpacity(
-              opacity: MediaQuery.of(context).size.width > 980 ? 1.0 : 0.0,
-              duration: const Duration(milliseconds: 1500),
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 500),
-                child: Container(
-                  height: 217,
-                  width: 35.w,
-                  decoration: BoxDecoration(
-                    color: Colors.black26,
-                    image: DecorationImage(
-                      image: AssetImage(imagePath),
-                      fit: BoxFit.cover,
+          if (MediaQuery.of(context).size.width > 960)
+            IgnorePointer(
+              ignoring: MediaQuery.of(context).size.width <=
+                  980, // 👈 nếu đang ẩn, không cho bấm
+              child: AnimatedOpacity(
+                opacity: MediaQuery.of(context).size.width > 980 ? 1.0 : 0.0,
+                duration: const Duration(milliseconds: 1500),
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 500),
+                  child: Container(
+                    height: 217,
+                    width: 35.w,
+                    decoration: BoxDecoration(
+                      color: Colors.black26,
+                      image: DecorationImage(
+                        image: AssetImage(imagePath),
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                    borderRadius: BorderRadius.circular(8),
                   ),
                 ),
               ),
             ),
-          )
-
-          ,
           const SizedBox(width: 32),
 
           // Nội dung bên phải
@@ -956,20 +930,24 @@ class TimelineItemWidget extends StatelessWidget {
               KSText(
                 title,
                 style: KSTheme.of(context).style.ts42w500.copyWith(
-                  color: Colors.black,
-                  height: 1.0,
-                ),
+                      color: Colors.black,
+                      height: 1.0,
+                    ),
               ),
               const SizedBox(height: 8),
               Row(
                 children: [
-                  Icon(Icons.calendar_today_outlined, size: 20,color:AppStyle.primaryColorBlack ,),
+                  Icon(
+                    Icons.calendar_today_outlined,
+                    size: 20,
+                    color: AppStyle.primaryColorBlack,
+                  ),
                   const SizedBox(width: 8),
                   KSText(
                     date,
                     style: KSTextStyle()
                         .style(14, FontWeight.w700,
-                        fontBuilder: GoogleFonts.cormorantInfant)
+                            fontBuilder: GoogleFonts.cormorantInfant)
                         .copyWith(color: AppStyle.primaryColorBlack),
                   ),
                 ],
@@ -977,13 +955,17 @@ class TimelineItemWidget extends StatelessWidget {
               const SizedBox(height: 16),
               Row(
                 children: [
-                  Icon(Icons.location_on_outlined, size: 20,color:AppStyle.primaryColorBlack ,),
+                  Icon(
+                    Icons.location_on_outlined,
+                    size: 20,
+                    color: AppStyle.primaryColorBlack,
+                  ),
                   const SizedBox(width: 8),
                   KSText(
                     location,
                     style: KSTextStyle()
                         .style(14, FontWeight.w700,
-                        fontBuilder: GoogleFonts.cormorantInfant)
+                            fontBuilder: GoogleFonts.cormorantInfant)
                         .copyWith(color: AppStyle.primaryColorBlack),
                   ),
                 ],
@@ -993,23 +975,22 @@ class TimelineItemWidget extends StatelessWidget {
                 description,
                 style: KSTextStyle()
                     .style(18, FontWeight.w500,
-                    fontBuilder: GoogleFonts.cormorantInfant)
+                        fontBuilder: GoogleFonts.cormorantInfant)
                     .copyWith(color: AppStyle.primaryGreen647B58),
               ),
               const SizedBox(height: 16),
-
               KSInkWellUnFocus(
                 onTap: onTap,
                 radius: 24,
                 child: Container(
                   decoration: BoxDecoration(
                     border:
-                    Border.all(width: 1, color: AppStyle.primaryColorBlack),
+                        Border.all(width: 1, color: AppStyle.primaryColorBlack),
                     borderRadius: BorderRadius.circular(24),
                   ),
                   child: Padding(
                     padding:
-                    AppStyle.padding_LR_16().copyWith(top: 8, bottom: 8),
+                        AppStyle.padding_LR_16().copyWith(top: 8, bottom: 8),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -1017,7 +998,7 @@ class TimelineItemWidget extends StatelessWidget {
                           "Xem hướng dẫn",
                           style: KSTextStyle()
                               .style(15, FontWeight.w700,
-                              fontBuilder: GoogleFonts.cormorantInfant)
+                                  fontBuilder: GoogleFonts.cormorantInfant)
                               .copyWith(color: AppStyle.primaryColorBlack),
                         ),
                         const SizedBox(width: 4),
@@ -1034,8 +1015,6 @@ class TimelineItemWidget extends StatelessWidget {
     );
   }
 }
-
-
 
 class TimelineItemWidgetMobile extends StatelessWidget {
   final String title;
@@ -1057,7 +1036,6 @@ class TimelineItemWidgetMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Padding(
       padding: AppStyle.padding_all_8(),
       child: Column(
@@ -1066,23 +1044,21 @@ class TimelineItemWidgetMobile extends StatelessWidget {
         children: [
           // Ảnh bên trái
           // if(MediaQuery.of(context).size.width > 960)
-            ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 500),
-              child: Container(
-                height: 402,
-                width: 65.w,
-                decoration: BoxDecoration(
-                  color: Colors.black26,
-                  image: DecorationImage(
-                    image: AssetImage(imagePath),
-                    fit: BoxFit.cover,
-                  ),
-                  // borderRadius: BorderRadius.circular(8),
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 500),
+            child: Container(
+              height: 402,
+              width: 65.w,
+              decoration: BoxDecoration(
+                color: Colors.black26,
+                image: DecorationImage(
+                  image: AssetImage(imagePath),
+                  fit: BoxFit.cover,
                 ),
+                // borderRadius: BorderRadius.circular(8),
               ),
-            )
-
-          ,
+            ),
+          ),
           const SizedBox(height: 32),
 
           // Nội dung bên phải
@@ -1095,9 +1071,9 @@ class TimelineItemWidgetMobile extends StatelessWidget {
                 KSText(
                   title,
                   style: KSTheme.of(context).style.ts30w500.copyWith(
-                    color: Colors.black,
-                    height: 1.0,
-                  ),
+                        color: Colors.black,
+                        height: 1.0,
+                      ),
                 ),
                 const SizedBox(height: 8),
                 Wrap(
@@ -1105,11 +1081,13 @@ class TimelineItemWidgetMobile extends StatelessWidget {
                   spacing: 8,
                   runSpacing: 8,
                   children: [
-                    Icon(Icons.calendar_today_outlined, size: 20, color: AppStyle.primaryColorBlack),
+                    Icon(Icons.calendar_today_outlined,
+                        size: 20, color: AppStyle.primaryColorBlack),
                     KSText(
                       date,
                       style: KSTextStyle()
-                          .style(14, FontWeight.w700, fontBuilder: GoogleFonts.cormorantInfant)
+                          .style(14, FontWeight.w700,
+                              fontBuilder: GoogleFonts.cormorantInfant)
                           .copyWith(color: AppStyle.primaryColorBlack),
                     ),
                   ],
@@ -1120,18 +1098,19 @@ class TimelineItemWidgetMobile extends StatelessWidget {
                   spacing: 8,
                   runSpacing: 8,
                   children: [
-                    Icon(Icons.location_on_outlined, size: 20, color: AppStyle.primaryColorBlack),
+                    Icon(Icons.location_on_outlined,
+                        size: 20, color: AppStyle.primaryColorBlack),
                     AutoSizeText(
                       minFontSize: 10,
                       location,
                       maxLines: 2,
                       style: KSTextStyle()
-                          .style(13, FontWeight.w700, fontBuilder: GoogleFonts.cormorantInfant)
+                          .style(13, FontWeight.w700,
+                              fontBuilder: GoogleFonts.cormorantInfant)
                           .copyWith(color: AppStyle.primaryColorBlack),
                     ),
                   ],
                 ),
-
                 const SizedBox(height: 8),
                 LayoutBuilder(
                   builder: (context, constraints) {
@@ -1142,25 +1121,24 @@ class TimelineItemWidgetMobile extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: KSTextStyle()
                           .style(15.sp, FontWeight.w500,
-                          fontBuilder: GoogleFonts.cormorantInfant)
+                              fontBuilder: GoogleFonts.cormorantInfant)
                           .copyWith(color: AppStyle.primaryGreen647B58),
                     );
                   },
-                )
-            ,
+                ),
                 const SizedBox(height: 16),
                 KSInkWellUnFocus(
                   onTap: onTap,
                   radius: 24,
                   child: Container(
                     decoration: BoxDecoration(
-                      border:
-                      Border.all(width: 1, color: AppStyle.primaryColorBlack),
+                      border: Border.all(
+                          width: 1, color: AppStyle.primaryColorBlack),
                       borderRadius: BorderRadius.circular(24),
                     ),
                     child: Padding(
                       padding:
-                      AppStyle.padding_LR_16().copyWith(top: 8, bottom: 8),
+                          AppStyle.padding_LR_16().copyWith(top: 8, bottom: 8),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -1168,7 +1146,7 @@ class TimelineItemWidgetMobile extends StatelessWidget {
                             "Xem hướng dẫn",
                             style: KSTextStyle()
                                 .style(15, FontWeight.w700,
-                                fontBuilder: GoogleFonts.cormorantInfant)
+                                    fontBuilder: GoogleFonts.cormorantInfant)
                                 .copyWith(color: AppStyle.primaryColorBlack),
                           ),
                           const SizedBox(width: 4),
@@ -1186,8 +1164,6 @@ class TimelineItemWidgetMobile extends StatelessWidget {
     );
   }
 }
-
-
 
 class CrossScrollDrivenAnimation extends StatefulWidget {
   final ScrollController scrollController;
@@ -1216,10 +1192,6 @@ class CrossScrollDrivenAnimation extends StatefulWidget {
   State<CrossScrollDrivenAnimation> createState() =>
       _CrossScrollDrivenAnimationState();
 }
-
-
-
-
 
 enum AnimationStatusState { idle, forwarded, reversed }
 
@@ -1360,7 +1332,6 @@ class _CrossScrollDrivenAnimationState extends State<CrossScrollDrivenAnimation>
                   left: 20,
                   top: 20,
                   width: widget.leftBoxWidth,
-
                   child: Column(
                     children: [
                       Container(
@@ -1373,10 +1344,10 @@ class _CrossScrollDrivenAnimationState extends State<CrossScrollDrivenAnimation>
                           minFontSize: 10,
                           style: KSTextStyle()
                               .style(
-                            20.sp,
-                            FontWeight.w400,
-                            fontBuilder: GoogleFonts.imperialScript,
-                          )
+                                20.sp,
+                                FontWeight.w400,
+                                fontBuilder: GoogleFonts.imperialScript,
+                              )
                               .copyWith(color: AppStyle.whiteBg)),
                       KSText(
                         textAlign: TextAlign.center,
@@ -1442,7 +1413,6 @@ class _CrossScrollDrivenAnimationState extends State<CrossScrollDrivenAnimation>
                   right: 20,
                   top: 20,
                   width: widget.rightBoxWidth,
-
                   child: Column(
                     children: [
                       Container(
@@ -1455,10 +1425,10 @@ class _CrossScrollDrivenAnimationState extends State<CrossScrollDrivenAnimation>
                           minFontSize: 10,
                           style: KSTextStyle()
                               .style(
-                            20.sp,
-                            FontWeight.w400,
-                            fontBuilder: GoogleFonts.imperialScript,
-                          )
+                                20.sp,
+                                FontWeight.w400,
+                                fontBuilder: GoogleFonts.imperialScript,
+                              )
                               .copyWith(color: AppStyle.whiteBg)),
                       KSText(
                         textAlign: TextAlign.center,
@@ -1544,7 +1514,6 @@ class _CrossScrollDrivenAnimationState extends State<CrossScrollDrivenAnimation>
   }
 }
 
-
 class CrossScrollDrivenAnimationMobile extends StatefulWidget {
   final ScrollController scrollController;
   final Widget redBox;
@@ -1573,9 +1542,8 @@ class CrossScrollDrivenAnimationMobile extends StatefulWidget {
       _CrossScrollDrivenAnimationMobileState();
 }
 
-
-
-class _CrossScrollDrivenAnimationMobileState extends State<CrossScrollDrivenAnimationMobile>
+class _CrossScrollDrivenAnimationMobileState
+    extends State<CrossScrollDrivenAnimationMobile>
     with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   late AnimationController _mainController;
   late AnimationController _redBoxController;
@@ -1706,10 +1674,9 @@ class _CrossScrollDrivenAnimationMobileState extends State<CrossScrollDrivenAnim
         key: _key,
         // color: AppStyle.greyBg,
         height: 480,
-            // MediaQuery.of(context).size.height * 0.2,
+        // MediaQuery.of(context).size.height * 0.2,
         child: Stack(
           children: [
-
             Container(
               child: Stack(
                 children: [
@@ -1726,32 +1693,33 @@ class _CrossScrollDrivenAnimationMobileState extends State<CrossScrollDrivenAnim
                           // height: widget.leftBoxHeight,
                           child: widget.leftBox,
                         ),
-                        SizedBox(height: 32,),
+                        SizedBox(
+                          height: 32,
+                        ),
                         AutoSizeText("Nguyễn Thị \nBảo Hân",
                             maxLines: 2,
                             minFontSize: 10,
                             style: KSTextStyle()
                                 .style(
-                              20.sp,
-                              FontWeight.w400,
-                              fontBuilder: GoogleFonts.imperialScript,
-                            )
+                                  20.sp,
+                                  FontWeight.w400,
+                                  fontBuilder: GoogleFonts.imperialScript,
+                                )
                                 .copyWith(color: AppStyle.whiteBg)),
                         KSText(
                           textAlign: TextAlign.center,
                           'Út Nữ',
                           style: KSTextStyle()
                               .style(
-                            20,
-                            FontWeight.w400,
-                            fontBuilder: GoogleFonts.cormorantInfant,
-                          )
+                                20,
+                                FontWeight.w400,
+                                fontBuilder: GoogleFonts.cormorantInfant,
+                              )
                               .copyWith(color: AppStyle.whiteBg),
                         ),
                         SizedBox(
                           height: 8,
                         ),
-
                       ],
                     ),
                   ),
@@ -1768,32 +1736,33 @@ class _CrossScrollDrivenAnimationMobileState extends State<CrossScrollDrivenAnim
                           // height: widget.rightBoxHeight,
                           child: widget.rightBox,
                         ),
-                        SizedBox(height: 32,),
+                        SizedBox(
+                          height: 32,
+                        ),
                         AutoSizeText("Lê Gia \nThịnh",
                             maxLines: 2,
                             minFontSize: 10,
                             style: KSTextStyle()
                                 .style(
-                              20.sp,
-                              FontWeight.w400,
-                              fontBuilder: GoogleFonts.imperialScript,
-                            )
+                                  20.sp,
+                                  FontWeight.w400,
+                                  fontBuilder: GoogleFonts.imperialScript,
+                                )
                                 .copyWith(color: AppStyle.whiteBg)),
                         KSText(
                           textAlign: TextAlign.center,
                           'Út Nam',
                           style: KSTextStyle()
                               .style(
-                            20,
-                            FontWeight.w400,
-                            fontBuilder: GoogleFonts.cormorantInfant,
-                          )
+                                20,
+                                FontWeight.w400,
+                                fontBuilder: GoogleFonts.cormorantInfant,
+                              )
                               .copyWith(color: AppStyle.whiteBg),
                         ),
                         SizedBox(
                           height: 8,
                         ),
-
                       ],
                     ),
                   ),
@@ -1821,7 +1790,6 @@ class _CrossScrollDrivenAnimationMobileState extends State<CrossScrollDrivenAnim
     );
   }
 }
-
 
 class ExpandableRevealPanel extends StatefulWidget {
   final Widget content;
@@ -1869,7 +1837,6 @@ class ExpandableRevealPanelState extends State<ExpandableRevealPanel>
       _radius = isExpanded ? 0 : 30;
 
       // Future.delayed(Duration(milliseconds: 1000));
-
     });
 
     if (isExpanded) {
@@ -1929,8 +1896,10 @@ class ExpandableRevealPanelState extends State<ExpandableRevealPanel>
           child: IgnorePointer(
             ignoring: !isExpanded,
             child: TweenAnimationBuilder<double>(
-              duration: Duration(milliseconds: isExpanded ? 1500 : 300), // Vào chậm, ra nhanh
-              tween: Tween<double>(begin: isExpanded ? 0 : 1, end: isExpanded ? 1 : 0),
+              duration: Duration(milliseconds: isExpanded ? 1500 : 300),
+              // Vào chậm, ra nhanh
+              tween: Tween<double>(
+                  begin: isExpanded ? 0 : 1, end: isExpanded ? 1 : 0),
               builder: (context, value, child) {
                 return Opacity(
                   opacity: value,
@@ -1944,8 +1913,7 @@ class ExpandableRevealPanelState extends State<ExpandableRevealPanel>
               ),
             ),
           ),
-        )
-,
+        ),
 
         // Lottie button with fade between black and white animation
         Positioned(
@@ -2001,8 +1969,6 @@ class ExpandableRevealPanelState extends State<ExpandableRevealPanel>
   }
 }
 
-
-
 bool get isTabVisible => html.document.visibilityState == 'visible';
 
 class ChatBubbleData {
@@ -2024,7 +1990,7 @@ class FlyingChatBubble extends StatefulWidget {
   final ChatBubbleData data;
   final VoidCallback? onCompleted;
 
-   FlyingChatBubble({
+  FlyingChatBubble({
     super.key,
     required this.data,
     this.onCompleted,
@@ -2113,7 +2079,10 @@ class _FlyingChatBubbleState extends State<FlyingChatBubble>
   Widget _bubbleContent() {
     final data = widget.data;
     return Container(
-      width: 200,
+      constraints: const BoxConstraints(
+        maxWidth: 300, // hoặc bao nhiêu tùy thiết kế
+      ),
+
       padding: const EdgeInsets.all(16),
       margin: const EdgeInsets.symmetric(vertical: 4),
       decoration: BoxDecoration(
@@ -2155,8 +2124,6 @@ class _FlyingChatBubbleState extends State<FlyingChatBubble>
   }
 }
 
-
-
 class MessagePopupDialog extends StatelessWidget {
   const MessagePopupDialog({super.key});
 
@@ -2188,23 +2155,25 @@ class MessagePopupDialog extends StatelessWidget {
                       children: [
                         /// Ảnh cưới bên trái
                         Expanded(
-                          flex:2,
+                          flex: 2,
                           child: Stack(
                             children: [
                               Positioned.fill(
                                 child: Image.network(
                                   vm.linkUrl,
                                   fit: BoxFit.cover,
-                                  loadingBuilder: (context, child, loadingProgress) {
+                                  loadingBuilder:
+                                      (context, child, loadingProgress) {
                                     if (loadingProgress == null) return child;
                                     return LoadingLottie();
                                   },
                                   errorBuilder: (context, error, stackTrace) {
-                                    return const Center(child: Icon(Icons.broken_image, size: 40));
+                                    return const Center(
+                                        child:
+                                            Icon(Icons.broken_image, size: 40));
                                   },
                                 ),
                               ),
-
                               Positioned(
                                 top: 8,
                                 left: 8,
@@ -2216,7 +2185,8 @@ class MessagePopupDialog extends StatelessWidget {
                                   child: Padding(
                                     padding: const EdgeInsets.all(4.0),
                                     child: IconButton(
-                                      icon: const Icon(Icons.close, color: Colors.black, size: 15),
+                                      icon: const Icon(Icons.close,
+                                          color: Colors.black, size: 15),
                                       padding: EdgeInsets.zero,
                                       constraints: const BoxConstraints(),
                                       onPressed: () {
@@ -2240,9 +2210,11 @@ class MessagePopupDialog extends StatelessWidget {
                             children: [
                               Expanded(
                                 child: SingleChildScrollView(
-                                  padding: const EdgeInsets.only(bottom: 16), // optional
+                                  padding: const EdgeInsets.only(bottom: 16),
+                                  // optional
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       _buildCommentSection(context, vm),
                                       const SizedBox(height: 16),
@@ -2254,7 +2226,6 @@ class MessagePopupDialog extends StatelessWidget {
                             ],
                           ),
                         )
-
                       ],
                     ),
                   ),
@@ -2266,19 +2237,15 @@ class MessagePopupDialog extends StatelessWidget {
   }
 
   Widget _buildInputField(BuildContext context, HomeScreenVm vm) {
-
-
     return InkWell(
-      onTap: (){
-
-      },
+      onTap: () {},
       child: SizedBox(
         height: 50,
         child: Stack(
           alignment: Alignment.centerRight,
           children: [
             TextField(
-              onTap: (){
+              onTap: () {
                 vm.setExpandedCMT(true);
               },
               // controller: vm.controllerCMT,
@@ -2291,8 +2258,8 @@ class MessagePopupDialog extends StatelessWidget {
                       fontBuilder: GoogleFonts.cormorantInfant,
                     )
                     .copyWith(
-                      color:
-                          AppStyle.primaryGreen647B58, // Nếu khóa thì đổi màu chữ
+                      color: AppStyle
+                          .primaryGreen647B58, // Nếu khóa thì đổi màu chữ
                     ),
                 filled: true,
                 fillColor: Colors.white,
@@ -2308,7 +2275,6 @@ class MessagePopupDialog extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-
                   ElevatedButton(
                     onPressed: () {
                       print("bấm");
@@ -2352,41 +2318,42 @@ class MessagePopupDialog extends StatelessWidget {
           final toLoad = remaining >= 5 ? 5 : remaining;
 
           return vm.isLoadingMoreCMT
-              ? LoadingLottie(height: 100,)
+              ? LoadingLottie(
+                  height: 100,
+                )
               : GestureDetector(
-            onTap: () => vm.next10CMT(context),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12),
-              child: Stack(
-                alignment: Alignment.bottomLeft,
-                children: [
-                  // Gạch chân tự định nghĩa
-                  Container(
-                    height: 1,
-                    width: 170, // 👉 chỉnh chiều dài gạch chân ở đây
-                    color: Colors.black,
-                  ),
-                  // Nội dung chữ
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 2), // 👉 khoảng cách giữa text và line
-                    child: Text(
-                      'Xem thêm $toLoad lời nhắn khác',
-                      style: KSTextStyle()
-                          .style(
-                        15,
-                        FontWeight.w700,
-                        fontBuilder: GoogleFonts.cormorantInfant,
-                      )
-                          .copyWith(color: Colors.black),
+                  onTap: () => vm.next10CMT(context),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    child: Stack(
+                      alignment: Alignment.bottomLeft,
+                      children: [
+                        // Gạch chân tự định nghĩa
+                        Container(
+                          height: 1,
+                          width: 170, // 👉 chỉnh chiều dài gạch chân ở đây
+                          color: Colors.black,
+                        ),
+                        // Nội dung chữ
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 2),
+                          // 👉 khoảng cách giữa text và line
+                          child: Text(
+                            'Xem thêm $toLoad lời nhắn khác',
+                            style: KSTextStyle()
+                                .style(
+                                  15,
+                                  FontWeight.w700,
+                                  fontBuilder: GoogleFonts.cormorantInfant,
+                                )
+                                .copyWith(color: Colors.black),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
-
-            ),
-          );
+                );
         }
-
 
         final msg = vm.messages[index];
         return Container(
@@ -2402,26 +2369,28 @@ class MessagePopupDialog extends StatelessWidget {
                 msg.userName,
                 style: KSTextStyle()
                     .style(
-                  14,
-                  FontWeight.w700,
-                  fontBuilder: GoogleFonts.cormorantInfant,
-                )
+                      14,
+                      FontWeight.w700,
+                      fontBuilder: GoogleFonts.cormorantInfant,
+                    )
                     .copyWith(
-                  color: AppStyle.primaryColorBlack,
-                ),
+                      color: AppStyle.primaryColorBlack,
+                    ),
               ),
               const SizedBox(height: 4),
               Text(
                 msg.comment,
                 style: KSTextStyle()
                     .style(
-                  13,
-                  FontWeight.w400,
-                  fontBuilder: GoogleFonts.cormorantInfant,
-                )
+                      13,
+                      FontWeight.w400,
+                      fontBuilder: GoogleFonts.cormorantInfant,
+                    )
                     .copyWith(
-                  color: AppStyle.primaryColorBlack,
-                ),
+                  fontFamily: GoogleFonts.cormorantInfant().fontFamily,
+                  fontFamilyFallback: ['NotoColorEmoji'],
+                      color: AppStyle.primaryColorBlack,
+                    ),
               ),
             ],
           ),
@@ -2430,59 +2399,56 @@ class MessagePopupDialog extends StatelessWidget {
     );
   }
 
-
-
-
-  Widget _buildFooter(HomeScreenVm vm,  BuildContext context) {
+  Widget _buildFooter(HomeScreenVm vm, BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          if(vm.indexList != 0)
-          InkWell(
-            onTap: () async {
-              await loadDataWithLoading(
-              action: () async {
-                EmojiPopupController().hide();
-                vm.preImgCMT(  context,); // ✅ Hàm TestBug được chạy sau khi loading hiển thị xong
+          if (vm.indexList != 0)
+            InkWell(
+              onTap: () async {
+                await loadDataWithLoading(
+                  action: () async {
+                    EmojiPopupController().hide();
+                    vm.preImgCMT(
+                      context,
+                    ); // ✅ Hàm TestBug được chạy sau khi loading hiển thị xong
+                  },
+                );
               },
-              );
-
-
-            },
-            child: KSText(
-              "Quay lại",
-              style: KSTextStyle()
-                  .style(
-                    15,
-                    FontWeight.w500,
-                    fontBuilder: GoogleFonts.cormorantInfant,
-                  )
-                  .copyWith(
-                    color: AppStyle.primaryColorBlack, // Nếu khóa thì đổi màu chữ
-                  ),
+              child: KSText(
+                "Quay lại",
+                style: KSTextStyle()
+                    .style(
+                      15,
+                      FontWeight.w500,
+                      fontBuilder: GoogleFonts.cormorantInfant,
+                    )
+                    .copyWith(
+                      color: AppStyle
+                          .primaryColorBlack, // Nếu khóa thì đổi màu chữ
+                    ),
+              ),
             ),
-          ),
           const Spacer(),
           SizedBox(
               height: 35,
               width: 100,
               child: KSButton(
-
-                onTap: (){
+                onTap: () {
                   EmojiPopupController().hide();
-                  vm.nextImgCMT( context,);
+                  vm.nextImgCMT(
+                    context,
+                  );
                 },
                 "Tiếp tục",
-
                 backgroundColor: AppStyle.primaryColorBlack,
               ))
         ],
       ),
     );
   }
-
 
   Widget _buildTextCMT(BuildContext context, HomeScreenVm vm) {
     return Container(
@@ -2494,8 +2460,7 @@ class MessagePopupDialog extends StatelessWidget {
       ),
       child: Center(
         child: Padding(
-          padding: AppStyle.padding_all_16()
-              .copyWith(left: 32, right: 32),
+          padding: AppStyle.padding_all_16().copyWith(left: 32, right: 32),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -2507,55 +2472,43 @@ class MessagePopupDialog extends StatelessWidget {
                   KSText("Tên hiển thị",
                       style: KSTextStyle()
                           .style(
-                        18,
-                        FontWeight.w700,
-                        fontBuilder:
-                        GoogleFonts.cormorantInfant,
-                      ).copyWith(
-                          color: AppStyle
-                              .primaryGreen11150F)),
+                            18,
+                            FontWeight.w700,
+                            fontBuilder: GoogleFonts.cormorantInfant,
+                          )
+                          .copyWith(color: AppStyle.primaryGreen11150F)),
                   SizedBox(
                     height: 8,
                   ),
                   TextField(
-                    onTap: (){
+                    onTap: () {
                       EmojiPopupController().hide();
                     },
                     controller: vm.userCMTController,
                     decoration: InputDecoration(
-
                       hintText: "Tên của bạn là...?",
                       filled: true,
                       fillColor: Colors.white,
-                      contentPadding:
-                      const EdgeInsets.symmetric(
+                      contentPadding: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 14),
                       enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(
-                            32), // 👈 Bo tròn
-                        borderSide: const BorderSide(
-                            color: Colors.black87,
-                            width: 0.5),
-
+                        borderRadius: BorderRadius.circular(32), // 👈 Bo tròn
+                        borderSide:
+                            const BorderSide(color: Colors.black87, width: 0.5),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderRadius:
-                        BorderRadius.circular(32),
-                        borderSide: const BorderSide(
-                            color: Colors.black87,
-                            width: 1),
+                        borderRadius: BorderRadius.circular(32),
+                        borderSide:
+                            const BorderSide(color: Colors.black87, width: 1),
                       ),
                     ),
                     style: KSTextStyle()
                         .style(
-                      15,
-                      FontWeight.w400,
-                      fontBuilder:
-                      GoogleFonts.cormorantInfant,
-                    )
-                        .copyWith(
-                        color:
-                        AppStyle.primaryGray8D8D8D),
+                          15,
+                          FontWeight.w400,
+                          fontBuilder: GoogleFonts.cormorantInfant,
+                        )
+                        .copyWith(color: AppStyle.primaryGray8D8D8D),
                   ),
                 ],
               ),
@@ -2566,24 +2519,22 @@ class MessagePopupDialog extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  KSText(
-                      "Bình luận của bạn",
-                  style: KSTextStyle()
-                      .style(
-                    18,
-                    FontWeight.w700,
-                    fontBuilder:
-                    GoogleFonts.cormorantInfant,
-                  ).copyWith(
-                          color: AppStyle
-                              .primaryGreen11150F)),
+                  KSText("Bình luận của bạn",
+                      style: KSTextStyle()
+                          .style(
+                            18,
+                            FontWeight.w700,
+                            fontBuilder: GoogleFonts.cormorantInfant,
+                          )
+                          .copyWith(color: AppStyle.primaryGreen11150F)),
                   SizedBox(
                     height: 8,
                   ),
-                  EmojiTextFieldSmall(onChanged: (String x){
-
-                    vm.noteCMTController.text = x;
-                  },),
+                  EmojiTextFieldSmall(
+                    onChanged: (String x) {
+                      vm.noteCMTController.text = x;
+                    },
+                  ),
                   // TextField(
                   //   controller: vm.noteCMTController,
                   //   minLines: 3,
@@ -2643,31 +2594,24 @@ class MessagePopupDialog extends StatelessWidget {
                     hitTestBehavior: HitTestBehavior.translucent,
                     onEnter: (_) => vm.setHover(true),
                     onExit: (_) => vm.setHover(false),
-                    child:    AnimatedScale(
+                    child: AnimatedScale(
                       duration: const Duration(milliseconds: 200),
-                      scale:  vm.isHover ? 1.1 : 1.0,
-                      child:  Container(
-
-
+                      scale: vm.isHover ? 1.1 : 1.0,
+                      child: Container(
                           width: 100,
                           height: 35,
                           child: KSButton(
                             radius: 32,
-
-                            onTap: (){
+                            onTap: () {
                               EmojiPopupController().hide();
                               vm.postCMTImage(context);
                               // vm.postWish(context);
                             },
                             "Gửi ngay",
                             backgroundColor: AppStyle.primaryGreen617855,
-
                           )),
                     ),
-
                   ),
-
-
                 ],
               ),
               SizedBox(
@@ -2680,7 +2624,6 @@ class MessagePopupDialog extends StatelessWidget {
     );
   }
 
-
   Widget _buildCommentSection(BuildContext context, HomeScreenVm vm) {
     return AnimatedCrossFade(
       duration: const Duration(milliseconds: 300),
@@ -2692,25 +2635,22 @@ class MessagePopupDialog extends StatelessWidget {
         child: _buildTextCMT(context, vm),
       ),
     );
-
   }
 }
-
-
 
 class MessagePopupDialogMobile extends StatelessWidget {
   const MessagePopupDialogMobile({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final vm = Provider.of<HomeScreenVm>(context);
+    final vm = Provider.of<HomeScreenMobileVm>(context);
 
     return Dialog(
       insetPadding: const EdgeInsets.all(16),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Container(
-        height: 778 + 64,
-        width: 518 + 518,
+        // height: 778 + 64,
+        // width: 518 + 518,
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -2723,107 +2663,107 @@ class MessagePopupDialogMobile extends StatelessWidget {
         child: vm.isLoading
             ? const Center(child: CircularProgressIndicator())
             : Column(
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  /// Ảnh cưới bên trái
                   Expanded(
-                    flex:3,
-                    child: Stack(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Positioned.fill(
-                          child: Image.network(
-                            vm.linkUrl,
-                            fit: BoxFit.cover,
-                            loadingBuilder: (context, child, loadingProgress) {
-                              if (loadingProgress == null) return child;
-                              return LoadingLottie();
-                            },
-                            errorBuilder: (context, error, stackTrace) {
-                              return const Center(child: Icon(Icons.broken_image, size: 40));
-                            },
+                        /// Ảnh cưới bên trái
+                        Flexible(
+                          flex: 4,
+                          child: Stack(
+                            children: [
+                              Positioned.fill(
+                                child: AspectRatio(
+                                  aspectRatio: 16 / 9,
+                                  child: Image.network(
+                                    vm.linkUrl,
+                                    fit: BoxFit.cover,
+                                    loadingBuilder:
+                                        (context, child, loadingProgress) {
+                                      if (loadingProgress == null) return child;
+                                      return LoadingLottie();
+                                    },
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return const Center(
+                                          child: Icon(Icons.broken_image,
+                                              size: 40));
+                                    },
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                top: 8,
+                                left: 8,
+                                child: KSInkWellUnFocus(
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Icon(Icons.close,
+                                            color: Colors.black, size: 15)),
+                                  ),
+                                ),
+                              ),
+                              Align(
+                                alignment: Alignment.center,
+                                child: _buildFooter(vm, context),
+                              ),
+                            ],
                           ),
                         ),
 
-                        Positioned(
-                          top: 8,
-                          left: 8,
-                          child: KSInkWellUnFocus(
-                            onTap: (){
-                              Navigator.pop(context);
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                shape: BoxShape.circle,
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child:Icon(Icons.close, color: Colors.black, size: 15)
-                              ),
-                            ),
-                          ),
-                        ),
-                        Align(
-                          alignment: Alignment.center,
-                          child: _buildFooter(vm, context),
-                        ),
+                        const SizedBox(height: 16),
 
+                        /// Input + danh sách lời nhắn
+                        Expanded(
+                          flex: 2,
+                          child: Column(
+                            children: [
+                              Expanded(
+                                child: SingleChildScrollView(
+                                  padding: const EdgeInsets.only(bottom: 16),
+                                  // optional
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      _buildCommentSection(context, vm),
+                                      const SizedBox(height: 16),
+                                      _buildMessageList(vm),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
                       ],
                     ),
                   ),
-
-                  const SizedBox(height: 16),
-
-                  /// Input + danh sách lời nhắn
-                  Expanded(
-                    flex: 2,
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: SingleChildScrollView(
-                            padding: const EdgeInsets.only(bottom: 16), // optional
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                _buildCommentSection(context, vm),
-                                const SizedBox(height: 16),
-                                _buildMessageList(vm),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-
                 ],
               ),
-            ),
-
-          ],
-        ),
       ),
     );
   }
 
-  Widget _buildInputField(BuildContext context, HomeScreenVm vm) {
-
-
+  Widget _buildInputField(BuildContext context, HomeScreenMobileVm vm) {
     return InkWell(
-      onTap: (){
-
-      },
+      onTap: () {},
       child: SizedBox(
         height: 50,
         child: Stack(
           alignment: Alignment.centerRight,
           children: [
             TextField(
-              onTap: (){
+              onTap: () {
                 vm.setExpandedCMT(true);
               },
               // controller: vm.controllerCMT,
@@ -2831,14 +2771,14 @@ class MessagePopupDialogMobile extends StatelessWidget {
                 hintText: 'Để lại lời nhắn...',
                 hintStyle: KSTextStyle()
                     .style(
-                  12,
-                  FontWeight.w700,
-                  fontBuilder: GoogleFonts.cormorantInfant,
-                )
+                      12,
+                      FontWeight.w700,
+                      fontBuilder: GoogleFonts.cormorantInfant,
+                    )
                     .copyWith(
-                  color:
-                  AppStyle.primaryGreen647B58, // Nếu khóa thì đổi màu chữ
-                ),
+                      color: AppStyle
+                          .primaryGreen647B58, // Nếu khóa thì đổi màu chữ
+                    ),
                 filled: true,
                 fillColor: Colors.white,
                 contentPadding: const EdgeInsets.symmetric(horizontal: 16),
@@ -2853,7 +2793,6 @@ class MessagePopupDialogMobile extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-
                   ElevatedButton(
                     onPressed: () {
                       print("bấm");
@@ -2866,13 +2805,13 @@ class MessagePopupDialogMobile extends StatelessWidget {
                       "Gửi ngay",
                       style: KSTextStyle()
                           .style(
-                        12,
-                        FontWeight.w700,
-                        fontBuilder: GoogleFonts.cormorantInfant,
-                      )
+                            12,
+                            FontWeight.w700,
+                            fontBuilder: GoogleFonts.cormorantInfant,
+                          )
                           .copyWith(
-                        color: AppStyle.whiteBg, // Nếu khóa thì đổi màu chữ
-                      ),
+                            color: AppStyle.whiteBg, // Nếu khóa thì đổi màu chữ
+                          ),
                     ),
                   ),
                 ],
@@ -2884,7 +2823,7 @@ class MessagePopupDialogMobile extends StatelessWidget {
     );
   }
 
-  Widget _buildMessageList(HomeScreenVm vm) {
+  Widget _buildMessageList(HomeScreenMobileVm vm) {
     return ListView.builder(
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -2897,41 +2836,42 @@ class MessagePopupDialogMobile extends StatelessWidget {
           final toLoad = remaining >= 5 ? 5 : remaining;
 
           return vm.isLoadingMoreCMT
-              ? LoadingLottie(height: 100,)
+              ? LoadingLottie(
+                  height: 100,
+                )
               : GestureDetector(
-            onTap: () => vm.next10CMT(context),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12),
-              child: Stack(
-                alignment: Alignment.bottomLeft,
-                children: [
-                  // Gạch chân tự định nghĩa
-                  Container(
-                    height: 1,
-                    width: 170, // 👉 chỉnh chiều dài gạch chân ở đây
-                    color: Colors.black,
-                  ),
-                  // Nội dung chữ
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 2), // 👉 khoảng cách giữa text và line
-                    child: Text(
-                      'Xem thêm $toLoad lời nhắn khác',
-                      style: KSTextStyle()
-                          .style(
-                        15,
-                        FontWeight.w700,
-                        fontBuilder: GoogleFonts.cormorantInfant,
-                      )
-                          .copyWith(color: Colors.black),
+                  onTap: () => vm.next10CMT(context),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    child: Stack(
+                      alignment: Alignment.bottomLeft,
+                      children: [
+                        // Gạch chân tự định nghĩa
+                        Container(
+                          height: 1,
+                          width: 170, // 👉 chỉnh chiều dài gạch chân ở đây
+                          color: Colors.black,
+                        ),
+                        // Nội dung chữ
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 2),
+                          // 👉 khoảng cách giữa text và line
+                          child: Text(
+                            'Xem thêm $toLoad lời nhắn khác',
+                            style: KSTextStyle()
+                                .style(
+                                  15,
+                                  FontWeight.w700,
+                                  fontBuilder: GoogleFonts.cormorantInfant,
+                                )
+                                .copyWith(color: Colors.black),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
-
-            ),
-          );
+                );
         }
-
 
         final msg = vm.messages[index];
         return Container(
@@ -2947,26 +2887,28 @@ class MessagePopupDialogMobile extends StatelessWidget {
                 msg.userName,
                 style: KSTextStyle()
                     .style(
-                  14,
-                  FontWeight.w700,
-                  fontBuilder: GoogleFonts.cormorantInfant,
-                )
+                      14,
+                      FontWeight.w700,
+                      fontBuilder: GoogleFonts.cormorantInfant,
+                    )
                     .copyWith(
-                  color: AppStyle.primaryColorBlack,
-                ),
+                      color: AppStyle.primaryColorBlack,
+                    ),
               ),
               const SizedBox(height: 4),
               Text(
                 msg.comment,
                 style: KSTextStyle()
                     .style(
-                  13,
-                  FontWeight.w400,
-                  fontBuilder: GoogleFonts.cormorantInfant,
-                )
+                      13,
+                      FontWeight.w400,
+                      fontBuilder: GoogleFonts.cormorantInfant,
+                    )
                     .copyWith(
-                  color: AppStyle.primaryColorBlack,
-                ),
+                  fontFamily: GoogleFonts.cormorantInfant().fontFamily,
+                  fontFamilyFallback: ['NotoColorEmoji'],
+                      color: AppStyle.primaryColorBlack,
+                    ),
               ),
             ],
           ),
@@ -2975,68 +2917,49 @@ class MessagePopupDialogMobile extends StatelessWidget {
     );
   }
 
-
-
-
-  Widget _buildFooter(HomeScreenVm vm,  BuildContext context) {
+  Widget _buildFooter(HomeScreenMobileVm vm, BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          if(vm.indexList != 0)
+          if (vm.indexList != 0)
             InkWell(
-              onTap: () async {
-                await loadDataWithLoading(
-                  action: () async {
-                    EmojiPopupController().hide();
-                    vm.preImgCMT(  context,); // ✅ Hàm TestBug được chạy sau khi loading hiển thị xong
-                  },
-                );
-
-
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppStyle.whiteBg
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Icon(Icons.arrow_back, size: 10,),
-                ),
-              )
-            ),
+                onTap: () async {
+                  await loadDataWithLoading(
+                    action: () async {
+                      EmojiPopupController().hide();
+                      vm.preImgCMT(
+                        context,
+                      ); // ✅ Hàm TestBug được chạy sau khi loading hiển thị xong
+                    },
+                  );
+                },
+                child: Icon(Icons.arrow_back_ios,
+                    size: 30, color: AppStyle.primaryGreen647B58)),
           const Spacer(),
           InkWell(
               onTap: () async {
                 await loadDataWithLoading(
                   action: () async {
                     EmojiPopupController().hide();
-                    vm.nextImgCMT( context,); // ✅ Hàm TestBug được chạy sau khi loading hiển thị xong
+                    vm.nextImgCMT(
+                      context,
+                    ); // ✅ Hàm TestBug được chạy sau khi loading hiển thị xong
                   },
                 );
-
-
               },
-              child: Container(
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: AppStyle.whiteBg
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Icon(Icons.arrow_forward, size: 10,),
-                ),
-              )
-          ),
+              child: Icon(
+                Icons.arrow_forward_ios,
+                size: 30,
+                color: AppStyle.primaryGreen647B58,
+              )),
         ],
       ),
     );
   }
 
-
-  Widget _buildTextCMT(BuildContext context, HomeScreenVm vm) {
+  Widget _buildTextCMT(BuildContext context, HomeScreenMobileVm vm) {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(12),
@@ -3046,8 +2969,7 @@ class MessagePopupDialogMobile extends StatelessWidget {
       ),
       child: Center(
         child: Padding(
-          padding: AppStyle.padding_all_16()
-              .copyWith(left: 16, right: 16),
+          padding: AppStyle.padding_all_16().copyWith(left: 16, right: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -3059,56 +2981,43 @@ class MessagePopupDialogMobile extends StatelessWidget {
                   KSText("Tên hiển thị",
                       style: KSTextStyle()
                           .style(
-                        13,
-                        FontWeight.w700,
-                        fontBuilder:
-                        GoogleFonts.cormorantInfant,
-                      ).copyWith(
-                          color: AppStyle
-                              .primaryGreen11150F)),
+                            13,
+                            FontWeight.w700,
+                            fontBuilder: GoogleFonts.cormorantInfant,
+                          )
+                          .copyWith(color: AppStyle.primaryGreen11150F)),
                   SizedBox(
                     height: 8,
                   ),
                   TextField(
-                    onTap: (){
-
+                    onTap: () {
                       EmojiPopupController().hide();
                     },
                     controller: vm.userCMTController,
                     decoration: InputDecoration(
-
                       hintText: "Tên của bạn là...?",
                       filled: true,
                       fillColor: Colors.white,
-                      contentPadding:
-                      const EdgeInsets.symmetric(
+                      contentPadding: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 14),
                       enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(
-                            32), // 👈 Bo tròn
-                        borderSide: const BorderSide(
-                            color: Colors.black87,
-                            width: 0.5),
-
+                        borderRadius: BorderRadius.circular(32), // 👈 Bo tròn
+                        borderSide:
+                            const BorderSide(color: Colors.black87, width: 0.5),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderRadius:
-                        BorderRadius.circular(32),
-                        borderSide: const BorderSide(
-                            color: Colors.black87,
-                            width: 1),
+                        borderRadius: BorderRadius.circular(32),
+                        borderSide:
+                            const BorderSide(color: Colors.black87, width: 1),
                       ),
                     ),
                     style: KSTextStyle()
                         .style(
-                      11,
-                      FontWeight.w400,
-                      fontBuilder:
-                      GoogleFonts.cormorantInfant,
-                    )
-                        .copyWith(
-                        color:
-                        AppStyle.primaryGray8D8D8D),
+                          11,
+                          FontWeight.w400,
+                          fontBuilder: GoogleFonts.cormorantInfant,
+                        )
+                        .copyWith(color: AppStyle.primaryGray8D8D8D),
                   ),
                 ],
               ),
@@ -3119,25 +3028,23 @@ class MessagePopupDialogMobile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  KSText(
-                      "Bình luận của bạn",
+                  KSText("Bình luận của bạn",
                       style: KSTextStyle()
                           .style(
-                        15,
-                        FontWeight.w700,
-                        fontBuilder:
-                        GoogleFonts.cormorantInfant,
-                      ).copyWith(
-                          color: AppStyle
-                              .primaryGreen11150F)),
+                            15,
+                            FontWeight.w700,
+                            fontBuilder: GoogleFonts.cormorantInfant,
+                          )
+                          .copyWith(color: AppStyle.primaryGreen11150F)),
                   SizedBox(
                     height: 8,
                   ),
 
-                  EmojiTextFieldMobile(onChanged: (String x){
-
-                    vm.noteCMTController.text = x;
-                  },),
+                  EmojiTextFieldMobile(
+                    onChanged: (String x) {
+                      vm.noteCMTController.text = x;
+                    },
+                  ),
                   // TextField(
                   //   controller: vm.noteCMTController,
                   //   minLines: 3,
@@ -3194,21 +3101,16 @@ class MessagePopupDialogMobile extends StatelessWidget {
                 children: [
                   Spacer(),
                   Container(
-
-
                       width: 100,
                       height: 35,
                       child: KSButton(
                         radius: 32,
-
-                        onTap: (){
-
+                        onTap: () {
                           vm.postCMTImage(context);
                           // vm.postWish(context);
                         },
                         "Gửi ngay",
                         backgroundColor: AppStyle.primaryGreen617855,
-
                       )),
                 ],
               ),
@@ -3222,8 +3124,7 @@ class MessagePopupDialogMobile extends StatelessWidget {
     );
   }
 
-
-  Widget _buildCommentSection(BuildContext context, HomeScreenVm vm) {
+  Widget _buildCommentSection(BuildContext context, HomeScreenMobileVm vm) {
     return AnimatedCrossFade(
       duration: const Duration(milliseconds: 300),
       crossFadeState: vm.isExpandedCMT
@@ -3234,12 +3135,8 @@ class MessagePopupDialogMobile extends StatelessWidget {
         child: _buildTextCMT(context, vm),
       ),
     );
-
   }
 }
-
-
-
 
 class EmojiTextField extends StatefulWidget {
   final void Function(String)? onChanged;
@@ -3269,7 +3166,7 @@ class _EmojiTextFieldState extends State<EmojiTextField> {
   void initState() {
     super.initState();
     _emojiTextStyle = DefaultEmojiTextStyle.copyWith(
-          fontFamily: 'NotoColorEmoji',
+      fontFamily: 'NotoColorEmoji',
       fontSize: 13 * (isApple ? 1.2 : 1.0),
     );
     _controller = EmojiTextEditingController(emojiTextStyle: _emojiTextStyle);
@@ -3287,7 +3184,8 @@ class _EmojiTextFieldState extends State<EmojiTextField> {
         height: 250,
         child: CompositedTransformFollower(
           link: _layerLink,
-          offset:   Offset(MediaQuery.of(context).size.width/2 + -300,20 ), // điều chỉnh vị trí popup
+          offset: Offset(MediaQuery.of(context).size.width / 2 + -300,
+              20), // điều chỉnh vị trí popup
           showWhenUnlinked: false,
           child: Material(
             elevation: 4,
@@ -3322,7 +3220,7 @@ class _EmojiTextFieldState extends State<EmojiTextField> {
       EmojiPopupController().show(
         context: context,
         layerLink: _layerLink,
-        offset:  Offset(MediaQuery.of(context).size.width/2 + -270,60 ),
+        offset: Offset(MediaQuery.of(context).size.width / 2 + -270, 60),
         width: 400,
         height: 250,
         child: EmojiPicker(
@@ -3344,7 +3242,6 @@ class _EmojiTextFieldState extends State<EmojiTextField> {
       );
     }
   }
-
 
   @override
   void dispose() {
@@ -3379,12 +3276,11 @@ class _EmojiTextFieldState extends State<EmojiTextField> {
   //   );
   // }
 
-
   @override
   Widget build(BuildContext context) {
     return CompositedTransformTarget(
       link: _layerLink,
-      child:    Stack(
+      child: Stack(
         children: [
           // ValueListenableBuilder(
           //   valueListenable: _controller,
@@ -3400,7 +3296,6 @@ class _EmojiTextFieldState extends State<EmojiTextField> {
             onChanged: widget.onChanged,
             onSubmitted: widget.onSubmitted,
             decoration: InputDecoration(
-
               // suffix: Align(
               //   alignment: Alignment.topRight,
               //   child: Container(color: AppStyle.primaryColorBlack,
@@ -3414,31 +3309,28 @@ class _EmojiTextFieldState extends State<EmojiTextField> {
               filled: true,
               hintStyle: KSTextStyle()
                   .style(
-                15,
-                FontWeight.w400,
-                fontBuilder: GoogleFonts.cormorantInfant,
-              )
-                  .copyWith(
-                  color: AppStyle.primaryGray8D8D8D),
+                    15,
+                    FontWeight.w400,
+                    fontBuilder: GoogleFonts.cormorantInfant,
+                  )
+                  .copyWith(color: AppStyle.primaryGray8D8D8D),
               fillColor: Colors.white,
               contentPadding: const EdgeInsets.fromLTRB(16, 16, 56, 16),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
-                borderSide:
-                const BorderSide(color: Colors.black87),
+                borderSide: const BorderSide(color: Colors.black87),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
-                borderSide:
-                const BorderSide(color: Colors.black),
+                borderSide: const BorderSide(color: Colors.black),
               ),
             ),
             style: KSTextStyle()
                 .style(
-              15,
-              FontWeight.w400,
-              fontBuilder: GoogleFonts.cormorantInfant,
-            )
+                  15,
+                  FontWeight.w400,
+                  fontBuilder: GoogleFonts.cormorantInfant,
+                )
                 .copyWith(color: AppStyle.primaryGray8D8D8D),
           ),
           Positioned(
@@ -3454,7 +3346,6 @@ class _EmojiTextFieldState extends State<EmojiTextField> {
     );
   }
 }
-
 
 class EmojiTextFieldMobile extends StatefulWidget {
   final void Function(String)? onChanged;
@@ -3484,7 +3375,7 @@ class _EmojiTextFieldMobileState extends State<EmojiTextFieldMobile> {
   void initState() {
     super.initState();
     _emojiTextStyle = DefaultEmojiTextStyle.copyWith(
-          fontFamily: 'NotoColorEmoji',
+      fontFamily: 'NotoColorEmoji',
       fontSize: 13 * (isApple ? 1.2 : 1.0),
     );
     _controller = EmojiTextEditingController(emojiTextStyle: _emojiTextStyle);
@@ -3502,7 +3393,8 @@ class _EmojiTextFieldMobileState extends State<EmojiTextFieldMobile> {
         height: 250,
         child: CompositedTransformFollower(
           link: _layerLink,
-          offset:   Offset(MediaQuery.of(context).size.width/2 + -300,20 ), // điều chỉnh vị trí popup
+          offset: Offset(MediaQuery.of(context).size.width / 2 + -300,
+              20), // điều chỉnh vị trí popup
           showWhenUnlinked: false,
           child: Material(
             elevation: 4,
@@ -3537,8 +3429,8 @@ class _EmojiTextFieldMobileState extends State<EmojiTextFieldMobile> {
       EmojiPopupController().show(
         context: context,
         layerLink: _layerLink,
-        offset:  Offset(0,60 ),
-        width: MediaQuery.of(context).size.width -100,
+        offset: Offset(0, 60),
+        width: MediaQuery.of(context).size.width - 100,
         height: 250,
         child: EmojiPicker(
           textEditingController: _controller,
@@ -3560,7 +3452,6 @@ class _EmojiTextFieldMobileState extends State<EmojiTextFieldMobile> {
     }
   }
 
-
   @override
   void dispose() {
     _controller.dispose();
@@ -3568,12 +3459,11 @@ class _EmojiTextFieldMobileState extends State<EmojiTextFieldMobile> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return CompositedTransformTarget(
       link: _layerLink,
-      child:    Stack(
+      child: Stack(
         children: [
           // ValueListenableBuilder(
           //   valueListenable: _controller,
@@ -3589,7 +3479,6 @@ class _EmojiTextFieldMobileState extends State<EmojiTextFieldMobile> {
             onChanged: widget.onChanged,
             onSubmitted: widget.onSubmitted,
             decoration: InputDecoration(
-
               // suffix: Align(
               //   alignment: Alignment.topRight,
               //   child: Container(color: AppStyle.primaryColorBlack,
@@ -3603,31 +3492,28 @@ class _EmojiTextFieldMobileState extends State<EmojiTextFieldMobile> {
               filled: true,
               hintStyle: KSTextStyle()
                   .style(
-                15,
-                FontWeight.w400,
-                fontBuilder: GoogleFonts.cormorantInfant,
-              )
-                  .copyWith(
-                  color: AppStyle.primaryGray8D8D8D),
+                    15,
+                    FontWeight.w400,
+                    fontBuilder: GoogleFonts.cormorantInfant,
+                  )
+                  .copyWith(color: AppStyle.primaryGray8D8D8D),
               fillColor: Colors.white,
               contentPadding: const EdgeInsets.fromLTRB(16, 16, 56, 16),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
-                borderSide:
-                const BorderSide(color: Colors.black87),
+                borderSide: const BorderSide(color: Colors.black87),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
-                borderSide:
-                const BorderSide(color: Colors.black),
+                borderSide: const BorderSide(color: Colors.black),
               ),
             ),
             style: KSTextStyle()
                 .style(
-              15,
-              FontWeight.w400,
-              fontBuilder: GoogleFonts.cormorantInfant,
-            )
+                  15,
+                  FontWeight.w400,
+                  fontBuilder: GoogleFonts.cormorantInfant,
+                )
                 .copyWith(color: AppStyle.primaryGray8D8D8D),
           ),
           Positioned(
@@ -3643,7 +3529,6 @@ class _EmojiTextFieldMobileState extends State<EmojiTextFieldMobile> {
     );
   }
 }
-
 
 class EmojiTextFieldSmall extends StatefulWidget {
   final void Function(String)? onChanged;
@@ -3673,7 +3558,7 @@ class _EmojiTextFieldSmallState extends State<EmojiTextFieldSmall> {
   void initState() {
     super.initState();
     _emojiTextStyle = DefaultEmojiTextStyle.copyWith(
-          fontFamily: 'NotoColorEmoji',
+      fontFamily: 'NotoColorEmoji',
       fontSize: 13 * (isApple ? 1.2 : 1.0),
     );
     _controller = EmojiTextEditingController(emojiTextStyle: _emojiTextStyle);
@@ -3691,7 +3576,8 @@ class _EmojiTextFieldSmallState extends State<EmojiTextFieldSmall> {
         height: 250,
         child: CompositedTransformFollower(
           link: _layerLink,
-          offset:   Offset(MediaQuery.of(context).size.width/2 + -300,20 ), // điều chỉnh vị trí popup
+          offset: Offset(MediaQuery.of(context).size.width / 2 + -300,
+              20), // điều chỉnh vị trí popup
           showWhenUnlinked: false,
           child: Material(
             elevation: 4,
@@ -3726,7 +3612,7 @@ class _EmojiTextFieldSmallState extends State<EmojiTextFieldSmall> {
       EmojiPopupController().show(
         context: context,
         layerLink: _layerLink,
-        offset:  Offset(MediaQuery.of(context).size.width/2 + -500,60 ),
+        offset: Offset(MediaQuery.of(context).size.width / 2 + -500, 60),
         width: 400,
         height: 250,
         child: EmojiPicker(
@@ -3743,14 +3629,11 @@ class _EmojiTextFieldSmallState extends State<EmojiTextFieldSmall> {
               showSearchViewButton: false,
               backgroundColor: Colors.transparent, // hoặc bỏ qua nếu cần
             ),
-
           ),
-
         ),
       );
     }
   }
-
 
   @override
   void dispose() {
@@ -3785,12 +3668,11 @@ class _EmojiTextFieldSmallState extends State<EmojiTextFieldSmall> {
   //   );
   // }
 
-
   @override
   Widget build(BuildContext context) {
     return CompositedTransformTarget(
       link: _layerLink,
-      child:    Stack(
+      child: Stack(
         children: [
           // ValueListenableBuilder(
           //   valueListenable: _controller,
@@ -3806,7 +3688,6 @@ class _EmojiTextFieldSmallState extends State<EmojiTextFieldSmall> {
             onChanged: widget.onChanged,
             onSubmitted: widget.onSubmitted,
             decoration: InputDecoration(
-
               // suffix: Align(
               //   alignment: Alignment.topRight,
               //   child: Container(color: AppStyle.primaryColorBlack,
@@ -3820,31 +3701,28 @@ class _EmojiTextFieldSmallState extends State<EmojiTextFieldSmall> {
               filled: true,
               hintStyle: KSTextStyle()
                   .style(
-                15,
-                FontWeight.w400,
-                fontBuilder: GoogleFonts.cormorantInfant,
-              )
-                  .copyWith(
-                  color: AppStyle.primaryGray8D8D8D),
+                    15,
+                    FontWeight.w400,
+                    fontBuilder: GoogleFonts.cormorantInfant,
+                  )
+                  .copyWith(color: AppStyle.primaryGray8D8D8D),
               fillColor: Colors.white,
               contentPadding: const EdgeInsets.fromLTRB(16, 16, 56, 16),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
-                borderSide:
-                const BorderSide(color: Colors.black87),
+                borderSide: const BorderSide(color: Colors.black87),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
-                borderSide:
-                const BorderSide(color: Colors.black),
+                borderSide: const BorderSide(color: Colors.black),
               ),
             ),
             style: KSTextStyle()
                 .style(
-              15,
-              FontWeight.w400,
-              fontBuilder: GoogleFonts.cormorantInfant,
-            )
+                  15,
+                  FontWeight.w400,
+                  fontBuilder: GoogleFonts.cormorantInfant,
+                )
                 .copyWith(color: AppStyle.primaryGray8D8D8D),
           ),
           Positioned(
@@ -3862,8 +3740,11 @@ class _EmojiTextFieldSmallState extends State<EmojiTextFieldSmall> {
 }
 
 class EmojiPopupController {
-  static final EmojiPopupController _instance = EmojiPopupController._internal();
+  static final EmojiPopupController _instance =
+      EmojiPopupController._internal();
+
   factory EmojiPopupController() => _instance;
+
   EmojiPopupController._internal();
 
   OverlayEntry? _overlayEntry;
@@ -3904,4 +3785,55 @@ class EmojiPopupController {
   }
 
   bool get isShowing => _overlayEntry != null;
+}
+
+class AttendanceCheckbox extends StatefulWidget {
+  final String label;
+  final bool value;
+  final ValueChanged<bool> onChanged;
+
+  const AttendanceCheckbox({
+    super.key,
+    required this.label,
+    required this.value,
+    required this.onChanged,
+  });
+
+  @override
+  State<AttendanceCheckbox> createState() => _AttendanceCheckboxState();
+}
+
+class _AttendanceCheckboxState extends State<AttendanceCheckbox> {
+  bool isChecked = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+
+      crossAxisAlignment:(MediaQuery.of(context).size.width <1111) ? CrossAxisAlignment.start : CrossAxisAlignment.center,
+      children: [
+        Checkbox(
+          hoverColor: Colors.white.withOpacity(0.2),
+          value: widget.value,
+          onChanged: (bool? newValue) {
+            widget.onChanged(newValue ?? false);
+          },
+          checkColor: Colors.black, // màu tick ✔
+          fillColor: MaterialStateProperty.all(Colors.white), // luôn có nền trắng
+          side: const BorderSide(color: Colors.white, width: 2), // viền trắng
+        ),
+
+        Flexible(
+          child: Text(widget.label,
+              style: KSTextStyle()
+                  .style(
+                    18,
+                    FontWeight.w400,
+                    fontBuilder: GoogleFonts.cormorantInfant,
+                  )
+                  .copyWith(color: AppStyle.primaryGrayB8C1B2)),
+        ),
+      ],
+    );
+  }
 }

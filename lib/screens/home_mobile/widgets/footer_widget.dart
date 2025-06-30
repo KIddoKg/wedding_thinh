@@ -14,7 +14,7 @@ class _FooterWidgetState extends State<_FooterWidget> {
     final width = SizeConfig.screenWidth!;
     final height = SizeConfig.screenHeight!;
 
-    return Consumer<HomeScreenVm>(builder: (context, vm, child) {
+    return Consumer<HomeScreenMobileVm>(builder: (context, vm, child) {
       return Stack(
         children: [
           Column(

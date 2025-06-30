@@ -69,6 +69,7 @@ class HomeScreenVm extends ChangeNotifier {
   final GlobalKey loveKey = GlobalKey();
   final GlobalKey scheduleKey = GlobalKey();
   final GlobalKey goKey = GlobalKey();
+  final GlobalKey timeKey = GlobalKey();
   final GlobalKey<ExpandableRevealPanelState> panelKey =
       GlobalKey<ExpandableRevealPanelState>();
 
@@ -118,7 +119,7 @@ class HomeScreenVm extends ChangeNotifier {
       }
 
       final data = cmtWish![index];
-      final randomLeft = Random().nextDouble() * (widthab - 250);
+      final randomLeft = Random().nextDouble() * (widthab - 300);
 
       final bubble = ChatBubbleData(
         name: data.userName,
@@ -131,7 +132,7 @@ class HomeScreenVm extends ChangeNotifier {
       notifyListeners();
 
       index = (index + 1) % cmtWish!.length;
-      await Future.delayed(const Duration(milliseconds: 500));
+      await Future.delayed(const Duration(milliseconds: 700));
       return _shouldContinue;
     });
   }
@@ -250,14 +251,15 @@ class HomeScreenVm extends ChangeNotifier {
   }
 
   TextEditingController nameController = TextEditingController();
-
+  // TextEditingController numberController = TextEditingController();
+  TextEditingController numberController = TextEditingController(text: '0');
   TextEditingController noteContoller = TextEditingController();
 
   Future<void> postInvitation(
     BuildContext context,
   ) async {
 
-    if (nameController.text.isEmpty || noteContoller.text.isEmpty) {
+    if (nameController.text.isEmpty || noteContoller.text.isEmpty || selectedOption == null) {
       // showAlertIOS(context, 'Thông báo', "Vui lòng điền đầy đủ thông tin");
       showCustomDialog(
           context: context,
@@ -268,10 +270,11 @@ class HomeScreenVm extends ChangeNotifier {
       return;
     }
     var res = await Services.instance.setContext(context).postInvitation(
-        nameController.text, int.parse(selected ?? "1"), noteContoller.text);
+        nameController.text, int.parse(numberController.text ?? "1"), noteContoller.text, selectedOption == 'attend' ? true : false);
     if (res == true) {
       nameController.clear();
       noteContoller.clear();
+      selectedOption = null;
       selected =null;
       // cmtWish = res.castList<UserCommentModel>(fromJson: res.data['data']);
       //
@@ -604,9 +607,10 @@ class HomeScreenVm extends ChangeNotifier {
     }
     notifyListeners();
   }
-
+  String? selectedOption; // 'attend' hoặc 'not_attend'
   int customImg = 1;
   int indexList = 1;
+
 
   Future<void> findImg(int i, BuildContext context) async {
     // await Future.delayed(Duration(milliseconds: 300));

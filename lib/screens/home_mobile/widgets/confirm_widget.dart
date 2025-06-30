@@ -14,7 +14,7 @@ class _ConfirmWidgetState extends State<_ConfirmWidget> {
     final width = SizeConfig.screenWidth!;
     final height = SizeConfig.screenHeight!;
 
-    return Consumer<HomeScreenVm>(builder: (context, vm, child) {
+    return Consumer<HomeScreenMobileVm>(builder: (context, vm, child) {
       return Column(
         children: [
           Container(
@@ -185,6 +185,54 @@ class _ConfirmWidgetState extends State<_ConfirmWidget> {
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              KSText("Bạn sẽ đến chứ ?",
+                                  style: KSTextStyle()
+                                      .style(
+                                    23,
+                                    FontWeight.w400,
+                                    fontBuilder: GoogleFonts.cormorantInfant,
+                                  )
+                                      .copyWith(
+                                      color: AppStyle.primaryGrayB8C1B2)),
+                              SizedBox(height: 8,),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children:   [
+                                  Expanded(
+                                    child: AttendanceCheckbox(
+                                      label: 'Mình sẽ tham dự',
+                                      value: vm.selectedOption == 'attend',
+                                      onChanged: (bool checked) {
+                                        print("${checked}");
+
+                                        vm.selectedOption = checked ? 'attend' : null;
+
+                                      },
+                                    ),
+                                  ),
+                                  SizedBox(width: 20),
+                                  Expanded(
+                                    child: AttendanceCheckbox(
+                                      label: 'Rất tiếc, mình không thể tham dự được',
+                                      value: vm.selectedOption == 'not_attend',
+                                      onChanged: (bool checked) {
+
+                                        vm.selectedOption = checked ? 'not_attend' : null;
+
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               KSText("Bạn sẽ đi cùng bao nhiêu người?",
@@ -197,54 +245,37 @@ class _ConfirmWidgetState extends State<_ConfirmWidget> {
                                       .copyWith(
                                       color: AppStyle.primaryGrayB8C1B2)),
                               SizedBox(height: 8,),
-                              DropdownButtonFormField<String>(
-                                onTap: (){
-                                  EmojiPopupController().hide();
-                                },
-                                value: vm.selected,
-                                hint: Text(
-                                  "Vd: 1",
-                                  style: KSTextStyle()
-                                      .style(
-                                        15,
-                                        FontWeight.w400,
-                                        fontBuilder: GoogleFonts.cormorantInfant,
-                                      )
-                                      .copyWith(
-                                          color: AppStyle.primaryGray8D8D8D),
-                                ),
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  contentPadding: const EdgeInsets.symmetric(
-                                      horizontal: 16, vertical: 12),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                    borderSide: BorderSide.none,
-                                  ),
-                                ),
-                                items: vm.contentMap.keys.map((title) {
-                                  return DropdownMenuItem<String>(
-                                    value: title,
-                                    child: Text(
-                                      title,
-                                      style: KSTextStyle()
-                                          .style(
-                                            13,
-                                            FontWeight.w400,
-                                            fontBuilder:
-                                                GoogleFonts.cormorantInfant,
-                                          )
-                                          .copyWith(
-                                              color: AppStyle.primaryGray8D8D8D),
-                                    ),
-                                  );
-                                }).toList(),
-                                onChanged: (value) {
-                                  EmojiPopupController().hide();
-                                  vm.selected = value;
-                                },
-                              ),
+                      TextField(
+                        onTap: (){
+
+                          EmojiPopupController().hide();
+                        },
+                        controller: vm.numberController,
+                        decoration: InputDecoration(
+                          hintText: "VD: 1",
+                          filled: true,
+                          fillColor: Colors.white,
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 14),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            // 👈 Bo tròn
+                            borderSide: BorderSide.none,
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: const BorderSide(
+                                color: Colors.black87, width: 1.5),
+                          ),
+                        ),
+                        style: KSTextStyle()
+                            .style(
+                          15,
+                          FontWeight.w400,
+                          fontBuilder: GoogleFonts.cormorantInfant,
+                        )
+                            .copyWith(color: AppStyle.primaryGray8D8D8D),
+                      ),
                             ],
                           ),
                           SizedBox(

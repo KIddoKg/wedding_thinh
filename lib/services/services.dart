@@ -216,13 +216,13 @@ class Services {
     }
   }
 
-  Future<bool> postInvitation(String name, int guest, String note) async {
-    var res = await API.postInvitation(name, guest, note).request();
+  Future<bool> postInvitation(String name, int guest, String note, bool attend) async {
+    var res = await API.postInvitation(name, guest, note, attend).request();
     if (res.isSuccess) {
       return true;
     } else {
       return await _errorAction(res, callApi: () async {
-        return postInvitation(name, guest, note);
+        return postInvitation(name, guest, note,attend);
       });
     }
   }

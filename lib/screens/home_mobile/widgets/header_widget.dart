@@ -12,24 +12,24 @@ class _HeaderWidgetState extends State<_HeaderWidget>
   @override
   void initState() {
     super.initState();
-    context.read<HomeScreenVm>().initAudioLottie(context,this);
+    context.read<HomeScreenMobileVm>().initAudioLottie(context,this);
   }
 
   @override
   void dispose() {
-    context.read<HomeScreenVm>().disposeAudioLottie();
+    context.read<HomeScreenMobileVm>().disposeAudioLottie();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final vm = context.watch<HomeScreenVm>();
+    final vm = context.watch<HomeScreenMobileVm>();
 
     SizeConfig().init(context);
     final width = SizeConfig.screenWidth!;
     final height = SizeConfig.screenHeight!;
 
-    return Consumer<HomeScreenVm>(builder: (context, vm, child) {
+    return Consumer<HomeScreenMobileVm>(builder: (context, vm, child) {
       return Column(
         children: [
           Stack(
@@ -47,36 +47,36 @@ class _HeaderWidgetState extends State<_HeaderWidget>
 
                             // Ảnh nền ở dưới
                             Positioned.fill(
-                              top: 100,
+                              top: 140,
                               child: Image.asset(
-                                Assets.png.pngOne.keyName,
+                                Assets.png.pngOneMobile.keyName,
                                 fit: BoxFit.cover,
                               ),
                             ),
 
                             // Gradient phủ phía trên
-                            Positioned.fill(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                    colors: [
-                                      // Colors.white.withOpacity(1.0),
-                                      Colors.white.withOpacity(1.0),
-                                      Colors.white.withOpacity(1.0),
-                                      Colors.white.withOpacity(1.0),
-                                      Colors.white.withOpacity(0.8),
-                                      Colors.white.withOpacity(0.6),
-                                      Colors.white.withOpacity(0.4),
-                                      Colors.white.withOpacity(0.2),
-                                      Colors.transparent,
-                                      Colors.transparent,
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
+                            // Positioned.fill(
+                            //   child: Container(
+                            //     decoration: BoxDecoration(
+                            //       gradient: LinearGradient(
+                            //         begin: Alignment.topCenter,
+                            //         end: Alignment.bottomCenter,
+                            //         colors: [
+                            //           // Colors.white.withOpacity(1.0),
+                            //           Colors.white.withOpacity(1.0),
+                            //           Colors.white.withOpacity(1.0),
+                            //           Colors.white.withOpacity(1.0),
+                            //           Colors.white.withOpacity(0.8),
+                            //           Colors.white.withOpacity(0.6),
+                            //           Colors.white.withOpacity(0.4),
+                            //           Colors.white.withOpacity(0.2),
+                            //           Colors.transparent,
+                            //           Colors.transparent,
+                            //         ],
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
 
                             // Thêm logo/menu hoặc các widget khác ở đây
                           ],
@@ -382,39 +382,51 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                 right: 0,
                 left: 0,
                 child: Center(
-                  child: Column(
-                    children: [
-                      Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: Colors.white,
-                              //                   <--- border color
-                              width: 1.0,
-                            ),
-                          ),
-                          child: Padding(
-                            padding: AppStyle.padding_all_8(),
-                            child: SvgPicture.asset(
-                              Assets.svg.svgArrowDown.keyName,
-                              width: 35,
-                            ),
-                          )),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        'Xem ngay',
-                        style: KSTextStyle()
-                            .style(
-                              20,
-                              FontWeight.w400,
-                              fontBuilder: GoogleFonts.cormorantInfant,
-                            )
-                            .copyWith(color: AppStyle.whiteBg),
-                      ),
-                    ],
+                  child:  MouseRegion(
+                    hitTestBehavior: HitTestBehavior.translucent,
+                    onEnter: (_) => vm.setHover(true),
+                    onExit: (_) => vm.setHover(false),
+                    child:    Column(
+                      children: [
+                        KSInkWellUnFocus(
+                          onTap: (){
+                            vm.scrollToTarget(vm.timeKey);
+                          },
+                          child: Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: Colors.white,
+                                  //                   <--- border color
+                                  width: 1.0,
+                                ),
+                              ),
+                              child: Padding(
+                                padding: AppStyle.padding_all_8(),
+                                child: SvgPicture.asset(
+                                  Assets.svg.svgArrowDown.keyName,
+                                  width: 35,
+                                ),
+                              )),
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Text(
+                          'Xem ngay',
+                          style: KSTextStyle()
+                              .style(
+                            20,
+                            FontWeight.w400,
+                            fontBuilder: GoogleFonts.cormorantInfant,
+                          )
+                              .copyWith(color: AppStyle.whiteBg),
+                        ),
+                      ],
+                    ),
+
                   ),
+
                 ),
               ),
             ],
@@ -424,6 +436,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
             Transform.translate(
               offset: Offset(0, -1),
               child: Container(
+                key:vm.timeKey,
                 // height: 600,
                 width: width,
                 decoration: BoxDecoration(
@@ -440,7 +453,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                   ),
                 ),
                 child: Padding(
-                  padding: AppStyle.padding_LR_16(),
+                  padding: AppStyle.padding_LR_8(),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -603,7 +616,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                       ),
                       Container(
                         color: Colors.transparent,
-                        height: 128 + 128 + 128,
+                        height: 128 + 128 + 128 + 64,
                         child: Stack(
                           children: vm.bubbles.map((bubble) {
                             return FlyingChatBubble(
@@ -625,7 +638,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                             //   _addManyBubbles();
                             // },),
                             SizedBox(
-                              height: 128,
+                              height: 64,
                             ),
                             Column(
                               children: [
@@ -1016,7 +1029,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
       );
     });
   }
-  Widget _buildLottieButton({required Key key, required bool hovered,  required HomeScreenVm vm}) {
+  Widget _buildLottieButton({required Key key, required bool hovered,  required HomeScreenMobileVm vm}) {
     return KSInkWellUnFocus(
       key: key,
       radius: 360,
@@ -1045,7 +1058,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
       ),
     );
   }
-  Widget _buildPlayButton({required Key key, required bool hovered , required HomeScreenVm vm}) {
+  Widget _buildPlayButton({required Key key, required bool hovered , required HomeScreenMobileVm vm}) {
     return KSInkWellUnFocus(
       key: key,
       radius: 360,
@@ -1132,7 +1145,7 @@ void showMessagePopup(BuildContext context, HomeScreenVm vm) {
 
 
 
-void showMessagePopupMobile(BuildContext context, HomeScreenVm vm) {
+void showMessagePopupMobile(BuildContext context, HomeScreenMobileVm vm) {
   showGeneralDialog(
     context: context,
     barrierDismissible: true,

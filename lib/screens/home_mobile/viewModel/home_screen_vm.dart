@@ -1,19 +1,21 @@
 import 'dart:async';
 import 'dart:math';
+import 'dart:html' as html;
 
 import 'package:flutter/services.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:wedding_hkn/screens/home/model/comment_model.dart';
+import 'package:wedding_hkn/screens/home/model/media_file_model.dart';
 import 'package:wedding_hkn/screens/home/model/user_comment_model.dart';
 
 import '../../../services/services.dart';
 import '../../../share/app_imports.dart';
 import '../../../share/share_on_app.dart';
-import '../model/comment_model.dart';
-import '../model/media_file_model.dart';
 
-class HomeScreenVm extends ChangeNotifier {
+
+class HomeScreenMobileVm extends ChangeNotifier {
   /// 🔄 Reset all data
   void reset() {}
   final Map<String, String> contentMap = {
@@ -25,6 +27,7 @@ class HomeScreenVm extends ChangeNotifier {
   };
 
   String? selected;
+  String? selectedOption; // 'attend' hoặc 'not_attend'
 
   final ScrollController scrollController = ScrollController();
   bool lockScroll = false;
@@ -67,6 +70,7 @@ class HomeScreenVm extends ChangeNotifier {
   final GlobalKey loveKey = GlobalKey();
   final GlobalKey scheduleKey = GlobalKey();
   final GlobalKey goKey = GlobalKey();
+  final GlobalKey timeKey = GlobalKey();
   final GlobalKey<ExpandableRevealPanelState> panelKey =
       GlobalKey<ExpandableRevealPanelState>();
 
@@ -94,7 +98,7 @@ class HomeScreenVm extends ChangeNotifier {
     Future.doWhile(() async {
       final data = cmtWish![index];
 
-      final randomLeft = Random().nextDouble() * (widthab - 250);
+      final randomLeft = Random().nextDouble() * (widthab - 200);
       final bubble = ChatBubbleData(
         name: data.userName,
         time: formatTimeAgo(int.parse(data.initTime)),
@@ -107,7 +111,7 @@ class HomeScreenVm extends ChangeNotifier {
 
       index = (index + 1) % cmtWish!.length; // quay lại từ đầu nếu hết
 
-      await Future.delayed(const Duration(milliseconds: 800));
+      await Future.delayed(const Duration(milliseconds: 1000));
       return true; // tiếp tục lặp mãi
     });
     notifyListeners();
@@ -158,7 +162,7 @@ class HomeScreenVm extends ChangeNotifier {
     });
   }
 
-  final DateTime targetDate = DateTime(2025, 7, 14, 0, 0);
+  final DateTime targetDate = DateTime(2025, 7, 14, 8, 0);
   late final Timer _timer;
 
   int dayTens = 0;
@@ -168,7 +172,7 @@ class HomeScreenVm extends ChangeNotifier {
   int minuteTens = 0;
   int minuteUnits = 0;
 
-  HomeScreenVm() {
+  HomeScreenMobileVm() {
     _startCountdownTimer();
     getListImg();
   }
@@ -207,6 +211,14 @@ class HomeScreenVm extends ChangeNotifier {
     super.dispose();
   }
 
+  bool isHover = false;
+
+  void setHover(bool value) {
+    isHover = value;
+    notifyListeners();
+  }
+
+
   List<UserCommentModel>? cmtWish;
 
   int page = 1;
@@ -223,6 +235,8 @@ class HomeScreenVm extends ChangeNotifier {
   }
 
   TextEditingController nameController = TextEditingController();
+  TextEditingController numberController = TextEditingController();
+
 
   TextEditingController noteContoller = TextEditingController();
 
@@ -240,7 +254,7 @@ class HomeScreenVm extends ChangeNotifier {
       return;
     }
     var res = await Services.instance.setContext(context).postInvitation(
-        nameController.text, int.parse(selected ?? "1"), noteContoller.text);
+        nameController.text, int.parse(selected ?? "1"), noteContoller.text, selectedOption == 'attend' ? true: false);
     if (res == true) {
       // cmtWish = res.castList<UserCommentModel>(fromJson: res.data['data']);
       //
@@ -321,8 +335,9 @@ class HomeScreenVm extends ChangeNotifier {
 
   bool get isPlaying => _isPlaying;
 
-  Future<void> initAudioLottie(TickerProvider vsync) async {
+  Future<void> initAudioLottie(BuildContext context, TickerProvider vsync) async {
     lottieController = AnimationController(vsync: vsync);
+    monitorTabVisibility(context);
   }
 
   void disposeAudioLottie() {
@@ -335,6 +350,37 @@ class HomeScreenVm extends ChangeNotifier {
   }
 
   bool isb = false;
+  bool _shouldContinue = true;
+
+  void stopBubbleLoop() {
+    // _shouldContinue = false;
+  }
+  bool hide = false;
+  Future<void>? _loopFuture;
+  void monitorTabVisibility(BuildContext context) {
+    html.document.onVisibilityChange.listen((event) async {
+      final isVisible = !html.document.hidden!;
+
+      if (isVisible) {
+        hide = false;
+        bubbles.clear();
+        stopBubbleLoop();
+        print('🟢 Tab is visible again');
+        //Tùy chọn: resume nếu muốn
+        // setPlay();
+        // _player.play();
+      } else {
+        _shouldContinue = true;
+        getWishCMT(context);
+        hide = true;
+        print('🔴 Tab is hidden, pause audio');
+        _player.pause();
+        _isPlaying = false;
+        notifyListeners();
+      }
+    });
+  }
+
 
   Future<void> setPlay() async {
     print("object");

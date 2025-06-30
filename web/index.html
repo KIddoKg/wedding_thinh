@@ -34,7 +34,7 @@
     <!-- 👇 THÊM vào trong <head> -->
     <meta property="og:title" content="Gia Thịnh & Bảo Hân - Wedding Invitation"/>
 <!--    <meta property="og:description" content="Cùng chúng mình đếm ngược tới ngày cưới nhé!"/>-->
-    <meta property="og:image" content="https://hanthinhwedding.com/assets/png_one.png"/>
+    <meta property="og:image" content="https://wedding-thinh.vercel.app/assets/png_one_edit.png"/>
     <meta property="og:url" content="https://hanthinhwedding.com"/>
     <meta property="og:type" content="website"/>
 
@@ -42,63 +42,66 @@
     <meta name="twitter:card" content="summary_large_image"/>
     <meta name="twitter:title" content="Gia Thịnh & Bảo Hân - Wedding Invitation"/>
 <!--    <meta name="twitter:description" content="Cùng chúng mình đếm ngược tới ngày cưới nhé!"/>-->
-    <meta name="twitter:image" content="https://hanthinhwedding.com/assets/png_one.png"/>
+    <meta name="twitter:image" content="https://wedding-thinh.vercel.app/assets/png_one_edit.png"/>
 
 
     <!-- Splash Styles -->
     <style>
-        #loading-splash {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100vw;
-          height: 100vh;
-          background-color: white;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          z-index: 9999;
-          opacity: 1;
-          transition: opacity 0.5s ease-out;
+        html, body {
+   scroll-behavior: smooth;
+   }
+       #loading-splash {
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100vw;
+         height: 100vh;
+         background-color: white;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+         z-index: 9999;
+         opacity: 1;
+         transition: opacity 0.5s ease-out;
 
-          /* Dành cho mobile GPU rendering */
-          transform: none;
-          animation: none;
-          will-change: opacity;
-          backface-visibility: hidden;
-          -webkit-transform: translateZ(0); /* Tối ưu cho Safari mobile */
-        }
+         /* Dành cho mobile GPU rendering */
+         transform: none;
+         animation: none;
+         will-change: opacity;
+         backface-visibility: hidden;
+         -webkit-transform: translateZ(0); /* Tối ưu cho Safari mobile */
+       }
 #loading-splash img,
 #loading-text,
 #loading-date {
-  transform: none;
-  animation: none;
-  backface-visibility: hidden;
-  -webkit-transform: translateZ(0); /* Tắt phóng to tự động Safari */
+ transform: none;
+ animation: none;
+ backface-visibility: hidden;
+ -webkit-transform: translateZ(0); /* Tắt phóng to tự động Safari */
 }
 
 
-                 #loading-splash img {
-                   width: 80px;
-                   height: 80px;
-                   margin-bottom: 16px;
-                 }
+                #loading-splash img {
+                  width: 80px;
+                  height: 80px;
+                  margin-bottom: 16px;
+                }
 
-              #loading-text {
-          font-family: 'Imperial Script', cursive;
-          font-size: 40px;
-          color: #1E2B20;
-          margin-bottom: 4px;
-          text-align: center; /* 👈 Cái này là để chữ canh giữa theo chiều ngang */
-        }
+             #loading-text {
+         font-family: 'Imperial Script', cursive;
+         font-size: 40px;
+         color: #1E2B20;
+         margin-bottom: 4px;
+         text-align: center; /* 👈 Cái này là để chữ canh giữa theo chiều ngang */
+       }
 
 
-                 #loading-date {
-                   font-family: 'Cormorant Infant', serif;
-                   font-size: 25px;
-                   color: #333;
-                 }
+                #loading-date {
+                  font-family: 'Cormorant Infant', serif;
+                  font-size: 25px;
+                  color: #333;
+                }
 
 
     </style>

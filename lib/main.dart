@@ -89,8 +89,8 @@ void main() async {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       html.document.title = "Thịnh 💍 Hân";
     });
-    await Future.delayed(Duration(seconds: 3), () {
-      showSplashFor(Duration(seconds: 0)); // ẩn lần đầu
+    await Future.delayed(Duration(seconds: 1), () {
+      showSplashFor(Duration(seconds: 0));
     });
     html.window.onResize.listen((event) {
       EmojiPopupController().hide();

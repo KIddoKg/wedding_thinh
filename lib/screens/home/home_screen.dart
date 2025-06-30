@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:ui';
 import 'dart:html' as html;
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
