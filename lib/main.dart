@@ -94,15 +94,33 @@ void main() async {
     });
     html.window.onResize.listen((event) {
       EmojiPopupController().hide();
-      showSplashFor(Duration(seconds: 1)); // mỗi lần resize, hiển splash 1s
+
+      showSplashFor(Duration(seconds: 1));
     });
 
+    forceSetTitle();
+    startTitleKeeper()
+;
   }, (error, trace) {
     log('[DEV] Error while running app', time: DateTime.now(), error: error, stackTrace: trace);
   });
 }
+void startTitleKeeper() {
+  Timer.periodic(const Duration(seconds: 2), (timer) {
+    if (html.document.title != "Thịnh 💍 Hân") {
+      html.document.title = "Thịnh 💍 Hân";
+    }
+  });
+}
+
+
+void forceSetTitle() {
+  html.document.title = "Thịnh 💍 Hân";
+}
+
 void showSplashFor(Duration duration) {
   final splash = html.document.getElementById('loading-splash');
+
 
   if (splash != null) {
     // Reset style trước khi hiển
