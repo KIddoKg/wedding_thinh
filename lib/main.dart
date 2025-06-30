@@ -86,15 +86,17 @@ void main() async {
     //   }
     // });
     // Lắng nghe khi resize
-
-    Future.delayed(Duration(seconds: 3), () {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      html.document.title = "Thịnh 💍 Hân";
+    });
+    await Future.delayed(Duration(seconds: 3), () {
       showSplashFor(Duration(seconds: 0)); // ẩn lần đầu
     });
     html.window.onResize.listen((event) {
       EmojiPopupController().hide();
       showSplashFor(Duration(seconds: 1)); // mỗi lần resize, hiển splash 1s
     });
-    html.document.title = "Thịnh 💍 Hân";
+
   }, (error, trace) {
     log('[DEV] Error while running app', time: DateTime.now(), error: error, stackTrace: trace);
   });

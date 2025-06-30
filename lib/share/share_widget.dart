@@ -216,7 +216,7 @@ class KSButton extends StatelessWidget {
     this.isSelected = false,
     this.backgroundColor = Colors.transparent,
     this.fontColor = Colors.white,
-    this.fontSize = 24,
+    this.fontSize = 18,
     this.height = 6.5,
     this.radius = 8,
     this.border = Colors.transparent,
@@ -272,7 +272,7 @@ class KSButton extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: KSTextStyle()
                     .style(
-                  15,
+                  fontSize,
                   FontWeight.w400,
                   fontBuilder: GoogleFonts.cormorantInfant,
                 )

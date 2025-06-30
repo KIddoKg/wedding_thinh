@@ -88,16 +88,38 @@ class HomeScreenVm extends ChangeNotifier {
   }
 
   final List<ChatBubbleData> bubbles = [];
+  bool _shouldContinue = true;
 
-  void ab(BuildContext context) {
+  void stopBubbleLoop() {
+    // _shouldContinue = false;
+  }
+  Future<void>? _loopFuture;
+
+
+  Future<void> ab(BuildContext context) async {
+    // Nếu đã có loop đang chạy → dừng nó
+    _shouldContinue = false;
+    await _loopFuture; // Đợi vòng cũ kết thúc nếu đang chạy
+
     double widthab = MediaQuery.of(context).size.width;
-
     int index = 0;
-    final now = DateTime.now(); // hoặc DateTime(2025, 6, 27, 11)
-    Future.doWhile(() async {
-      final data = cmtWish![index];
 
+    _shouldContinue = true;
+
+    _loopFuture = Future.doWhile(() async {
+      if (!_shouldContinue || hide == true) {
+        await Future.delayed(const Duration(milliseconds: 500));
+        return _shouldContinue;
+      }
+
+      if (bubbles.length >= 40) {
+        await Future.delayed(const Duration(milliseconds: 300));
+        return _shouldContinue;
+      }
+
+      final data = cmtWish![index];
       final randomLeft = Random().nextDouble() * (widthab - 250);
+
       final bubble = ChatBubbleData(
         name: data.userName,
         time: formatTimeAgo(int.parse(data.initTime)),
@@ -108,13 +130,14 @@ class HomeScreenVm extends ChangeNotifier {
       bubbles.add(bubble);
       notifyListeners();
 
-      index = (index + 1) % cmtWish!.length; // quay lại từ đầu nếu hết
-
-      await Future.delayed(const Duration(milliseconds: 800));
-      return true; // tiếp tục lặp mãi
+      index = (index + 1) % cmtWish!.length;
+      await Future.delayed(const Duration(milliseconds: 500));
+      return _shouldContinue;
     });
-    notifyListeners();
   }
+
+
+
 
   String formatTimeAgo(int timestampMillis) {
     final now = DateTime.now();
@@ -219,6 +242,7 @@ class HomeScreenVm extends ChangeNotifier {
     var res =
         await Services.instance.setContext(context).getWish(page, pageSize);
     if (res.isSuccess) {
+      // cmtWish?.clear();
       cmtWish = res.castList<UserCommentModel>(fromJson: res.data['data']);
 
       ab(context);
@@ -333,9 +357,9 @@ class HomeScreenVm extends ChangeNotifier {
 
   bool get isPlaying => _isPlaying;
 
-  Future<void> initAudioLottie(TickerProvider vsync) async {
+  Future<void> initAudioLottie(BuildContext context, TickerProvider vsync) async {
     lottieController = AnimationController(vsync: vsync);
-    monitorTabVisibility();
+    monitorTabVisibility(context);
   }
 
   void disposeAudioLottie() {
@@ -366,16 +390,23 @@ class HomeScreenVm extends ChangeNotifier {
   }
 
 
-  void monitorTabVisibility() {
+  bool hide = false;
+  void monitorTabVisibility(BuildContext context) {
     html.document.onVisibilityChange.listen((event) async {
       final isVisible = !html.document.hidden!;
 
       if (isVisible) {
+        hide = false;
+        bubbles.clear();
+        stopBubbleLoop();
         print('🟢 Tab is visible again');
         //Tùy chọn: resume nếu muốn
         // setPlay();
         // _player.play();
       } else {
+        _shouldContinue = true;
+        getWishCMT(context);
+        hide = true;
         print('🔴 Tab is hidden, pause audio');
         _player.pause();
         _isPlaying = false;

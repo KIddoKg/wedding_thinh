@@ -62,7 +62,7 @@ class _ConfirmWidgetState extends State<_ConfirmWidget> {
                       ],
                     ),
                     Positioned(
-                      right: width * 0.07,
+                      right:0.1 * width,
                       top: 0,
                       bottom: 0,
                       child: Align(
@@ -113,7 +113,7 @@ class _ConfirmWidgetState extends State<_ConfirmWidget> {
                                   ),
 
                                   Container(
-                                    height: 5.w,
+                                    height: 9.w,
                                   )
 
                                 ],
@@ -288,7 +288,7 @@ class _ConfirmWidgetState extends State<_ConfirmWidget> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            KSText("Gửi gắm điều muốn nói ?",
+                            KSText("Bọn mình cần chú ý gì không nè ?",
                                 style: KSTextStyle()
                                     .style(
                                   23,
@@ -316,14 +316,15 @@ class _ConfirmWidgetState extends State<_ConfirmWidget> {
                                 child:  Container(
 
 
-                                    width: 100,
-                                    height: 35,
+                                    width: 150,
+                                    height: 50,
                                     child: KSButton(
                                       onTap: (){
                                         EmojiPopupController().hide();
                                         vm.postInvitation(context);
                                       },
                                       "Gửi ngay",
+                                      fontSize: 23,
                                       backgroundColor: AppStyle.primaryColorBlack,
 
                                     ))

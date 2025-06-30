@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:math';
-
+import 'dart:html' as html;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:wedding_hkn/screens/home/viewModel/home_screen_vm.dart';
 import 'package:wedding_hkn/share/size_configs.dart';
 import 'package:sizer/sizer.dart';
+import 'package:wedding_hkn/share/tab_visibility_monitor.dart';
 import 'package:wedding_hkn/share/text_style.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'app_imports.dart';
@@ -2000,6 +2001,10 @@ class ExpandableRevealPanelState extends State<ExpandableRevealPanel>
   }
 }
 
+
+
+bool get isTabVisible => html.document.visibilityState == 'visible';
+
 class ChatBubbleData {
   final String name;
   final String time;
@@ -2015,13 +2020,15 @@ class ChatBubbleData {
 }
 
 class FlyingChatBubble extends StatefulWidget {
+  bool? hide;
   final ChatBubbleData data;
   final VoidCallback? onCompleted;
 
-  const FlyingChatBubble({
+   FlyingChatBubble({
     super.key,
     required this.data,
     this.onCompleted,
+    this.hide,
   });
 
   @override
@@ -2034,9 +2041,12 @@ class _FlyingChatBubbleState extends State<FlyingChatBubble>
   late final Animation<double> _positionAnimation;
   late final Animation<double> _fadeAnimation;
 
+  bool _didStart = false;
+
   @override
   void initState() {
     super.initState();
+
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 5),
@@ -2045,17 +2055,40 @@ class _FlyingChatBubbleState extends State<FlyingChatBubble>
     _positionAnimation = Tween<double>(begin: 0, end: 300).animate(_controller);
     _fadeAnimation = Tween<double>(begin: 1.0, end: 0.0).animate(_controller);
 
+    // Gọi trực tiếp nếu tab đang visible
+    if (TabVisibilityMonitor().isVisible) {
+      _startAnimation();
+    }
+
+    // Đăng ký lắng nghe khi tab visible trở lại
+    TabVisibilityMonitor().addListener(_onVisibilityChanged);
+  }
+
+  void _onVisibilityChanged(bool isVisible) {
+    if (isVisible && !_didStart && mounted) {
+      _startAnimation();
+    }
+  }
+
+  void _startAnimation() {
+    if (_didStart) return;
+    _didStart = true;
+
     _controller.forward();
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         widget.onCompleted?.call();
       }
     });
+
+    // Gỡ listener sau khi đã chạy
+    TabVisibilityMonitor().removeListener(_onVisibilityChanged);
   }
 
   @override
   void dispose() {
     _controller.dispose();
+    TabVisibilityMonitor().removeListener(_onVisibilityChanged);
     super.dispose();
   }
 
@@ -2110,13 +2143,12 @@ class _FlyingChatBubbleState extends State<FlyingChatBubble>
           Text(
             data.message,
             style: TextStyle(
-              fontFamily: GoogleFonts.cormorantInfant().fontFamily, // hoặc GoogleFonts.roboto().fontFamily
+              fontFamily: GoogleFonts.cormorantInfant().fontFamily,
               fontFamilyFallback: ['NotoColorEmoji'],
               fontSize: 16,
               color: Colors.black87,
             ),
           )
-
         ],
       ),
     );

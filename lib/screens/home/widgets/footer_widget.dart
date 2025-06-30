@@ -73,39 +73,26 @@ class _FooterWidgetState extends State<_FooterWidget> {
                  ),
 
                 Spacer(),
-                 MouseRegion(
-                   hitTestBehavior: HitTestBehavior.translucent,
-                   onEnter: (_) => vm.setHover(true),
-                   onExit: (_) => vm.setHover(false),
-                   child:    AnimatedScale(
-                     duration: const Duration(milliseconds: 200),
-                     scale:  vm.isHover ? 1.1 : 1.0,
-                     child:  MouseRegion(
-                       hitTestBehavior: HitTestBehavior.translucent,
-                       onEnter: (_) => vm.setHover(true),
-                       onExit: (_) => vm.setHover(false),
-                       child:    AnimatedScale(
-                         duration: const Duration(milliseconds: 200),
-                         scale:  vm.isHover ? 1.1 : 1.0,
-                         child: SizedBox(
-                             width: 100,
-                             height: 35,
-                             child: KSButton(
-                               onTap: () {
-                                 EmojiPopupController().hide();
-                                 vm.postWish(context);
-                               },
-                               "Gửi ngay",
-                               backgroundColor:
-                               AppStyle.primaryColorBlack,
-                             )),
+                 KSInkWellUnFocus(
+                   radius: 180,
+                   onTap: (){
+                     EmojiPopupController().hide();
+                     vm.scrollToTop();
+                   },
+                   child: Container(
+                       decoration: BoxDecoration(
+                           shape: BoxShape.circle,
+                           border: Border.all(
+                             color: Colors.white,
+
+                             width: 1.0,
+                           )
                        ),
-
-                     ),
-
-                   ),
-
-                 ),
+                       child: Padding(
+                           padding: AppStyle.padding_all_16(),
+                           child:Icon(Icons.arrow_upward_outlined,size: 15,color: AppStyle.whiteBg,)
+                       )),
+                 )
 
 
                ],

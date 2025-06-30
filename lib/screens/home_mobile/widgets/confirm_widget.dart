@@ -254,7 +254,7 @@ class _ConfirmWidgetState extends State<_ConfirmWidget> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              KSText("Gửi gắm điều muốn nói ?",
+                              KSText("Bọn mình cần chú ý gì không nè ?",
                                   style: KSTextStyle()
                                       .style(
                                     18,

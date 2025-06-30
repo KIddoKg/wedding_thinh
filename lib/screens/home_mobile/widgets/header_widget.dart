@@ -12,7 +12,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
   @override
   void initState() {
     super.initState();
-    context.read<HomeScreenVm>().initAudioLottie(this);
+    context.read<HomeScreenVm>().initAudioLottie(context,this);
   }
 
   @override
@@ -459,7 +459,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                                   .copyWith(color: AppStyle.whiteBg)),
                           KSText(
                             textAlign: TextAlign.center,
-                            'Hân hoan thông báo lễ thành hôn của chúng mình! Rất mong bạn sẽ đến chung vui vào ngày trọng đại.hời gian đang đếm ngược đến khoảnh khắc thiêng liêng nhất của tụi mình. Đừng bỏ lỡ nhé! ',
+                            'Hân hoan thông báo lễ thành hôn của chúng mình! Rất mong bạn sẽ đến chung vui vào ngày trọng đại. Thời gian đang đếm ngược đến khoảnh khắc thiêng liêng nhất của tụi mình. Đừng bỏ lỡ nhé! ',
                             style: KSTextStyle()
                                 .style(
                               15,
@@ -607,6 +607,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                         child: Stack(
                           children: vm.bubbles.map((bubble) {
                             return FlyingChatBubble(
+                              hide: vm.hide,
                               key: ValueKey(bubble),
                               // Để đảm bảo widget không bị tái sử dụng sai
                               data: bubble,
@@ -633,7 +634,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                                     style: KSTheme.of(context)
                                         .style
                                         .ts42w500
-                                        .copyWith(color: AppStyle.primaryColorBlack)),
+                                        .copyWith(color: AppStyle.whiteBg)),
                                 SizedBox(
                                   height: 16,
                                 ),
@@ -646,7 +647,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                                     FontWeight.w400,
                                     fontBuilder: GoogleFonts.cormorantInfant,
                                   )
-                                      .copyWith(color: AppStyle.primaryColorBlack),
+                                      .copyWith(color: AppStyle.whiteBg),
                                 ),
                                 KSText(
                                   textAlign: TextAlign.center,
@@ -657,7 +658,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                                     FontWeight.w400,
                                     fontBuilder: GoogleFonts.cormorantInfant,
                                   )
-                                      .copyWith(color: AppStyle.primaryColorBlack),
+                                      .copyWith(color: AppStyle.whiteBg),
                                 ),
                               ],
                             ),

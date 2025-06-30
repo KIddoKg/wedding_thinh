@@ -12,7 +12,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
   @override
   void initState() {
     super.initState();
-    context.read<HomeScreenVm>().initAudioLottie(this);
+    context.read<HomeScreenVm>().initAudioLottie(context, this);
   }
 
   @override
@@ -358,32 +358,40 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                                           ),
                                         ),
                                         child: Row(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
-                                            KSText(
-                                              "Bạn có đến không nè? ",
-                                              style: KSTheme.of(context)
-                                                  .style
-                                                  .ts42w500
-                                                  .copyWith(
-                                                      color: AppStyle.whiteBg),
+                                            // Text sẽ xuống dòng nếu không đủ chỗ
+                                            Expanded(
+                                              child: Wrap(
+                                                spacing: 4,
+                                                runSpacing: 4,
+                                                children: [
+                                                  KSText(
+                                                    "Bạn có đến không nè? ",
+                                                    style: KSTheme.of(context)
+                                                        .style
+                                                        .ts42w500
+                                                        .copyWith(color: AppStyle.whiteBg),
+                                                  ),
+                                                  KSText(
+                                                    "( Gửi xác nhận )",
+                                                    style: KSTheme.of(context)
+                                                        .style
+                                                        .ts42w500
+                                                        .copyWith(color: AppStyle.primaryGreen617856),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                            KSText(
-                                              "( Gửi xác nhận )",
-                                              style: KSTheme.of(context)
-                                                  .style
-                                                  .ts42w500
-                                                  .copyWith(
-                                                      color: AppStyle
-                                                          .primaryGreen617856),
-                                            ),
-                                            Spacer(),
+                                            const SizedBox(width: 8),
                                             Icon(
                                               Icons.arrow_forward,
                                               color: AppStyle.whiteBg,
-                                            )
+                                            ),
                                           ],
                                         ),
-                                      ),
+                                      )
+
                                     ),
                                   ],
                                 ),
@@ -503,7 +511,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                       ),
                       KSText(
                         textAlign: TextAlign.center,
-                        'sẽ đến chung vui vào ngày trọng đại.hời gian đang đếm ngược đến khoảnh khắc thiêng liêng nhất của tụi mình. Đừng bỏ lỡ nhé!',
+                        'sẽ đến chung vui vào ngày trọng đại. Thời gian đang đếm ngược đến khoảnh khắc thiêng liêng nhất của tụi mình. Đừng bỏ lỡ nhé!',
                         style: KSTextStyle()
                             .style(
                               18,
@@ -580,21 +588,24 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                       Assets.png.pngChinha.keyName,
                     ),
                   ),
+                  // if(vm.bubbles.isNotEmpty)
                   Container(
                     color: Colors.transparent,
                     height: 128 + 128 + 128,
                     child: Stack(
-                      children: vm.bubbles.map((bubble) {
-                        return FlyingChatBubble(
-                          key: ValueKey(bubble),
-                          // Để đảm bảo widget không bị tái sử dụng sai
-                          data: bubble,
-                          onCompleted: () {
-                            setState(() => vm.bubbles.remove(bubble));
-                          },
-                        );
-                      }).toList(),
+                      children: vm.bubbles
+                          .where((_) => vm.hide == false)
+                          .map((bubble) => FlyingChatBubble(
+                        key: ValueKey(bubble),
+                        hide: true, // vì đã lọc rồi
+                        data: bubble,
+                        onCompleted: () {
+                          setState(() => vm.bubbles.remove(bubble));
+                        },
+                      ))
+                          .toList(),
                     ),
+
                   ),
                   Container(
                     child: Column(
@@ -613,7 +624,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                                     .style
                                     .ts70w500
                                     .copyWith(
-                                        color: AppStyle.primaryColorBlack)),
+                                        color: AppStyle.whiteBg)),
                             SizedBox(
                               height: 16,
                             ),
@@ -626,7 +637,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                                     FontWeight.w400,
                                     fontBuilder: GoogleFonts.cormorantInfant,
                                   )
-                                  .copyWith(color: AppStyle.primaryColorBlack),
+                                  .copyWith(color: AppStyle.whiteBg),
                             ),
                             KSText(
                               textAlign: TextAlign.center,
@@ -637,7 +648,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                                     FontWeight.w400,
                                     fontBuilder: GoogleFonts.cormorantInfant,
                                   )
-                                  .copyWith(color: AppStyle.primaryColorBlack),
+                                  .copyWith(color: AppStyle.whiteBg),
                             ),
                           ],
                         ),
@@ -757,13 +768,14 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                                       duration: const Duration(milliseconds: 200),
                                       scale:  vm.isHover ? 1.1 : 1.0,
                                       child: SizedBox(
-                                          width: 100,
-                                          height: 35,
+                                          width: 150,
+                                          height: 50,
                                           child: KSButton(
                                             onTap: () {
                                               EmojiPopupController().hide();
                                               vm.postWish(context);
                                             },
+                                            fontSize: 23,
                                             "Gửi ngay",
                                             backgroundColor:
                                             AppStyle.primaryColorBlack,
