@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
+import 'package:web_smooth_scroll/web_smooth_scroll.dart';
 import 'package:wedding_hkn/screens/home/viewModel/home_screen_vm.dart';
 import 'package:wedding_hkn/share/share_on_app.dart';
 import 'package:wedding_hkn/share/size_configs.dart';
@@ -71,20 +72,21 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
             vm.setPlay();
             EmojiPopupController().hide();
           },
-          child: CustomScrollView(
-            // physics: vm.lockScroll
-            //     ? const NeverScrollableScrollPhysics()
-            //     : const ClampingScrollPhysics(),
-            controller: vm.scrollController,
-            slivers: [
+          child: WebSmoothScroll(
+            controller:vm.scrollController,
+            child: CustomScrollView(
+              physics: const NeverScrollableScrollPhysics(),
+              controller: vm.scrollController,
+              slivers: [
 
-              // const SliverToBoxAdapter(child: Text("😂"  /, style: TextStyle(fontFamily: 'NotoColorEmoji'))
+                // const SliverToBoxAdapter(child: Text("😂"  /, style: TextStyle(fontFamily: 'NotoColorEmoji'))
 
-              const SliverToBoxAdapter(child: _HeaderWidget()),
+                const SliverToBoxAdapter(child: _HeaderWidget()),
 
-              const SliverToBoxAdapter(child: _ConfirmWidget()),
-              const SliverToBoxAdapter(child: _FooterWidget()),
-            ],
+                const SliverToBoxAdapter(child: _ConfirmWidget()),
+                const SliverToBoxAdapter(child: _FooterWidget()),
+              ],
+            ),
           ),
         );
       },

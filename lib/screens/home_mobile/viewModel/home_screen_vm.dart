@@ -29,7 +29,7 @@ class HomeScreenMobileVm extends ChangeNotifier {
   String? selected;
   String? selectedOption; // 'attend' hoặc 'not_attend'
 
-  final ScrollController scrollController = ScrollController();
+    final ScrollController scrollController = ScrollController();
   bool lockScroll = false;
 
   void scrollToTop() {

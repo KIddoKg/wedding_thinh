@@ -68,6 +68,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "bottom_sheet_scroll_physics",
+      "rootUri": "file:///Users/kiddohome/.pub-cache/hosted/pub.dev/bottom_sheet_scroll_physics-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
       "name": "build",
       "rootUri": "file:///Users/kiddohome/.pub-cache/hosted/pub.dev/build-2.4.2",
       "packageUri": "lib/",
@@ -1280,6 +1286,12 @@
       "languageVersion": "3.4"
     },
     {
+      "name": "web_smooth_scroll",
+      "rootUri": "file:///Users/kiddohome/.pub-cache/hosted/pub.dev/web_smooth_scroll-2.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "web_socket_channel",
       "rootUri": "file:///Users/kiddohome/.pub-cache/hosted/pub.dev/web_socket_channel-2.4.0",
       "packageUri": "lib/",
@@ -1316,7 +1328,7 @@
       "languageVersion": "3.6"
     }
   ],
-  "generated": "2025-06-30T18:22:50.166706Z",
+  "generated": "2025-06-30T19:15:11.377923Z",
   "generator": "pub",
   "generatorVersion": "3.6.0",
   "flutterRoot": "file:///Volumes/Work/Flutter/FlutterDev-v/flutter",

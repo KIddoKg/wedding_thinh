@@ -59,9 +59,9 @@ dependencies:
   expandable: ^5.0.1
   percent_indicator: ^4.2.3
   just_audio: ^0.10.4
+  web_smooth_scroll: ^2.0.0
 
-
-
+  bottom_sheet_scroll_physics: ^1.0.0
   image: ^4.3.0
 
 
