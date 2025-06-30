@@ -489,38 +489,33 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Column(
-                    children: [
-                      SizedBox(
-                        height: 128,
-                      ),
-                      KSText("Đếm ngược tới ngày cưới",
-                          style: KSTheme.of(context)
-                              .style
-                              .ts70w500
-                              .copyWith(color: AppStyle.whiteBg)),
-                      KSText(
-                        'Hân hoan thông báo lễ thành hôn của chúng mình! Rất mong bạn ',
-                        style: KSTextStyle()
-                            .style(
-                              18,
-                              FontWeight.w400,
-                              fontBuilder: GoogleFonts.cormorantInfant,
-                            )
-                            .copyWith(color: AppStyle.primaryGray90998B),
-                      ),
-                      KSText(
-                        textAlign: TextAlign.center,
-                        'sẽ đến chung vui vào ngày trọng đại. Thời gian đang đếm ngược đến khoảnh khắc thiêng liêng nhất của tụi mình. Đừng bỏ lỡ nhé!',
-                        style: KSTextStyle()
-                            .style(
-                              18,
-                              FontWeight.w400,
-                              fontBuilder: GoogleFonts.cormorantInfant,
-                            )
-                            .copyWith(color: AppStyle.primaryGray90998B),
-                      ),
-                    ],
+                  Padding(
+                    padding: AppStyle.padding_LR_16(),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 128,
+                        ),
+                        KSText("Đếm ngược tới ngày cưới",
+                            textAlign: TextAlign.center,
+                            style: KSTheme.of(context)
+                                .style
+                                .ts70w500
+                                .copyWith(color: AppStyle.whiteBg)),
+                        KSText(
+                          textAlign: TextAlign.center,
+                          'Hân hoan thông báo lễ thành hôn của chúng mình! Rất mong bạn sẽ đến chung vui vào ngày trọng đại. \n Thời gian đang đếm ngược đến khoảnh khắc thiêng liêng nhất của tụi mình. Đừng bỏ lỡ nhé!',
+                          style: KSTextStyle()
+                              .style(
+                                18,
+                                FontWeight.w400,
+                                fontBuilder: GoogleFonts.cormorantInfant,
+                              )
+                              .copyWith(color: AppStyle.primaryGray90998B),
+                        ),
+
+                      ],
+                    ),
                   ),
                   SizedBox(
                     height: 64,
