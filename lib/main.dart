@@ -92,11 +92,11 @@ void main() async {
     await Future.delayed(Duration(seconds: 2), () {
       showSplashFor(Duration(seconds: 0));
     });
-    html.window.onResize.listen((event) {
-      EmojiPopupController().hide();
-
-      showSplashFor(Duration(seconds: 1));
-    });
+    // html.window.onResize.listen((event) {
+    //   EmojiPopupController().hide();
+    //
+    //   showSplashFor(Duration(seconds: 1));
+    // });
 
     forceSetTitle();
     startTitleKeeper()
