@@ -9,12 +9,17 @@ class HomeScreenAdaptive extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (_, constraints) {
-        if (constraints.maxWidth < 600) {
+        final width = constraints.maxWidth;
+
+        if (width < 280) {
+          return Container(); // Trường hợp quá hẹp
+        } else if (width < 600) {
           return const HomeScreenMobile();
         } else {
           return const HomeScreen();
         }
       },
     );
+
   }
 }

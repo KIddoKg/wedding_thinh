@@ -74,8 +74,7 @@ class _HomeScreenMobileContentState extends State<HomeScreenMobileContent> {
             vm.setPlay();
           },
           child: CustomScrollView(
-            shrinkWrap: true,
-            physics: const BottomSheetScrollPhysics(),
+
             controller: vm.scrollController,
             slivers: [
 

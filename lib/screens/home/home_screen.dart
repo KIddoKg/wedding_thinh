@@ -58,12 +58,44 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
       vm.getWishCMT(context);
 
     });
-
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final width = MediaQuery.of(context).size.width;
+      if (width > 600) {
+        html.window.onResize.listen((event) {
+          EmojiPopupController().hide();
+          showSplashFor(Duration(seconds: 1));
+        });
+      }
+    });
 
 
 
     super.initState();
   }
+  void showSplashFor(Duration duration) {
+    final splash = html.document.getElementById('loading-splash');
+
+
+    if (splash != null) {
+      // Reset style trước khi hiển
+      splash.style
+        ..opacity = '1'
+        ..display = 'flex'
+        ..transition = 'opacity 0.5s ease-out'
+        ..transform = 'none' // Chặn scale hoặc hiệu ứng cũ
+        ..animation = 'none'; // Nếu có animation CSS, tắt nó đi
+
+      // Sau thời gian delay, ẩn đi
+      Future.delayed(duration, () {
+        splash.style.opacity = '0';
+        Future.delayed(Duration(milliseconds: 500), () {
+          splash.style.display = 'none';
+        });
+      });
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Consumer<HomeScreenVm>(
