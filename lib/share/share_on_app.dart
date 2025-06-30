@@ -11,6 +11,7 @@ import 'package:sizer/sizer.dart';
 import 'package:wedding_hkn/share/tab_visibility_monitor.dart';
 import 'package:wedding_hkn/share/text_style.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
+import '../generated/l10n.dart';
 import '../screens/home_mobile/viewModel/home_screen_vm.dart';
 import 'app_imports.dart';
 import 'package:lottie/lottie.dart';
@@ -995,7 +996,7 @@ class TimelineItemWidget extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         KSText(
-                          "Xem hướng dẫn",
+                          S.current.see_instructions,
                           style: KSTextStyle()
                               .style(15, FontWeight.w700,
                                   fontBuilder: GoogleFonts.cormorantInfant)
@@ -1143,7 +1144,7 @@ class TimelineItemWidgetMobile extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           KSText(
-                            "Xem hướng dẫn",
+                            S.current.see_instructions,
                             style: KSTextStyle()
                                 .style(15, FontWeight.w700,
                                     fontBuilder: GoogleFonts.cormorantInfant)
@@ -1339,7 +1340,7 @@ class _CrossScrollDrivenAnimationState extends State<CrossScrollDrivenAnimation>
                         height: widget.leftBoxHeight,
                         child: widget.leftBox,
                       ),
-                      AutoSizeText("Nguyễn Thị Bảo Hân",
+                      AutoSizeText(S.current.name_girl_full,
                           maxLines: 1,
                           minFontSize: 10,
                           style: KSTextStyle()
@@ -1351,7 +1352,7 @@ class _CrossScrollDrivenAnimationState extends State<CrossScrollDrivenAnimation>
                               .copyWith(color: AppStyle.whiteBg)),
                       KSText(
                         textAlign: TextAlign.center,
-                        'Út Nữ',
+                        S.current.girl_small,
                         style: KSTextStyle()
                             .style(
                               20,
@@ -1420,7 +1421,7 @@ class _CrossScrollDrivenAnimationState extends State<CrossScrollDrivenAnimation>
                         height: widget.rightBoxHeight,
                         child: widget.rightBox,
                       ),
-                      AutoSizeText("Lê Gia Thịnh",
+                      AutoSizeText(S.current.name_boy_full,
                           maxLines: 1,
                           minFontSize: 10,
                           style: KSTextStyle()
@@ -1432,7 +1433,7 @@ class _CrossScrollDrivenAnimationState extends State<CrossScrollDrivenAnimation>
                               .copyWith(color: AppStyle.whiteBg)),
                       KSText(
                         textAlign: TextAlign.center,
-                        'Út Nam',
+                          S.current.boy_small,
                         style: KSTextStyle()
                             .style(
                               20,
@@ -1696,7 +1697,7 @@ class _CrossScrollDrivenAnimationMobileState
                         SizedBox(
                           height: 32,
                         ),
-                        AutoSizeText("Nguyễn Thị \nBảo Hân",
+                        AutoSizeText("${S.current.n_girl_boy} \n${S.current.name_girl} ",
                             maxLines: 2,
                             minFontSize: 10,
                             style: KSTextStyle()
@@ -1708,7 +1709,7 @@ class _CrossScrollDrivenAnimationMobileState
                                 .copyWith(color: AppStyle.whiteBg)),
                         KSText(
                           textAlign: TextAlign.center,
-                          'Út Nữ',
+                          S.current.girl_small,
                           style: KSTextStyle()
                               .style(
                                 20,
@@ -1739,7 +1740,7 @@ class _CrossScrollDrivenAnimationMobileState
                         SizedBox(
                           height: 32,
                         ),
-                        AutoSizeText("Lê Gia \nThịnh",
+                        AutoSizeText("${S.current.n_name_boy} \n${S.current.name_boy} ",
                             maxLines: 2,
                             minFontSize: 10,
                             style: KSTextStyle()
@@ -1751,7 +1752,7 @@ class _CrossScrollDrivenAnimationMobileState
                                 .copyWith(color: AppStyle.whiteBg)),
                         KSText(
                           textAlign: TextAlign.center,
-                          'Út Nam',
+                          S.current.boy_small,
                           style: KSTextStyle()
                               .style(
                                 20,
@@ -2250,7 +2251,7 @@ class MessagePopupDialog extends StatelessWidget {
               },
               // controller: vm.controllerCMT,
               decoration: InputDecoration(
-                hintText: 'Để lại lời nhắn...',
+                hintText:    S.current.give_mess,
                 hintStyle: KSTextStyle()
                     .style(
                       18,
@@ -2284,7 +2285,7 @@ class MessagePopupDialog extends StatelessWidget {
                       backgroundColor: AppStyle.primaryGreen617855,
                     ),
                     child: Text(
-                      "Gửi ngay",
+                      S.current.send_now,
                       style: KSTextStyle()
                           .style(
                             18,
@@ -2418,7 +2419,7 @@ class MessagePopupDialog extends StatelessWidget {
                 );
               },
               child: KSText(
-                "Quay lại",
+                S.current.back,
                 style: KSTextStyle()
                     .style(
                       15,
@@ -2442,7 +2443,7 @@ class MessagePopupDialog extends StatelessWidget {
                     context,
                   );
                 },
-                "Tiếp tục",
+                S.current.next,
                 backgroundColor: AppStyle.primaryColorBlack,
               ))
         ],
@@ -2469,7 +2470,7 @@ class MessagePopupDialog extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  KSText("Tên hiển thị",
+                  KSText( S.current.name_show,
                       style: KSTextStyle()
                           .style(
                             18,
@@ -2486,7 +2487,7 @@ class MessagePopupDialog extends StatelessWidget {
                     },
                     controller: vm.userCMTController,
                     decoration: InputDecoration(
-                      hintText: "Tên của bạn là...?",
+                      hintText: S.current.ex_name_show,
                       filled: true,
                       fillColor: Colors.white,
                       contentPadding: const EdgeInsets.symmetric(
@@ -2519,7 +2520,7 @@ class MessagePopupDialog extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  KSText("Bình luận của bạn",
+                  KSText(S.current.comment,
                       style: KSTextStyle()
                           .style(
                             18,
@@ -2607,7 +2608,7 @@ class MessagePopupDialog extends StatelessWidget {
                               vm.postCMTImage(context);
                               // vm.postWish(context);
                             },
-                            "Gửi ngay",
+                            S.current.send_now,
                             backgroundColor: AppStyle.primaryGreen617855,
                           )),
                     ),
@@ -2767,7 +2768,7 @@ class MessagePopupDialogMobile extends StatelessWidget {
               },
               // controller: vm.controllerCMT,
               decoration: InputDecoration(
-                hintText: 'Để lại lời nhắn...',
+                hintText:  S.current.give_mess,
                 hintStyle: KSTextStyle()
                     .style(
                       12,
@@ -2801,7 +2802,7 @@ class MessagePopupDialogMobile extends StatelessWidget {
                       backgroundColor: AppStyle.primaryGreen617855,
                     ),
                     child: Text(
-                      "Gửi ngay",
+                      S.current.send_now,
                       style: KSTextStyle()
                           .style(
                             12,
@@ -2977,7 +2978,7 @@ class MessagePopupDialogMobile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  KSText("Tên hiển thị",
+                  KSText(S.current.name_show,
                       style: KSTextStyle()
                           .style(
                             13,
@@ -2994,7 +2995,7 @@ class MessagePopupDialogMobile extends StatelessWidget {
                     },
                     controller: vm.userCMTController,
                     decoration: InputDecoration(
-                      hintText: "Tên của bạn là...?",
+                      hintText: S.current.ex_name_show,
                       filled: true,
                       fillColor: Colors.white,
                       contentPadding: const EdgeInsets.symmetric(
@@ -3027,7 +3028,7 @@ class MessagePopupDialogMobile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  KSText("Bình luận của bạn",
+                  KSText(S.current.comment,
                       style: KSTextStyle()
                           .style(
                             15,
@@ -3108,7 +3109,7 @@ class MessagePopupDialogMobile extends StatelessWidget {
                           vm.postCMTImage(context);
                           // vm.postWish(context);
                         },
-                        "Gửi ngay",
+                        S.current.send_now,
                         backgroundColor: AppStyle.primaryGreen617855,
                       )),
                 ],
@@ -3304,7 +3305,7 @@ class _EmojiTextFieldState extends State<EmojiTextField> {
               //     ),
               //   ),
               // ),
-              hintText: "Nhập lời muốn nói",
+              hintText:   S.current.ex_comment,
               filled: true,
               hintStyle: KSTextStyle()
                   .style(
@@ -3487,7 +3488,7 @@ class _EmojiTextFieldMobileState extends State<EmojiTextFieldMobile> {
               //     ),
               //   ),
               // ),
-              hintText: "Nhập lời muốn nói",
+              hintText:  S.current.ex_comment,
               filled: true,
               hintStyle: KSTextStyle()
                   .style(
@@ -3696,7 +3697,7 @@ class _EmojiTextFieldSmallState extends State<EmojiTextFieldSmall> {
               //     ),
               //   ),
               // ),
-              hintText: "Nhập lời muốn nói",
+              hintText: S.current.ex_comment,
               filled: true,
               hintStyle: KSTextStyle()
                   .style(
@@ -3833,6 +3834,109 @@ class _AttendanceCheckboxState extends State<AttendanceCheckbox> {
                   .copyWith(color: AppStyle.primaryGrayB8C1B2)),
         ),
       ],
+    );
+  }
+}
+
+class LanguageToggleButton extends StatelessWidget {
+  final String currentLang;
+  final Function(String langCode) onSelected;
+
+  const LanguageToggleButton({
+    super.key,
+    required this.currentLang,
+    required this.onSelected,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final isVN = currentLang == 'vi';
+
+    return Container(
+      padding: const EdgeInsets.all(4),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black),
+        borderRadius: BorderRadius.circular(32),
+      ),
+      child: Row(
+        children: [
+          // VN
+          GestureDetector(
+            onTap: () => onSelected('vi'),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+              decoration: BoxDecoration(
+                color: isVN ? Colors.white : Colors.transparent,
+                border: isVN
+                    ? Border.all(color: Colors.black, width: 1)
+                    : null,
+                borderRadius: BorderRadius.circular(32),
+              ),
+              child: Row(
+                children: [
+                    CircleAvatar(
+                    radius: 10,
+                    backgroundImage: AssetImage(Assets.png.pngVn.keyName),
+                  ),
+                  if (isVN) ...[
+                    const SizedBox(width: 6),
+                    Text(
+                      'VN',
+                    style: KSTextStyle()
+        .style(
+    18,
+    FontWeight.w400,
+    fontBuilder: GoogleFonts.cormorantInfant,
+    )
+        .copyWith(
+    color: AppStyle.primaryGreen647B58)),
+
+                  ]
+                ],
+              ),
+            ),
+          ),
+
+          const SizedBox(width: 4),
+
+          // US
+          GestureDetector(
+            onTap: () => onSelected('en'),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+              decoration: BoxDecoration(
+                color: !isVN ? Colors.white : Colors.transparent,
+                border: !isVN
+                    ? Border.all(color: Colors.black, width: 1)
+                    : null,
+                borderRadius: BorderRadius.circular(32),
+              ),
+              child: Row(
+                children: [
+                    CircleAvatar(
+                    radius: 10,
+                    backgroundImage: AssetImage(Assets.png.pngEn.keyName),
+                  ),
+                  if (!isVN) ...[
+                    const SizedBox(width: 6),
+                    Text(
+                      'EN',
+    style: KSTextStyle()
+        .style(
+    18,
+    FontWeight.w400,
+    fontBuilder: GoogleFonts.cormorantInfant,
+    )
+        .copyWith(
+    color: AppStyle.primaryGreen647B58)),
+
+                  ]
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

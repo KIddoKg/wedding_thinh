@@ -20,11 +20,18 @@ import 'helper/di/di.dart';
 
 class MyApp extends StatefulWidget {
   final bool shouldShowDebugButton;
+  final Locale? initialLocale;
 
   const MyApp({
-    required this.shouldShowDebugButton,
+    required this.shouldShowDebugButton,this.initialLocale,
     super.key,
   });
+
+  static void setLocale(BuildContext context, Locale newLocale) {
+    final _MyAppState? state = context.findAncestorStateOfType<_MyAppState>();
+    state?.updateLocale(newLocale);
+  }
+
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -35,8 +42,13 @@ class _MyAppState extends BaseState<MyApp> with WidgetsBindingObserver {
   // @override
   // final FCMUtil fcmUtil = di();
   // NotificationServicesFireBase _notificationServicesFireBase = NotificationServicesFireBase();
+  Locale _locale = const Locale('vi');
 
-
+  void updateLocale(Locale newLocale) {
+    setState(() {
+      _locale = newLocale;
+    });
+  }
 
 
   @override
@@ -49,6 +61,7 @@ class _MyAppState extends BaseState<MyApp> with WidgetsBindingObserver {
     );
       SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
     // }
+    _locale = widget.initialLocale ?? const Locale('vi');
   }
 
   @override
@@ -75,7 +88,7 @@ class _MyAppState extends BaseState<MyApp> with WidgetsBindingObserver {
         child:Sizer(
           builder: (context, orientation, screenType) {
           return MaterialApp(
-
+            locale: _locale,
           // Cần có dòng này
           navigatorObservers: [BotToastNavigatorObserver()],
           debugShowCheckedModeBanner: false,

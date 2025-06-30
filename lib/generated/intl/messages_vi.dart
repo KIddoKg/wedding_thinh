@@ -22,100 +22,127 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "add_address": MessageLookupByLibrary.simpleMessage("Thêm địa chỉ mới"),
-        "app_name": MessageLookupByLibrary.simpleMessage("Base Flutter"),
-        "back": MessageLookupByLibrary.simpleMessage("Quay lại"),
-        "cancellation_rate":
-            MessageLookupByLibrary.simpleMessage("Tỷ lệ huỷ chuyến"),
-        "categories": MessageLookupByLibrary.simpleMessage("Danh mục"),
-        "choose_area":
-            MessageLookupByLibrary.simpleMessage("Khu vực được chọn"),
-        "coal": MessageLookupByLibrary.simpleMessage("Than đá"),
-        "completion_rate":
-            MessageLookupByLibrary.simpleMessage("Tỷ lệ hoàn thành"),
-        "contact_name_by_address":
-            MessageLookupByLibrary.simpleMessage("Tên liên hệ theo địa chỉ"),
-        "content_does_not_exist":
-            MessageLookupByLibrary.simpleMessage("Nội dung không tồn tại"),
-        "create_customer":
-            MessageLookupByLibrary.simpleMessage("Tạo khách hàng"),
-        "created_at": MessageLookupByLibrary.simpleMessage(
-            "Được tạo 14:00 14 Th 11, 2024"),
-        "customer_list":
-            MessageLookupByLibrary.simpleMessage("Danh sách khách hàng"),
-        "customer_name": MessageLookupByLibrary.simpleMessage("Tên khách hàng"),
-        "customer_name_uppercase":
-            MessageLookupByLibrary.simpleMessage("Tên khách hàng"),
-        "day_sort": MessageLookupByLibrary.simpleMessage("Ngày tháng năm"),
-        "description": MessageLookupByLibrary.simpleMessage("Mô tả"),
-        "different_day":
-            MessageLookupByLibrary.simpleMessage("so với ngày hôm qua"),
-        "do_not_empty":
-            MessageLookupByLibrary.simpleMessage("Không được bỏ trống"),
-        "domestic": MessageLookupByLibrary.simpleMessage("Trong nước"),
-        "email": MessageLookupByLibrary.simpleMessage("Email"),
-        "employee_list":
-            MessageLookupByLibrary.simpleMessage("Danh sách nhân viên"),
-        "forgot_password":
-            MessageLookupByLibrary.simpleMessage("Quên mật khẩu?"),
-        "healthcare": MessageLookupByLibrary.simpleMessage("Y tế"),
-        "hello_comeback":
-            MessageLookupByLibrary.simpleMessage("Chào mừng bạn quay trở lại"),
-        "industry": MessageLookupByLibrary.simpleMessage("Ngành hàng"),
-        "international": MessageLookupByLibrary.simpleMessage("Ngoài nước"),
-        "intro_one": MessageLookupByLibrary.simpleMessage(
-            "Công Ty TNHH HÒA KIẾN NHÂN ra đời với mong muốn giải quyết triệt để, vấn đề cho các nhà máy nhiệt điện than và vật liệu xây dựng tro bay, xỉ than trên cả nước, góp phần tận dụng nguồn tài nguyên và giảm thiểu ô nhiểm môi trường."),
-        "intro_three": MessageLookupByLibrary.simpleMessage(
-            "Với quy trình chuỗi cung ứng tự động hóa hoàn toàn, cắt giảm bớt những thao tác thực hiện nghiệp vụ thủ công, sai sót Việc cung ứng hàng hóa cho khách hàng được nhanh hơn, chính xác hơn, cung ứng cho khách hàng dịch vụ quản lý vận tải công nghệ trong nước và kể cả xuất nhập khẩu ngoài nước"),
-        "intro_two": MessageLookupByLibrary.simpleMessage(
-            "Xí nghiệp đã coi trọng áp dụng công nghệ thông tin vào quản lý. Đến nay đã và đang triển khai hệ thống đo bể tự động giám sát cột bơm tại các cửa hàng. Tổ chức khai thác hiệu quả hạ tầng truyền thông internet; ứng dụng chương trình quản lý văn bản."),
-        "login": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
-        "new_customer": MessageLookupByLibrary.simpleMessage("Khách mới"),
-        "note": MessageLookupByLibrary.simpleMessage("Ghi chú"),
-        "order_list":
-            MessageLookupByLibrary.simpleMessage("Danh sách đơn hàng"),
-        "password": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
-        "phone": MessageLookupByLibrary.simpleMessage("Số điện thoại"),
-        "phone_number_receiver":
-            MessageLookupByLibrary.simpleMessage("Số điện thoại (nhận hàng)"),
-        "product_list":
-            MessageLookupByLibrary.simpleMessage("Danh sách đơn hàng"),
-        "province_city_district_ward": MessageLookupByLibrary.simpleMessage(
-            "Tỉnh/Thành phố, Quận/Huyện, Phường/Xã"),
-        "request_help": MessageLookupByLibrary.simpleMessage("YÊU CẦU HỖ TRỢ"),
-        "request_help_detail": MessageLookupByLibrary.simpleMessage(
-            "Bạn không nhận được mã xác nhận. Đừng lo lắng, đội ngũ hỗ trợ sẽ liên hệ với bạn trong vòng 24 giờ để xác nhận tài khoản của bạn \nVui lòng cung cấp địa chỉ email, chúng tôi sẽ liên lạc để hỗ trợ bạn xác minh tài khoản"),
-        "rest_all": MessageLookupByLibrary.simpleMessage("Thiết lập lại thiết"),
-        "revenue": MessageLookupByLibrary.simpleMessage("Doanh thu"),
-        "save_password":
-            MessageLookupByLibrary.simpleMessage("Lưu lại mật khẩu"),
-        "service_1": MessageLookupByLibrary.simpleMessage("Dịch vụ 1"),
-        "service_2": MessageLookupByLibrary.simpleMessage("Dịch vụ 2"),
-        "service_3": MessageLookupByLibrary.simpleMessage("Dịch vụ 3"),
-        "service_price_by_address": MessageLookupByLibrary.simpleMessage(
-            "Đơn giá dịch vụ theo địa chỉ"),
-        "service_type_provided":
-            MessageLookupByLibrary.simpleMessage("Loại dịch vụ cung cấp"),
-        "shipping_address":
-            MessageLookupByLibrary.simpleMessage("Địa chỉ giao hàng"),
-        "show_detail": MessageLookupByLibrary.simpleMessage("Xem chi tiết"),
-        "something_wrong": MessageLookupByLibrary.simpleMessage(
-            "Lỗi hệ thống. Vui lòng thử lại!"),
-        "street_building_house_number":
-            MessageLookupByLibrary.simpleMessage("Tên đường, toà nhà, số nhà"),
-        "system_maintain": MessageLookupByLibrary.simpleMessage(
-            "Hệ thống đang bảo trì. Vui lòng thử lại!"),
-        "tax_code": MessageLookupByLibrary.simpleMessage("Mã số thuế"),
-        "ton": MessageLookupByLibrary.simpleMessage("Tấn"),
-        "total_trips_success": MessageLookupByLibrary.simpleMessage(
-            "Tổng số chuyến đi hoàn thành"),
-        "trips": MessageLookupByLibrary.simpleMessage("chuyến"),
-        "type_customer":
-            MessageLookupByLibrary.simpleMessage("Loại khách hàng"),
-        "using_service":
-            MessageLookupByLibrary.simpleMessage("Đang sử dụng dịch vụ"),
-        "vehicle_journey":
-            MessageLookupByLibrary.simpleMessage("Hành trình của xe"),
-        "view_all": MessageLookupByLibrary.simpleMessage("Xem tất cả")
+        "attend": MessageLookupByLibrary.simpleMessage("Mình sẽ tham dự"),
+        "back": MessageLookupByLibrary.simpleMessage("Quay lại"),
+        "boy_small": MessageLookupByLibrary.simpleMessage("Út Nam"),
+        "comment": MessageLookupByLibrary.simpleMessage("Bình luận của bạn"),
+        "countdown":
+            MessageLookupByLibrary.simpleMessage("Đếm ngược tới ngày cưới"),
+        "day": MessageLookupByLibrary.simpleMessage("Ngày"),
+        "dont_skip":
+            MessageLookupByLibrary.simpleMessage("😢 Đừng bỏ qua nha..."),
+        "enter_wish": MessageLookupByLibrary.simpleMessage(
+            "Ghi lời chúc hoặc một mẩu chuyện bạn nhớ về tụi mình cũng được nè!"),
+        "event_schedule":
+            MessageLookupByLibrary.simpleMessage("Lịch trình sự kiện"),
+        "ex_comment": MessageLookupByLibrary.simpleMessage("Nhập lời muốn nói"),
+        "ex_enter_wish":
+            MessageLookupByLibrary.simpleMessage("Nhập lời chúc của bạn"),
+        "ex_name_show":
+            MessageLookupByLibrary.simpleMessage("Tên của bạn là...?"),
+        "ex_who_sending_love": MessageLookupByLibrary.simpleMessage(
+            "Vd: Cô Út, Chú 6, Bảo Bảo nè,..."),
+        "girl_small": MessageLookupByLibrary.simpleMessage("Út Nữ"),
+        "give_mess": MessageLookupByLibrary.simpleMessage("Để lại lời nhắn"),
+        "give_say": MessageLookupByLibrary.simpleMessage(
+            "Dặn dò về món ăn, dị ứng, chỗ ngồi, thời gian đến... hoặc bất cứ điều gì tụi mình cần lưu ý để buổi tiệc được trọn vẹn nha!"),
+        "hour": MessageLookupByLibrary.simpleMessage("Giờ"),
+        "hundred_years_of_love":
+            MessageLookupByLibrary.simpleMessage("Kết duyên trăm năm"),
+        "item_one_address": MessageLookupByLibrary.simpleMessage(
+            "15 Đ. Trần Phú, Phường 3, Đà Lạt"),
+        "item_one_date":
+            MessageLookupByLibrary.simpleMessage("17h00 Ngày 11/07/2025"),
+        "item_one_detail": MessageLookupByLibrary.simpleMessage(
+            "Nghi thức thiêng liêng dưới sự chứng giám của Chúa."),
+        "item_one_name": MessageLookupByLibrary.simpleMessage("Hôn Phối"),
+        "item_three_address": MessageLookupByLibrary.simpleMessage(
+            "19 Nguyễn Du, Phường 9, Thành phố Đà Lạt"),
+        "item_three_date":
+            MessageLookupByLibrary.simpleMessage("11h30 Ngày 14/07/2025"),
+        "item_three_detail": MessageLookupByLibrary.simpleMessage(
+            "Bữa tiệc ấm áp bên bạn bè và người thân."),
+        "item_three_name":
+            MessageLookupByLibrary.simpleMessage("Lễ Cưới Nhà Hàng"),
+        "item_two_address": MessageLookupByLibrary.simpleMessage(
+            "10 Ngô Thi Sỹ - P4, Tp Đà Lạt"),
+        "item_two_date":
+            MessageLookupByLibrary.simpleMessage("08h00 Ngày 14/07/2025"),
+        "item_two_detail": MessageLookupByLibrary.simpleMessage(
+            "Gặp gỡ hai gia đình & chính thức rước nàng về dinh."),
+        "item_two_name": MessageLookupByLibrary.simpleMessage("Lễ Rước Dâu"),
+        "know_name":
+            MessageLookupByLibrary.simpleMessage("Tôi biết bạn tên gì nè?"),
+        "line_four": MessageLookupByLibrary.simpleMessage(
+            "Cùng xem các mốc quan trọng trong lễ cưới – từ lễ đón dâu, lễ nhà thờ đến tiệc cưới tại nhà hàng."),
+        "line_one": MessageLookupByLibrary.simpleMessage(
+            "Hân hoan thông báo lễ thành hôn của chúng mình! Rất mong bạn sẽ đến chung vui vào ngày trọng đại.\n Thời gian đang đếm ngược đến khoảnh khắc thiêng liêng nhất của tụi mình. Đừng bỏ lỡ nhé!"),
+        "line_six": MessageLookupByLibrary.simpleMessage(
+            "Hạnh phúc của tụi mình sẽ trọn vẹn hơn nếu có bạn bên cạnh."),
+        "line_six_edd": MessageLookupByLibrary.simpleMessage(
+            "Bạn vui lòng cho tụi mình biết liệu bạn có thể đến chung vui không nhé!"),
+        "line_three": MessageLookupByLibrary.simpleMessage(
+            "Mỗi lời chúc là một món quà tinh thần quý giá mà tụi mình sẽ luôn ghi nhớ"),
+        "line_three_add": MessageLookupByLibrary.simpleMessage(
+            "Cảm ơn vì đã gửi đến tụi mình những tình cảm chân thành và ngọt ngào nhất trong ngày đặc biệt này."),
+        "line_two": MessageLookupByLibrary.simpleMessage(
+            "Hai con người, một hành trình. Tụi mình đã tìm thấy nhau và giờ đây sẵn sàng bước vào một chương mới – hôn nhân."),
+        "many_people": MessageLookupByLibrary.simpleMessage(
+            "Bạn sẽ đi cùng bao nhiêu người?"),
+        "menu_comfirm":
+            MessageLookupByLibrary.simpleMessage("Bạn có đến không nè"),
+        "menu_info": MessageLookupByLibrary.simpleMessage("Thông tin liên lạc"),
+        "menu_love":
+            MessageLookupByLibrary.simpleMessage("Khoảnh khắc tình yêu"),
+        "menu_ok": MessageLookupByLibrary.simpleMessage("(Gửi xác nhận)"),
+        "menu_schedule":
+            MessageLookupByLibrary.simpleMessage("Lịch trình sự kiện"),
+        "min": MessageLookupByLibrary.simpleMessage("Phút"),
+        "moment_of_love":
+            MessageLookupByLibrary.simpleMessage("Khoảnh khắc tình yêu"),
+        "my_love_story":
+            MessageLookupByLibrary.simpleMessage("Chuyện tình của chúng mình…"),
+        "n_girl_boy": MessageLookupByLibrary.simpleMessage("Nguyễn Thị"),
+        "n_name_boy": MessageLookupByLibrary.simpleMessage("Lê Gia"),
+        "name": MessageLookupByLibrary.simpleMessage("Gia Thịnh & Bảo Hân"),
+        "name_boy": MessageLookupByLibrary.simpleMessage("Gia Thịnh"),
+        "name_boy_full": MessageLookupByLibrary.simpleMessage("Lê Gia Thịnh"),
+        "name_boy_one": MessageLookupByLibrary.simpleMessage("Gia Thịnh"),
+        "name_girl": MessageLookupByLibrary.simpleMessage("Bảo Hân"),
+        "name_girl_full":
+            MessageLookupByLibrary.simpleMessage("Nguyễn Thị Bảo Hân"),
+        "name_girl_one": MessageLookupByLibrary.simpleMessage("Hân"),
+        "name_show": MessageLookupByLibrary.simpleMessage("Tên hiển thị"),
+        "next": MessageLookupByLibrary.simpleMessage("Tiếp tục"),
+        "no_attend": MessageLookupByLibrary.simpleMessage(
+            "Rất tiếc, mình không thể tham dự được"),
+        "note_skip": MessageLookupByLibrary.simpleMessage(
+            "Chỉ vài chữ thôi cũng được, miễn là mình biết bạn là ai."),
+        "note_thanks": MessageLookupByLibrary.simpleMessage(
+            "Chúng tôi đã nhận được lời chúc của bạn, cảm ơn bạn rất nhiều."),
+        "restauration_name":
+            MessageLookupByLibrary.simpleMessage("Nhà hàng Túi Ba Gang"),
+        "restauration_name_break":
+            MessageLookupByLibrary.simpleMessage("( Sảnh La’ Muse )"),
+        "see_instructions":
+            MessageLookupByLibrary.simpleMessage("Xem hướng dẫn"),
+        "send_now": MessageLookupByLibrary.simpleMessage("Gửi ngay"),
+        "sending_love": MessageLookupByLibrary.simpleMessage(
+            "Ai đang gửi yêu thương vậy nè?"),
+        "step_arrangement":
+            MessageLookupByLibrary.simpleMessage("sắp bước sang một trang mới"),
+        "thanks": MessageLookupByLibrary.simpleMessage(
+            "🎉 Cảm ơn bạn đã gửi lời chúc"),
+        "to_say": MessageLookupByLibrary.simpleMessage(
+            "Bọn mình cần chú ý gì không nè "),
+        "watch_now": MessageLookupByLibrary.simpleMessage("Xem ngay"),
+        "will_you_attend":
+            MessageLookupByLibrary.simpleMessage("Bạn sẽ tham dự lễ cưới chứ?"),
+        "will_you_come":
+            MessageLookupByLibrary.simpleMessage("Bạn sẽ\n đến chứ?."),
+        "will_you_come_st":
+            MessageLookupByLibrary.simpleMessage("Bạn sẽ đến chứ ?"),
+        "wishes_loves": MessageLookupByLibrary.simpleMessage(
+            "Lời chúc từ những người thương yêu")
       };
 }

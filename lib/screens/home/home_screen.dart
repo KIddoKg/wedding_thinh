@@ -11,6 +11,7 @@ import 'package:wedding_hkn/screens/home/viewModel/home_screen_vm.dart';
 import 'package:wedding_hkn/share/share_on_app.dart';
 import 'package:wedding_hkn/share/size_configs.dart';
 
+import '../../generated/l10n.dart';
 import '../../share/app_imports.dart';
 import '../../share/text_style.dart';
 import 'package:lottie/lottie.dart';
@@ -79,9 +80,9 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
               controller: vm.scrollController,
               slivers: [
 
-                // const SliverToBoxAdapter(child: Text("😂"  /, style: TextStyle(fontFamily: 'NotoColorEmoji'))
 
                 const SliverToBoxAdapter(child: _HeaderWidget()),
+
 
                 const SliverToBoxAdapter(child: _ConfirmWidget()),
                 const SliverToBoxAdapter(child: _FooterWidget()),

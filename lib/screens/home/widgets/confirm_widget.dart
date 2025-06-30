@@ -97,7 +97,7 @@ class _ConfirmWidgetState extends State<_ConfirmWidget> {
                                   // Text "Bạn sẽ đến chứ?"
                                   AutoSizeText(
                                     minFontSize: 10,
-                                    "Bạn sẽ\nđến chứ?",
+                                    S.current.will_you_come,
                                     textAlign: TextAlign.center,
                                     // maxLines: 1,
 
@@ -135,14 +135,14 @@ class _ConfirmWidgetState extends State<_ConfirmWidget> {
                       SizedBox(
                         height: 64,
                       ),
-                      KSText("Bạn sẽ tham dự lễ cưới chứ?",
+                      KSText( S.current.will_you_attend,
                           textAlign: TextAlign.center,
                           style: KSTheme.of(context)
                               .style
                               .ts70w500
                               .copyWith(color: AppStyle.whiteBg)),
                       KSText(
-                        'Hạnh phúc của tụi mình sẽ trọn vẹn hơn nếu có bạn bên cạnh. ',
+                        S.current.line_six,
                         style: KSTextStyle()
                             .style(
                               18,
@@ -153,7 +153,7 @@ class _ConfirmWidgetState extends State<_ConfirmWidget> {
                       ),
                       KSText(
                         textAlign: TextAlign.center,
-                        'Bạn vui lòng cho tụi mình biết liệu bạn có thể đến chung vui không nhé!',
+                        S.current.line_six_edd,
                         style: KSTextStyle()
                             .style(
                               18,
@@ -175,7 +175,7 @@ class _ConfirmWidgetState extends State<_ConfirmWidget> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            KSText("Họ và Tên",
+                            KSText(S.current.know_name,
                                 style: KSTextStyle()
                                     .style(
                                   23,
@@ -191,7 +191,7 @@ class _ConfirmWidgetState extends State<_ConfirmWidget> {
                               },
                               controller: vm.nameController,
                               decoration: InputDecoration(
-                                hintText: "Họ và Tên",
+                                hintText: S.current.ex_who_sending_love,
                                 filled: true,
                                 fillColor: Colors.white,
                                 contentPadding: const EdgeInsets.symmetric(
@@ -223,7 +223,7 @@ class _ConfirmWidgetState extends State<_ConfirmWidget> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            KSText("Bạn sẽ đến chứ ?",
+                            KSText(S.current.will_you_come_st,
                                 style: KSTextStyle()
                                     .style(
                                   23,
@@ -239,7 +239,7 @@ class _ConfirmWidgetState extends State<_ConfirmWidget> {
                               children:   [
                                 Expanded(
                                   child: AttendanceCheckbox(
-                                    label: 'Mình sẽ tham dự',
+                                    label: S.current.attend,
                                     value: vm.selectedOption == 'attend',
                                     onChanged: (bool checked) {
                                       print("${checked}");
@@ -252,7 +252,7 @@ class _ConfirmWidgetState extends State<_ConfirmWidget> {
                                 SizedBox(width: 20),
                                 Expanded(
                                   child: AttendanceCheckbox(
-                                    label: 'Rất tiếc, mình không thể tham dự được',
+                                    label: S.current.no_attend,
                                     value: vm.selectedOption == 'not_attend',
                                     onChanged: (bool checked) {
 
@@ -272,7 +272,7 @@ class _ConfirmWidgetState extends State<_ConfirmWidget> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            KSText("Bạn sẽ đi cùng bao nhiêu người?",
+                            KSText(S.current.many_people,
                                 style: KSTextStyle()
                                     .style(
                                   23,
@@ -326,7 +326,7 @@ class _ConfirmWidgetState extends State<_ConfirmWidget> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            KSText("Bọn mình cần chú ý gì không nè ?",
+                            KSText(S.current.to_say,
                                 style: KSTextStyle()
                                     .style(
                                   23,
@@ -361,7 +361,7 @@ class _ConfirmWidgetState extends State<_ConfirmWidget> {
                                         EmojiPopupController().hide();
                                         vm.postInvitation(context);
                                       },
-                                      "Gửi ngay",
+                                        S.current.send_now,
                                       fontSize: 23,
                                       backgroundColor: AppStyle.primaryColorBlack,
 

@@ -82,6 +82,19 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                           ],
                         ),
                         Positioned(
+                            top: 25,
+                            right: 90,
+
+                            child:  Center(
+                              child: SizedBox(
+                                width: 120,
+                                child: LanguageToggleButton(
+                                  currentLang: vm.currentLang,
+                                  onSelected: (langCode) => vm.changeLang(context, langCode),
+                                ),
+                              ),
+                            )),
+                        Positioned(
                           // left: 0,
                           top: 90,
                           right: 0,
@@ -97,7 +110,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                                   Row(
                                     children: [
                                       Text(
-                                        'Gia Thịnh',
+                                        S.current.name_boy,
                                         style: KSTheme.of(context)
                                             .style
                                             .ts60w500
@@ -127,7 +140,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                                       SizedBox(width: 64,)
 ,
                                       Text(
-                                        'Bảo Hân',
+                                        S.current.name_girl,
                                         style: KSTheme.of(context)
                                             .style
                                             .ts60w500
@@ -143,7 +156,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
                                       Text(
-                                        'Chuyện tình của chúng mình...\nsắp bước sang một trang mới',
+                                        '${S.current.my_love_story}\n${S.current.step_arrangement}',
                                         textAlign: TextAlign.right,
                                         style: KSTextStyle().style(
                                           18,
@@ -245,7 +258,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                                           ),
                                         ),
                                         child: KSText(
-                                          "Thông tin liên lạc",
+                                          S.current.menu_info,
                                           style: KSTheme.of(context)
                                               .style
                                               .ts35w500
@@ -270,7 +283,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                                           ),
                                         ),
                                         child: KSText(
-                                          "Khoảnh khắc tình yêu",
+                                          S.current.menu_love,
                                           style: KSTheme.of(context)
                                               .style
                                               .ts35w500
@@ -295,7 +308,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                                           ),
                                         ),
                                         child: KSText(
-                                          "Lịch trình sự kiện",
+                                          S.current.menu_schedule,
                                           style: KSTheme.of(context)
                                               .style
                                               .ts35w500
@@ -323,7 +336,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                                           TextSpan(
                                             children: [
                                               TextSpan(
-                                                text: 'Bạn có đến không nè?\n',
+                                                text: '${S.current.menu_comfirm}\n',
                                                 style: KSTheme.of(context)
                                                     .style
                                                     .ts35w500
@@ -331,7 +344,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                                               ),
 
                                               TextSpan(
-                                                text: '  ( Gửi xác nhận )',
+                                                text: '  ${  S.current.menu_ok}',
                                                 style: KSTheme.of(context)
                                                     .style
                                                     .ts35w500
@@ -413,7 +426,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                           height: 8,
                         ),
                         Text(
-                          'Xem ngay',
+                          S.current.watch_now,
                           style: KSTextStyle()
                               .style(
                             20,
@@ -463,7 +476,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                           SizedBox(
                             height: 128,
                           ),
-                          KSText("Đếm ngược tới ngày cưới",
+                          KSText(S.current.countdown,
                               maxLines: 2,
                               textAlign: TextAlign.center,
                               style: KSTheme.of(context)
@@ -472,7 +485,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                                   .copyWith(color: AppStyle.whiteBg)),
                           KSText(
                             textAlign: TextAlign.center,
-                            'Hân hoan thông báo lễ thành hôn của chúng mình! Rất mong bạn sẽ đến chung vui vào ngày trọng đại. Thời gian đang đếm ngược đến khoảnh khắc thiêng liêng nhất của tụi mình. Đừng bỏ lỡ nhé! ',
+                            S.current.line_one,
                             style: KSTextStyle()
                                 .style(
                               15,
@@ -506,7 +519,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                             ver: 6,
                             topLeft: vm.dayTens.toString(),
                             topRight: vm.dayUnits.toString(),
-                            label: 'Ngày',
+                            label: S.current.day,
                           ),
                           const SizedBox(width: 16),
                           TimeColumn(
@@ -514,7 +527,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                             size: 25.sp,
                             topLeft: vm.hourTens.toString(),
                             topRight: vm.hourUnits.toString(),
-                            label: 'Giờ',
+                            label: S.current.hour,
                           ),
                           const SizedBox(width: 16),
                           TimeColumn(
@@ -522,7 +535,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                             size: 25.sp,
                             topLeft: vm.minuteTens.toString(),
                             topRight: vm.minuteUnits.toString(),
-                            label: 'Phút',
+                            label: S.current.min,
                           ),
                         ],
                       ),
@@ -576,14 +589,14 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                             SizedBox(
                               height: 128,
                             ),
-                            KSText("Kết duyên trăm năm",textAlign: TextAlign.center,
+                            KSText(  S.current.hundred_years_of_love,textAlign: TextAlign.center,
                                 style: KSTheme.of(context)
                                     .style
                                     .ts42w500
                                     .copyWith(color: AppStyle.whiteBg)),
                             KSText(
                               textAlign: TextAlign.center,
-                              'Hai con người, một hành trình. Tụi mình đã tìm thấy nhau và giờ đây sẵn sàng bước vào một chương mới – hôn nhân.',
+                              S.current.line_two,
                               style: KSTextStyle()
                                   .style(
                                 15,
@@ -642,7 +655,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                             ),
                             Column(
                               children: [
-                                KSText("Lời chúc từ những người thương yêu",
+                                KSText(S.current.wishes_loves,
                                     textAlign: TextAlign.center,
                                     style: KSTheme.of(context)
                                         .style
@@ -653,7 +666,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                                 ),
                                 KSText(
                                   textAlign: TextAlign.center,
-                                  'Mỗi lời chúc là một món quà tinh thần quý giá mà tụi mình sẽ luôn ghi nhớ.',
+                                  S.current.line_three,
                                   style: KSTextStyle()
                                       .style(
                                     15,
@@ -664,7 +677,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                                 ),
                                 KSText(
                                   textAlign: TextAlign.center,
-                                  'Cảm ơn vì đã gửi đến tụi mình những tình cảm chân thành và ngọt ngào nhất trong ngày đặc biệt này.',
+                                  S.current.line_three_add,
                                   style: KSTextStyle()
                                       .style(
                                     15,
@@ -697,7 +710,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         mainAxisAlignment: MainAxisAlignment.start,
                                         children: [
-                                          KSText("Ai đang gửi yêu thương vậy nè?",
+                                          KSText(S.current.sending_love,
                                               style: KSTextStyle()
                                                   .style(
                                                 18,
@@ -719,7 +732,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                                             controller: vm.usernameController,
                                             decoration: InputDecoration(
                                               hintText:
-                                              "Vd: Cô Út, Chú 6, Bảo Bảo nè,...",
+        S.current.ex_who_sending_love,
                                               filled: true,
                                               fillColor: Colors.white,
                                               contentPadding:
@@ -759,7 +772,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                                         mainAxisAlignment: MainAxisAlignment.start,
                                         children: [
                                           KSText(
-                                              "Ghi lời chúc hoặc một mẩu chuyện bạn nhớ về tụi mình cũng được nè!",
+                                              S.current.enter_wish,
                                               style: KSTextStyle()
                                                   .style(
                                                 18,
@@ -843,7 +856,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                                                   EmojiPopupController().hide();
                                                   vm.postWish(context);
                                                 },
-                                                "Gửi ngay",
+                                                S.current.send_now,
                                                 backgroundColor:
                                                 AppStyle.primaryColorBlack,
                                               )),
@@ -869,7 +882,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                             SizedBox(
                               height: 128,
                             ),
-                            KSText("Khoảnh khắc tình yêu",textAlign: TextAlign.center,
+                            KSText(S.current.moment_of_love,textAlign: TextAlign.center,
                                 maxLines: 2,
                                 style: KSTheme.of(context)
                                     .style
@@ -877,7 +890,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                                     .copyWith(color: AppStyle.whiteBg)),
                             KSText(
                               textAlign: TextAlign.center,
-                              'Mời bạn cùng ngắm nhìn những thước ảnh ghi lại hành trình yêu thương của tụi mình.',
+                              S.current.line_four,
                               style: KSTextStyle()
                                   .style(
                                 15,
@@ -925,7 +938,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                   ),
                   Column(
                     children: [
-                      KSText("Lịch trình sự kiện",
+                      KSText(  S.current.event_schedule,
                           textAlign: TextAlign.center,
                           style: KSTheme.of(context)
                               .style
@@ -936,7 +949,7 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                       ),
                       KSText(
                         textAlign: TextAlign.center,
-                        'Cùng xem các mốc quan trọng trong lễ cưới – từ lễ đón dâu, lễ nhà thờ đến tiệc cưới tại nhà hàng.',
+                        S.current.line_four,
                         style: KSTextStyle()
                             .style(
                           15,
@@ -965,11 +978,11 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                       lineBottomHeight: 420 + 200,
                     ),
                     TimelineItemWidgetMobile(
-                      title: "Hôn Phối",
-                      date: "17h00 Ngày 11/07/2025",
-                      location: "15 Đ. Trần Phú, Phường 3, Đà Lạt",
+                      title: S.current.item_one_name,
+                      date:  S.current.item_one_date,
+                      location:  S.current.item_one_address,
                       description:
-                      "Nghi thức thiêng liêng dưới sự chứng giám của Chúa.",
+                      S.current.item_one_detail,
                       imagePath: Assets.png.pngAddress1.keyName,
                       onTap: () {
                         vm.launchMap(
@@ -990,11 +1003,12 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                       lineBottomHeight: 250,
                     ),
                     TimelineItemWidgetMobile(
-                      title: "Lễ Rước Dâu",
-                      date: "08h00 Ngày 14/07/2025",
-                      location: "10 Ngô Thi Sỹ - P4, Tp Đà Lạt",
+                      title: S.current.item_two_name,
+                      date:  S.current.item_two_date,
+                      location:  S.current.item_two_address,
                       description:
-                      "Gặp gỡ hai gia đình & chính thức rước nàng về dinh.",
+                      S.current.item_two_detail,
+
                       imagePath: Assets.png.pmgAddress2Mobile.keyName,
                       onTap: () {
                         vm.launchMap(
@@ -1011,10 +1025,12 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                       lineTopHeight: 250,
                     ),
                     TimelineItemWidgetMobile(
-                      title: "Lễ Cưới Nhà Hàng",
-                      date: "11h30 Ngày 14/07/2025",
-                      location: "19 Nguyễn Du, Phường 9, Đà Lạt",
-                      description: "Bữa tiệc ấm áp bên bạn bè và người thân.",
+                      title: S.current.item_three_name,
+                      date:  S.current.item_three_date,
+                      location:  S.current.item_three_address,
+                      description:
+                      S.current.item_three_detail,
+
                       imagePath: Assets.png.pngAddress3.keyName,
                       onTap: () {
                         vm.launchMap(

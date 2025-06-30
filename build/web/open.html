@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vui lòng mở bằng trình duyệt</title>
+<style>
+body {
+font-family: sans-serif;
+padding: 24px;
+text-align: center;
+background-color: #fffdf8;
+}
+h1 {
+color: #d6336c;
+}
+    .btn {
+margin-top: 20px;
+padding: 12px 24px;
+background-color: #007bff;
+color: white;
+font-size: 16px;
+border: none;
+border-radius: 8px;
+cursor: pointer;
+text-decoration: none;
+display: inline-block;
+}
+</style>
+</head>
+<body>
+
+<h1>🚫 Bạn đang mở trang trong ứng dụng</h1>
+<p>Trang này hoạt động tốt nhất khi được mở bằng trình duyệt như <strong>Chrome</strong> hoặc <strong>Safari</strong>.</p>
+<p>👉 Vui lòng nhấn vào dấu ba chấm <strong>(⋮)</strong> hoặc nút chia sẻ, sau đó chọn <strong>"Mở bằng trình duyệt"</strong>.</p>
+
+<a href="https://hanthinhwedding.com" target="_blank" class="btn">Mở ngay bằng trình duyệt</a>
+
+<script>
+const ua = navigator.userAgent.toLowerCase();
+const isZalo = ua.includes("zalo");
+const isFacebook = ua.includes("fbav") || ua.includes("fban");
+
+if (!isZalo && !isFacebook) {
+// Không phải mở từ Zalo/Facebook → tự động chuyển hướng
+window.location.href = "https://hanthinhwedding.com";
+}
+</script>
+
+
+</body>
+</html>

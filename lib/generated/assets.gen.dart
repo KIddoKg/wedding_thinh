@@ -94,6 +94,9 @@ class $AssetsPngGen {
   AssetGenImage get pngConfirm =>
       const AssetGenImage('assets/png/png_confirm.png');
 
+  /// File path: assets/png/png_en.png
+  AssetGenImage get pngEn => const AssetGenImage('assets/png/png_en.png');
+
   /// File path: assets/png/png_flower.png
   AssetGenImage get pngFlower =>
       const AssetGenImage('assets/png/png_flower.png');
@@ -123,6 +126,9 @@ class $AssetsPngGen {
   /// File path: assets/png/png_test.png
   AssetGenImage get pngTest => const AssetGenImage('assets/png/png_test.png');
 
+  /// File path: assets/png/png_vn.png
+  AssetGenImage get pngVn => const AssetGenImage('assets/png/png_vn.png');
+
   /// File path: assets/png/png_waring.png
   AssetGenImage get pngWaring =>
       const AssetGenImage('assets/png/png_waring.png');
@@ -141,6 +147,7 @@ class $AssetsPngGen {
         pngChinha,
         pngCoanfirm,
         pngConfirm,
+        pngEn,
         pngFlower,
         pngMobile,
         pngNewLogo,
@@ -149,6 +156,7 @@ class $AssetsPngGen {
         pngRange,
         pngSuccess,
         pngTest,
+        pngVn,
         pngWaring,
         pngZalo
       ];

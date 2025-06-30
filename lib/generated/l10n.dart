@@ -50,621 +50,741 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Base Flutter`
-  String get app_name {
+  /// `Our love story…`
+  String get my_love_story {
     return Intl.message(
-      'Base Flutter',
-      name: 'app_name',
+      'Our love story…',
+      name: 'my_love_story',
       desc: '',
       args: [],
     );
   }
 
-  /// `Lỗi hệ thống. Vui lòng thử lại!`
-  String get something_wrong {
+  /// `is about to turn a new page`
+  String get step_arrangement {
     return Intl.message(
-      'Lỗi hệ thống. Vui lòng thử lại!',
-      name: 'something_wrong',
+      'is about to turn a new page',
+      name: 'step_arrangement',
       desc: '',
       args: [],
     );
   }
 
-  /// `Hệ thống đang bảo trì. Vui lòng thử lại!`
-  String get system_maintain {
+  /// `Watch now`
+  String get watch_now {
     return Intl.message(
-      'Hệ thống đang bảo trì. Vui lòng thử lại!',
-      name: 'system_maintain',
+      'Watch now',
+      name: 'watch_now',
       desc: '',
       args: [],
     );
   }
 
-  /// `Không được bỏ trống`
-  String get do_not_empty {
+  /// `Countdown to the wedding day`
+  String get countdown {
     return Intl.message(
-      'Không được bỏ trống',
-      name: 'do_not_empty',
+      'Countdown to the wedding day',
+      name: 'countdown',
       desc: '',
       args: [],
     );
   }
 
-  /// `Nội dung không tồn tại`
-  String get content_does_not_exist {
+  /// `We are delighted to announce our wedding! We sincerely hope you can join us on our big day. \n Time is ticking down to our most sacred moment. Don’t miss it!`
+  String get line_one {
     return Intl.message(
-      'Nội dung không tồn tại',
-      name: 'content_does_not_exist',
+      'We are delighted to announce our wedding! We sincerely hope you can join us on our big day. \n Time is ticking down to our most sacred moment. Don’t miss it!',
+      name: 'line_one',
       desc: '',
       args: [],
     );
   }
 
-  /// `Công Ty TNHH HÒA KIẾN NHÂN ra đời với mong muốn giải quyết triệt để, vấn đề cho các nhà máy nhiệt điện than và vật liệu xây dựng tro bay, xỉ than trên cả nước, góp phần tận dụng nguồn tài nguyên và giảm thiểu ô nhiểm môi trường.`
-  String get intro_one {
+  /// `Day`
+  String get day {
     return Intl.message(
-      'Công Ty TNHH HÒA KIẾN NHÂN ra đời với mong muốn giải quyết triệt để, vấn đề cho các nhà máy nhiệt điện than và vật liệu xây dựng tro bay, xỉ than trên cả nước, góp phần tận dụng nguồn tài nguyên và giảm thiểu ô nhiểm môi trường.',
-      name: 'intro_one',
+      'Day',
+      name: 'day',
       desc: '',
       args: [],
     );
   }
 
-  /// `Xí nghiệp đã coi trọng áp dụng công nghệ thông tin vào quản lý. Đến nay đã và đang triển khai hệ thống đo bể tự động giám sát cột bơm tại các cửa hàng. Tổ chức khai thác hiệu quả hạ tầng truyền thông internet; ứng dụng chương trình quản lý văn bản.`
-  String get intro_two {
+  /// `Hour`
+  String get hour {
     return Intl.message(
-      'Xí nghiệp đã coi trọng áp dụng công nghệ thông tin vào quản lý. Đến nay đã và đang triển khai hệ thống đo bể tự động giám sát cột bơm tại các cửa hàng. Tổ chức khai thác hiệu quả hạ tầng truyền thông internet; ứng dụng chương trình quản lý văn bản.',
-      name: 'intro_two',
+      'Hour',
+      name: 'hour',
       desc: '',
       args: [],
     );
   }
 
-  /// `Với quy trình chuỗi cung ứng tự động hóa hoàn toàn, cắt giảm bớt những thao tác thực hiện nghiệp vụ thủ công, sai sót Việc cung ứng hàng hóa cho khách hàng được nhanh hơn, chính xác hơn, cung ứng cho khách hàng dịch vụ quản lý vận tải công nghệ trong nước và kể cả xuất nhập khẩu ngoài nước`
-  String get intro_three {
+  /// `Minute`
+  String get min {
     return Intl.message(
-      'Với quy trình chuỗi cung ứng tự động hóa hoàn toàn, cắt giảm bớt những thao tác thực hiện nghiệp vụ thủ công, sai sót Việc cung ứng hàng hóa cho khách hàng được nhanh hơn, chính xác hơn, cung ứng cho khách hàng dịch vụ quản lý vận tải công nghệ trong nước và kể cả xuất nhập khẩu ngoài nước',
-      name: 'intro_three',
+      'Minute',
+      name: 'min',
       desc: '',
       args: [],
     );
   }
 
-  /// `Email`
-  String get email {
+  /// `A hundred years of love`
+  String get hundred_years_of_love {
     return Intl.message(
-      'Email',
-      name: 'email',
+      'A hundred years of love',
+      name: 'hundred_years_of_love',
       desc: '',
       args: [],
     );
   }
 
-  /// `Số điện thoại`
-  String get phone {
+  /// `Two people, one journey. We have found each other and are now ready to begin a new chapter – marriage.`
+  String get line_two {
     return Intl.message(
-      'Số điện thoại',
-      name: 'phone',
+      'Two people, one journey. We have found each other and are now ready to begin a new chapter – marriage.',
+      name: 'line_two',
       desc: '',
       args: [],
     );
   }
 
-  /// `Mật khẩu`
-  String get password {
+  /// `Ut Nam`
+  String get boy_small {
     return Intl.message(
-      'Mật khẩu',
-      name: 'password',
+      'Ut Nam',
+      name: 'boy_small',
       desc: '',
       args: [],
     );
   }
 
-  /// `Lưu lại mật khẩu`
-  String get save_password {
+  /// `Ut Nu`
+  String get girl_small {
     return Intl.message(
-      'Lưu lại mật khẩu',
-      name: 'save_password',
+      'Ut Nu',
+      name: 'girl_small',
       desc: '',
       args: [],
     );
   }
 
-  /// `Quên mật khẩu?`
-  String get forgot_password {
+  /// `Wishes from our beloved ones`
+  String get wishes_loves {
     return Intl.message(
-      'Quên mật khẩu?',
-      name: 'forgot_password',
+      'Wishes from our beloved ones',
+      name: 'wishes_loves',
       desc: '',
       args: [],
     );
   }
 
-  /// `Đăng nhập`
-  String get login {
+  /// `Every wish is a precious gift that we will always cherish.`
+  String get line_three {
     return Intl.message(
-      'Đăng nhập',
-      name: 'login',
+      'Every wish is a precious gift that we will always cherish.',
+      name: 'line_three',
       desc: '',
       args: [],
     );
   }
 
-  /// `Quay lại`
+  /// `Thank you for sending us your sincere and sweetest wishes on this special day.`
+  String get line_three_add {
+    return Intl.message(
+      'Thank you for sending us your sincere and sweetest wishes on this special day.',
+      name: 'line_three_add',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Who's sending love here?`
+  String get sending_love {
+    return Intl.message(
+      'Who\'s sending love here?',
+      name: 'sending_love',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `E.g.: Aunt Út, Uncle 6, Little Bảo,...`
+  String get ex_who_sending_love {
+    return Intl.message(
+      'E.g.: Aunt Út, Uncle 6, Little Bảo,...',
+      name: 'ex_who_sending_love',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Write a wish or a memory you have with us!`
+  String get enter_wish {
+    return Intl.message(
+      'Write a wish or a memory you have with us!',
+      name: 'enter_wish',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your wish`
+  String get ex_enter_wish {
+    return Intl.message(
+      'Enter your wish',
+      name: 'ex_enter_wish',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send now`
+  String get send_now {
+    return Intl.message(
+      'Send now',
+      name: 'send_now',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Moments of love`
+  String get moment_of_love {
+    return Intl.message(
+      'Moments of love',
+      name: 'moment_of_love',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Let’s look back on the photos capturing our love journey.`
+  String get line_four {
+    return Intl.message(
+      'Let’s look back on the photos capturing our love journey.',
+      name: 'line_four',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Event schedule`
+  String get event_schedule {
+    return Intl.message(
+      'Event schedule',
+      name: 'event_schedule',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Holy Matrimony`
+  String get item_one_name {
+    return Intl.message(
+      'Holy Matrimony',
+      name: 'item_one_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `5:00 PM, July 11, 2025`
+  String get item_one_date {
+    return Intl.message(
+      '5:00 PM, July 11, 2025',
+      name: 'item_one_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `15 Tran Phu St., Ward 3, Da Lat`
+  String get item_one_address {
+    return Intl.message(
+      '15 Tran Phu St., Ward 3, Da Lat',
+      name: 'item_one_address',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `A sacred ceremony witnessed by God.`
+  String get item_one_detail {
+    return Intl.message(
+      'A sacred ceremony witnessed by God.',
+      name: 'item_one_detail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `See instructions`
+  String get see_instructions {
+    return Intl.message(
+      'See instructions',
+      name: 'see_instructions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bridal Procession`
+  String get item_two_name {
+    return Intl.message(
+      'Bridal Procession',
+      name: 'item_two_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `8:00 AM, July 14, 2025`
+  String get item_two_date {
+    return Intl.message(
+      '8:00 AM, July 14, 2025',
+      name: 'item_two_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `10 Ngo Thi Sy - Ward 4, Da Lat City`
+  String get item_two_address {
+    return Intl.message(
+      '10 Ngo Thi Sy - Ward 4, Da Lat City',
+      name: 'item_two_address',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Meeting the families & officially bringing the bride home.`
+  String get item_two_detail {
+    return Intl.message(
+      'Meeting the families & officially bringing the bride home.',
+      name: 'item_two_detail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wedding Reception`
+  String get item_three_name {
+    return Intl.message(
+      'Wedding Reception',
+      name: 'item_three_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `11:30 AM, July 14, 2025`
+  String get item_three_date {
+    return Intl.message(
+      '11:30 AM, July 14, 2025',
+      name: 'item_three_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `19 Nguyen Du, Ward 9, Da Lat City`
+  String get item_three_address {
+    return Intl.message(
+      '19 Nguyen Du, Ward 9, Da Lat City',
+      name: 'item_three_address',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `A cozy party with friends and family.`
+  String get item_three_detail {
+    return Intl.message(
+      'A cozy party with friends and family.',
+      name: 'item_three_detail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Will you\n join us?`
+  String get will_you_come {
+    return Intl.message(
+      'Will you\n join us?',
+      name: 'will_you_come',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Will you attend our wedding?`
+  String get will_you_attend {
+    return Intl.message(
+      'Will you attend our wedding?',
+      name: 'will_you_attend',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Our happiness will be more complete with you by our side.`
+  String get line_six {
+    return Intl.message(
+      'Our happiness will be more complete with you by our side.',
+      name: 'line_six',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please let us know if you will be able to join us!`
+  String get line_six_edd {
+    return Intl.message(
+      'Please let us know if you will be able to join us!',
+      name: 'line_six_edd',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `May we know your name?`
+  String get know_name {
+    return Intl.message(
+      'May we know your name?',
+      name: 'know_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Will you join us?`
+  String get will_you_come_st {
+    return Intl.message(
+      'Will you join us?',
+      name: 'will_you_come_st',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I will attend`
+  String get attend {
+    return Intl.message(
+      'I will attend',
+      name: 'attend',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sorry, I won’t be able to attend`
+  String get no_attend {
+    return Intl.message(
+      'Sorry, I won’t be able to attend',
+      name: 'no_attend',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `How many people will come with you?`
+  String get many_people {
+    return Intl.message(
+      'How many people will come with you?',
+      name: 'many_people',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Is there anything we should know?`
+  String get to_say {
+    return Intl.message(
+      'Is there anything we should know?',
+      name: 'to_say',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notes about food, allergies, seating, arrival time... anything that helps us make the party perfect for you!`
+  String get give_say {
+    return Intl.message(
+      'Notes about food, allergies, seating, arrival time... anything that helps us make the party perfect for you!',
+      name: 'give_say',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tui Ba Gang Restaurant`
+  String get restauration_name {
+    return Intl.message(
+      'Tui Ba Gang Restaurant',
+      name: 'restauration_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `(La’ Muse Hall)`
+  String get restauration_name_break {
+    return Intl.message(
+      '(La’ Muse Hall)',
+      name: 'restauration_name_break',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Leave a message`
+  String get give_mess {
+    return Intl.message(
+      'Leave a message',
+      name: 'give_mess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Next`
+  String get next {
+    return Intl.message(
+      'Next',
+      name: 'next',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Back`
   String get back {
     return Intl.message(
-      'Quay lại',
+      'Back',
       name: 'back',
       desc: '',
       args: [],
     );
   }
 
-  /// `YÊU CẦU HỖ TRỢ`
-  String get request_help {
+  /// `Your comment`
+  String get comment {
     return Intl.message(
-      'YÊU CẦU HỖ TRỢ',
-      name: 'request_help',
+      'Your comment',
+      name: 'comment',
       desc: '',
       args: [],
     );
   }
 
-  /// `Bạn không nhận được mã xác nhận. Đừng lo lắng, đội ngũ hỗ trợ sẽ liên hệ với bạn trong vòng 24 giờ để xác nhận tài khoản của bạn \nVui lòng cung cấp địa chỉ email, chúng tôi sẽ liên lạc để hỗ trợ bạn xác minh tài khoản`
-  String get request_help_detail {
+  /// `Enter your message`
+  String get ex_comment {
     return Intl.message(
-      'Bạn không nhận được mã xác nhận. Đừng lo lắng, đội ngũ hỗ trợ sẽ liên hệ với bạn trong vòng 24 giờ để xác nhận tài khoản của bạn \nVui lòng cung cấp địa chỉ email, chúng tôi sẽ liên lạc để hỗ trợ bạn xác minh tài khoản',
-      name: 'request_help_detail',
+      'Enter your message',
+      name: 'ex_comment',
       desc: '',
       args: [],
     );
   }
 
-  /// `Mô tả`
-  String get description {
+  /// `Display name`
+  String get name_show {
     return Intl.message(
-      'Mô tả',
-      name: 'description',
+      'Display name',
+      name: 'name_show',
       desc: '',
       args: [],
     );
   }
 
-  /// `Chào mừng bạn quay trở lại`
-  String get hello_comeback {
+  /// `What’s your name?`
+  String get ex_name_show {
     return Intl.message(
-      'Chào mừng bạn quay trở lại',
-      name: 'hello_comeback',
+      'What’s your name?',
+      name: 'ex_name_show',
       desc: '',
       args: [],
     );
   }
 
-  /// `Doanh thu`
-  String get revenue {
+  /// `Gia Thinh & Bao Han`
+  String get name {
     return Intl.message(
-      'Doanh thu',
-      name: 'revenue',
+      'Gia Thinh & Bao Han',
+      name: 'name',
       desc: '',
       args: [],
     );
   }
 
-  /// `Ngày tháng năm`
-  String get day_sort {
+  /// `Contact Information`
+  String get menu_info {
     return Intl.message(
-      'Ngày tháng năm',
-      name: 'day_sort',
+      'Contact Information',
+      name: 'menu_info',
       desc: '',
       args: [],
     );
   }
 
-  /// `so với ngày hôm qua`
-  String get different_day {
+  /// `Moments of Love`
+  String get menu_love {
     return Intl.message(
-      'so với ngày hôm qua',
-      name: 'different_day',
+      'Moments of Love',
+      name: 'menu_love',
       desc: '',
       args: [],
     );
   }
 
-  /// `Xem chi tiết`
-  String get show_detail {
+  /// `Event Schedule`
+  String get menu_schedule {
     return Intl.message(
-      'Xem chi tiết',
-      name: 'show_detail',
+      'Event Schedule',
+      name: 'menu_schedule',
       desc: '',
       args: [],
     );
   }
 
-  /// `Tổng số chuyến đi hoàn thành`
-  String get total_trips_success {
+  /// `Will you come?`
+  String get menu_comfirm {
     return Intl.message(
-      'Tổng số chuyến đi hoàn thành',
-      name: 'total_trips_success',
+      'Will you come?',
+      name: 'menu_comfirm',
       desc: '',
       args: [],
     );
   }
 
-  /// `Tỷ lệ hoàn thành`
-  String get completion_rate {
+  /// `(Send Confirmation)`
+  String get menu_ok {
     return Intl.message(
-      'Tỷ lệ hoàn thành',
-      name: 'completion_rate',
+      '(Send Confirmation)',
+      name: 'menu_ok',
       desc: '',
       args: [],
     );
   }
 
-  /// `Tỷ lệ huỷ chuyến`
-  String get cancellation_rate {
+  /// `Gia Thinh`
+  String get name_boy {
     return Intl.message(
-      'Tỷ lệ huỷ chuyến',
-      name: 'cancellation_rate',
+      'Gia Thinh',
+      name: 'name_boy',
       desc: '',
       args: [],
     );
   }
 
-  /// `chuyến`
-  String get trips {
+  /// `Thinh`
+  String get name_boy_one {
     return Intl.message(
-      'chuyến',
-      name: 'trips',
+      'Thinh',
+      name: 'name_boy_one',
       desc: '',
       args: [],
     );
   }
 
-  /// `Danh mục`
-  String get categories {
+  /// `Bao Han`
+  String get name_girl {
     return Intl.message(
-      'Danh mục',
-      name: 'categories',
+      'Bao Han',
+      name: 'name_girl',
       desc: '',
       args: [],
     );
   }
 
-  /// `Xem tất cả`
-  String get view_all {
+  /// `Han`
+  String get name_girl_one {
     return Intl.message(
-      'Xem tất cả',
-      name: 'view_all',
+      'Han',
+      name: 'name_girl_one',
       desc: '',
       args: [],
     );
   }
 
-  /// `Hành trình của xe`
-  String get vehicle_journey {
+  /// `Le Gia Thinh`
+  String get name_boy_full {
     return Intl.message(
-      'Hành trình của xe',
-      name: 'vehicle_journey',
+      'Le Gia Thinh',
+      name: 'name_boy_full',
       desc: '',
       args: [],
     );
   }
 
-  /// `Danh sách nhân viên`
-  String get employee_list {
+  /// `Nguyen Thi Bao Han`
+  String get name_girl_full {
     return Intl.message(
-      'Danh sách nhân viên',
-      name: 'employee_list',
+      'Nguyen Thi Bao Han',
+      name: 'name_girl_full',
       desc: '',
       args: [],
     );
   }
 
-  /// `Danh sách đơn hàng`
-  String get order_list {
+  /// `Le Gia`
+  String get n_name_boy {
     return Intl.message(
-      'Danh sách đơn hàng',
-      name: 'order_list',
+      'Le Gia',
+      name: 'n_name_boy',
       desc: '',
       args: [],
     );
   }
 
-  /// `Danh sách khách hàng`
-  String get customer_list {
+  /// `Nguyen Thi`
+  String get n_girl_boy {
     return Intl.message(
-      'Danh sách khách hàng',
-      name: 'customer_list',
+      'Nguyen Thi',
+      name: 'n_girl_boy',
       desc: '',
       args: [],
     );
   }
 
-  /// `Loại dịch vụ cung cấp`
-  String get service_type_provided {
+  /// `😢 Don’t skip this part...`
+  String get dont_skip {
     return Intl.message(
-      'Loại dịch vụ cung cấp',
-      name: 'service_type_provided',
+      '😢 Don’t skip this part...',
+      name: 'dont_skip',
       desc: '',
       args: [],
     );
   }
 
-  /// `Than đá`
-  String get coal {
+  /// `Just a few words are enough, as long as we know who you are.`
+  String get note_skip {
     return Intl.message(
-      'Than đá',
-      name: 'coal',
+      'Just a few words are enough, as long as we know who you are.',
+      name: 'note_skip',
       desc: '',
       args: [],
     );
   }
 
-  /// `Y tế`
-  String get healthcare {
+  /// `We’ve received your message — thank you so much!`
+  String get note_thanks {
     return Intl.message(
-      'Y tế',
-      name: 'healthcare',
+      'We’ve received your message — thank you so much!',
+      name: 'note_thanks',
       desc: '',
       args: [],
     );
   }
 
-  /// `Dịch vụ 1`
-  String get service_1 {
+  /// `🎉 Thank you for your wishes`
+  String get thanks {
     return Intl.message(
-      'Dịch vụ 1',
-      name: 'service_1',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Dịch vụ 2`
-  String get service_2 {
-    return Intl.message(
-      'Dịch vụ 2',
-      name: 'service_2',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Dịch vụ 3`
-  String get service_3 {
-    return Intl.message(
-      'Dịch vụ 3',
-      name: 'service_3',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Ngành hàng`
-  String get industry {
-    return Intl.message(
-      'Ngành hàng',
-      name: 'industry',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Đang sử dụng dịch vụ`
-  String get using_service {
-    return Intl.message(
-      'Đang sử dụng dịch vụ',
-      name: 'using_service',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Khách mới`
-  String get new_customer {
-    return Intl.message(
-      'Khách mới',
-      name: 'new_customer',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Tên khách hàng`
-  String get customer_name_uppercase {
-    return Intl.message(
-      'Tên khách hàng',
-      name: 'customer_name_uppercase',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Tên khách hàng`
-  String get customer_name {
-    return Intl.message(
-      'Tên khách hàng',
-      name: 'customer_name',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Được tạo 14:00 14 Th 11, 2024`
-  String get created_at {
-    return Intl.message(
-      'Được tạo 14:00 14 Th 11, 2024',
-      name: 'created_at',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Danh sách đơn hàng`
-  String get product_list {
-    return Intl.message(
-      'Danh sách đơn hàng',
-      name: 'product_list',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Tạo khách hàng`
-  String get create_customer {
-    return Intl.message(
-      'Tạo khách hàng',
-      name: 'create_customer',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Loại khách hàng`
-  String get type_customer {
-    return Intl.message(
-      'Loại khách hàng',
-      name: 'type_customer',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Địa chỉ giao hàng`
-  String get shipping_address {
-    return Intl.message(
-      'Địa chỉ giao hàng',
-      name: 'shipping_address',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Tên liên hệ theo địa chỉ`
-  String get contact_name_by_address {
-    return Intl.message(
-      'Tên liên hệ theo địa chỉ',
-      name: 'contact_name_by_address',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Số điện thoại (nhận hàng)`
-  String get phone_number_receiver {
-    return Intl.message(
-      'Số điện thoại (nhận hàng)',
-      name: 'phone_number_receiver',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Trong nước`
-  String get domestic {
-    return Intl.message(
-      'Trong nước',
-      name: 'domestic',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Ngoài nước`
-  String get international {
-    return Intl.message(
-      'Ngoài nước',
-      name: 'international',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Tỉnh/Thành phố, Quận/Huyện, Phường/Xã`
-  String get province_city_district_ward {
-    return Intl.message(
-      'Tỉnh/Thành phố, Quận/Huyện, Phường/Xã',
-      name: 'province_city_district_ward',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Tên đường, toà nhà, số nhà`
-  String get street_building_house_number {
-    return Intl.message(
-      'Tên đường, toà nhà, số nhà',
-      name: 'street_building_house_number',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Đơn giá dịch vụ theo địa chỉ`
-  String get service_price_by_address {
-    return Intl.message(
-      'Đơn giá dịch vụ theo địa chỉ',
-      name: 'service_price_by_address',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Tấn`
-  String get ton {
-    return Intl.message(
-      'Tấn',
-      name: 'ton',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Mã số thuế`
-  String get tax_code {
-    return Intl.message(
-      'Mã số thuế',
-      name: 'tax_code',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Ghi chú`
-  String get note {
-    return Intl.message(
-      'Ghi chú',
-      name: 'note',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Thêm địa chỉ mới`
-  String get add_address {
-    return Intl.message(
-      'Thêm địa chỉ mới',
-      name: 'add_address',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Khu vực được chọn`
-  String get choose_area {
-    return Intl.message(
-      'Khu vực được chọn',
-      name: 'choose_area',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Thiết lập lại thiết`
-  String get rest_all {
-    return Intl.message(
-      'Thiết lập lại thiết',
-      name: 'rest_all',
+      '🎉 Thank you for your wishes',
+      name: 'thanks',
       desc: '',
       args: [],
     );

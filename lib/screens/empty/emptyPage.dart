@@ -14,7 +14,7 @@ class EmptyPage extends StatelessWidget {
           color: KSTheme.of(context).color.systemGreen,
           child: Center(
               child:    KSText(
-            S.current.content_does_not_exist,
+            "S.current.content_does_not_exist",
             style: KSTheme.of(context)
                 .style
                 .ts12w400

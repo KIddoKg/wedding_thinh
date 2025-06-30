@@ -31,7 +31,7 @@ class _FooterWidgetState extends State<_FooterWidget> {
                  Column(
                    crossAxisAlignment: CrossAxisAlignment.start,
                    children: [
-                     KSText("Gia Thịnh & Bảo Hân",
+                     KSText(S.current.name,
                          textAlign: TextAlign.center,
                          style: KSTheme.of(context)
                              .style
@@ -39,7 +39,7 @@ class _FooterWidgetState extends State<_FooterWidget> {
                              .copyWith(color: AppStyle.whiteBg)),
                      SizedBox(height: 8,),
                      KSText(
-                       'Nhà hàng Túi Ba Gang ( Sảnh La’ Muse )',
+                       '${S.current.restauration_name} ${S.current.restauration_name_break}',
                        style: KSTextStyle()
                            .style(
                          15,
@@ -50,7 +50,7 @@ class _FooterWidgetState extends State<_FooterWidget> {
                      ),
                      KSText(
                        textAlign: TextAlign.center,
-                       '19 Nguyễn Du, Phường 9, Thành phố Đà Lạt.',
+                       S.current.item_three_address,
                        style: KSTextStyle()
                            .style(
                          15,

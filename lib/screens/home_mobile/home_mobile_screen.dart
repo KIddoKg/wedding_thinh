@@ -3,10 +3,12 @@ import 'dart:ui';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bottom_sheet_scroll_physics/bottom_sheet_scroll_physics.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:web_smooth_scroll/web_smooth_scroll.dart';
+import 'package:wedding_hkn/generated/l10n.dart';
 import 'package:wedding_hkn/screens/home/viewModel/home_screen_vm.dart';
 import 'package:wedding_hkn/screens/home_mobile/viewModel/home_screen_vm.dart';
 import 'package:wedding_hkn/share/share_on_app.dart';
@@ -76,6 +78,7 @@ class _HomeScreenMobileContentState extends State<HomeScreenMobileContent> {
             physics: const BottomSheetScrollPhysics(),
             controller: vm.scrollController,
             slivers: [
+
               const SliverToBoxAdapter(child: _HeaderWidget()),
               const SliverToBoxAdapter(child: _ConfirmWidget()),
               const SliverToBoxAdapter(child: _FooterWidget()),

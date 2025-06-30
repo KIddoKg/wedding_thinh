@@ -80,7 +80,7 @@ class KSTextStyle {
   TextStyle get ts28w700 => style(28, FontWeight.w700);
   TextStyle get ts28w900 => style(28, FontWeight.w900);
   TextStyle get ts30w500 => style(30, FontWeight.w500);
-  TextStyle get ts35w500 => style(20.sp, FontWeight.w500);
+  TextStyle get ts35w500 => style(25.sp, FontWeight.w500);
   TextStyle get ts38w500 => style(38, FontWeight.w500);
   TextStyle get ts42w500 => style(42, FontWeight.w500);
   TextStyle get ts50w500 => style(50, FontWeight.w500);

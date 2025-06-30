@@ -2449,7 +2449,8 @@ void showCustomDialog({
                         title,
                         maxLines: 2,
                         textAlign: TextAlign.center,
-                        style: KSTheme.of(context).style.ts35w500,
+                        style: KSTheme.of(context).style.ts35w500.copyWith( fontFamily: GoogleFonts.cormorantInfant().fontFamily,
+                          fontFamilyFallback: ['NotoColorEmoji'],),
 
                       ),
                       if (detail != null)

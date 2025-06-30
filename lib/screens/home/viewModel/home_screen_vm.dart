@@ -5,10 +5,13 @@ import 'dart:html' as html;
 
 import 'package:flutter/services.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wedding_hkn/screens/home/model/user_comment_model.dart';
 
+import '../../../app.dart';
+import '../../../generated/l10n.dart';
 import '../../../services/services.dart';
 import '../../../share/app_imports.dart';
 import '../../../share/share_on_app.dart';
@@ -264,16 +267,16 @@ class HomeScreenVm extends ChangeNotifier {
       showCustomDialog(
           context: context,
           imageAsset: Assets.png.pngWaring.keyName,
-          title: '😢 Đừng bỏ qua nha...',
-          detail:
-              'Chỉ vài chữ thôi cũng được, miễn là mình biết bạn là ai. \nĐừng lặng lẽ rời đi nhé.');
+          title: S.current.dont_skip,
+          detail: S.current.note_skip,);
       return;
     }
     var res = await Services.instance.setContext(context).postInvitation(
-        nameController.text, int.parse(numberController.text ?? "1"), noteContoller.text, selectedOption == 'attend' ? true : false);
+        nameController.text, int.parse(numberController.text), noteContoller.text, selectedOption == 'attend' ? true : false);
     if (res == true) {
       nameController.clear();
       noteContoller.clear();
+      numberController.clear();
       selectedOption = null;
       selected =null;
       // cmtWish = res.castList<UserCommentModel>(fromJson: res.data['data']);
@@ -284,9 +287,8 @@ class HomeScreenVm extends ChangeNotifier {
       showCustomDialog(
           context: context,
           imageAsset: Assets.png.pngSuccess.keyName,
-          title: '🎉 Cảm ơn bạn đã gửi lời chúc',
-          detail:
-          'Chúng tôi đã nhận được lời chúc của bạn, cảm ơn bạn rất nhiều \nvì đã gửi đến những lời tốt đẹp như thế!.');
+          title: S.current.thanks,
+          detail: S.current.note_thanks);
     }
   }
 
@@ -303,10 +305,9 @@ class HomeScreenVm extends ChangeNotifier {
       showCustomDialog(
           context: context,
           imageAsset: Assets.png.pngWaring.keyName,
-          title: '😢 Đừng bỏ qua nha...',
+          title: S.current.dont_skip,
           detail:
-          'Chỉ vài chữ thôi cũng được, miễn là mình biết bạn là ai. \nĐừng lặng lẽ rời đi nhé.');
-      return;
+          S.current.note_skip,);  return;
     }
     var res = await Services.instance
         .setContext(context)
@@ -319,10 +320,8 @@ class HomeScreenVm extends ChangeNotifier {
       showCustomDialog(
           context: context,
           imageAsset: Assets.png.pngSuccess.keyName,
-          title: '🎉 Cảm ơn bạn đã gửi lời chúc',
-          detail:
-          'Chúng tôi đã nhận được lời chúc của bạn, cảm ơn bạn rất nhiều \nvì đã gửi đến những lời tốt đẹp như thế!.');
-    }
+          title: S.current.thanks,
+          detail: S.current.note_thanks);}
   }
 
   // late final AnimationController lottieController;
@@ -574,10 +573,9 @@ class HomeScreenVm extends ChangeNotifier {
       showCustomDialog(
           context: context,
           imageAsset: Assets.png.pngWaring.keyName,
-          title: '😢 Đừng bỏ qua nha...',
-          detail:
-          'Chỉ vài chữ thôi cũng được, miễn là mình biết bạn là ai. \nĐừng lặng lẽ rời đi nhé.');
-      return;
+          title: S.current.dont_skip,
+
+          detail: S.current.note_skip,);  return;
     }
     var res = await Services.instance
         .setContext(context)
@@ -647,6 +645,77 @@ class HomeScreenVm extends ChangeNotifier {
     setExpandedCMT(false);
     await getListCMTImage(context);
     await getLinkImg(context);
+  }
+
+
+
+
+  String currentLang = 'vi';
+
+
+  Locale _locale = const Locale('vi'); // mặc định là tiếng Việt
+
+  Locale get locale => _locale;
+
+  void setLocale(String langCode) {
+    final newLocale = Locale(langCode);
+    if (!S.delegate.isSupported(newLocale)) return;
+
+    _locale = newLocale;
+    S.load(_locale); // 🔥 GỌI HÀM load()
+    notifyListeners();
+  }
+
+  Future<void> changeLang(BuildContext context, String langCode) async {
+
+
+      showSplashFor(await Duration(seconds: 1));
+
+    currentLang = langCode;
+    final newLocale = Locale(langCode);
+    if (!S.delegate.isSupported(newLocale)) return;
+
+    _locale = newLocale;
+
+    // Save to SharedPreferences
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('locale', langCode);
+
+    // Load S + update MaterialApp
+    await S.load(_locale);
+    MyApp.setLocale(context, _locale);
+    // html.window.location.reload();
+
+    print('✅ Đã chọn ngôn ngữ: $langCode');
+    notifyListeners();
+  }
+
+  Future<void> loadSavedLocale(BuildContext context) async {
+    final prefs = await SharedPreferences.getInstance();
+    final savedCode = prefs.getString('locale') ?? 'vi';
+    await changeLang(context, savedCode);
+  }
+  void showSplashFor(Duration duration) {
+    final splash = html.document.getElementById('loading-splash');
+
+
+    if (splash != null) {
+      // Reset style trước khi hiển
+      splash.style
+        ..opacity = '1'
+        ..display = 'flex'
+        ..transition = 'opacity 0.5s ease-out'
+        ..transform = 'none' // Chặn scale hoặc hiệu ứng cũ
+        ..animation = 'none'; // Nếu có animation CSS, tắt nó đi
+
+      // Sau thời gian delay, ẩn đi
+      Future.delayed(duration, () {
+        splash.style.opacity = '0';
+        Future.delayed(Duration(milliseconds: 500), () {
+          splash.style.display = 'none';
+        });
+      });
+    }
   }
 
 }
