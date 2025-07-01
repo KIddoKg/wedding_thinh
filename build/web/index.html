@@ -163,21 +163,29 @@
 
 <script>
 
-   let startY = 0;
+<!--   let startY = 0;-->
 
-   document.addEventListener('touchstart', (e) => {
-     startY = e.touches[0].clientY;
-   }, { passive: true });
+<!--   document.addEventListener('touchstart', (e) => {-->
+<!--     startY = e.touches[0].clientY;-->
+<!--   }, { passive: true });-->
 
-   document.addEventListener('touchmove', (e) => {
-     const currentY = e.touches[0].clientY;
-     const deltaY = currentY - startY;
+<!--   document.addEventListener('touchmove', (e) => {-->
+<!--     const currentY = e.touches[0].clientY;-->
+<!--     const deltaY = currentY - startY;-->
 
-     // Nếu ở đầu trang và kéo mạnh xuống
-     if (window.scrollY === 0 && deltaY > 25) {
-       e.preventDefault(); // Ngăn WebView bị dismiss
-     }
-   }, { passive: false });
+<!--     // Nếu ở đầu trang và kéo mạnh xuống-->
+<!--     if (window.scrollY === 0 && deltaY > 25) {-->
+<!--       e.preventDefault(); // Ngăn WebView bị dismiss-->
+<!--     }-->
+<!--   }, { passive: false });-->
+
+    document.addEventListener('touchmove', function (e) {
+  if (window.scrollY <= 0 && e.touches[0].clientY - startY > 20) {
+    // Đoạn này chỉ chạy nếu kéo từ đầu trang + mạnh tay
+    e.preventDefault();
+  }
+}, { passive: false });
+
 </script>
 
 
