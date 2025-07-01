@@ -67,16 +67,16 @@
 <!--  }-->
 
   html, body {
-    height: 150%;
+    height: 120%;
     scroll-behavior: smooth;
     margin: 0;
     padding: 0;
     overscroll-behavior-y: contain; /* Chặn overscroll trên Y */
-    touch-action: pan-x;            /* Cho phép pan ngang, chặn vuốt dọc */
+<!--    touch-action: pan-x;            /* Cho phép pan ngang, chặn vuốt dọc */-->
   }
 
   #scroll-wrapper {
-    height: 150%;
+    height: 120%;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     touch-action: pan-y;
@@ -152,23 +152,39 @@
 </script>
 
 <script>
-    let startY = 0;
-    let currentY = 0;
+<!--    let startY = 0;-->
+<!--    let currentY = 0;-->
 
-    document.addEventListener("touchstart", function (e) {
-      startY = e.touches[0].clientY;
-    }, { passive: true });
+<!--    document.addEventListener("touchstart", function (e) {-->
+<!--      startY = e.touches[0].clientY;-->
+<!--    }, { passive: true });-->
 
-    document.addEventListener("touchmove", function (e) {
-      currentY = e.touches[0].clientY;
+<!--    document.addEventListener("touchmove", function (e) {-->
+<!--      currentY = e.touches[0].clientY;-->
 
-      const deltaY = currentY - startY;
+<!--      const deltaY = currentY - startY;-->
 
-      // Nếu người dùng vuốt nhanh xuống (deltaY lớn), chặn nó
-      if (deltaY > 30) {
-        e.preventDefault(); // Ngăn WebView hiểu là dismiss gesture
-      }
-    }, { passive: false });
+<!--      // Nếu người dùng vuốt nhanh xuống (deltaY lớn), chặn nó-->
+<!--      if (deltaY > 30) {-->
+<!--        e.preventDefault(); // Ngăn WebView hiểu là dismiss gesture-->
+<!--      }-->
+<!--    }, { passive: false });-->
+let startY = 0;
+
+  document.addEventListener("touchstart", function (e) {
+    startY = e.touches[0].clientY;
+  }, { passive: true });
+
+  document.addEventListener("touchmove", function (e) {
+    const currentY = e.touches[0].clientY;
+    const deltaY = currentY - startY;
+
+    // Chỉ chặn nếu vuốt mạnh xuống đầu trang
+    if (window.scrollY === 0 && deltaY > 30) {
+      e.preventDefault();
+    }
+  }, { passive: false });
+
 </script>
 
 
