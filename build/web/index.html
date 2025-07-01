@@ -83,6 +83,7 @@
     overflow: auto;
     -webkit-overflow-scrolling: touch;
     touch-action: pan-y;
+      display: block;
     }
 
   #scroll-wrapper {
@@ -163,28 +164,25 @@
 
 <script>
 
-<!--   let startY = 0;-->
 
-<!--   document.addEventListener('touchstart', (e) => {-->
-<!--     startY = e.touches[0].clientY;-->
-<!--   }, { passive: true });-->
+      let startY = 0;
 
-<!--   document.addEventListener('touchmove', (e) => {-->
-<!--     const currentY = e.touches[0].clientY;-->
-<!--     const deltaY = currentY - startY;-->
+      const wrapper = document.getElementById("scroll-wrapper");
 
-<!--     // Nếu ở đầu trang và kéo mạnh xuống-->
-<!--     if (window.scrollY === 0 && deltaY > 25) {-->
-<!--       e.preventDefault(); // Ngăn WebView bị dismiss-->
-<!--     }-->
-<!--   }, { passive: false });-->
+      wrapper.addEventListener('touchstart', function (e) {
+        startY = e.touches[0].clientY;
+      }, { passive: true });
 
-    document.addEventListener('touchmove', function (e) {
-  if (window.scrollY <= 0 && e.touches[0].clientY - startY > 20) {
-    // Đoạn này chỉ chạy nếu kéo từ đầu trang + mạnh tay
-    e.preventDefault();
-  }
-}, { passive: false });
+      wrapper.addEventListener('touchmove', function (e) {
+        const currentY = e.touches[0].clientY;
+        const deltaY = currentY - startY;
+
+        // ✅ Chỉ chặn khi scroll-wrapper ở đầu và người dùng kéo mạnh xuống
+        if (wrapper.scrollTop <= 0 && deltaY > 25) {
+          e.preventDefault(); // Ngăn dismiss WebView
+        }
+      }, { passive: false });
+
 
 </script>
 
