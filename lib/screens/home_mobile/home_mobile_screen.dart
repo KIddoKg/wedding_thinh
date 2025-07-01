@@ -74,7 +74,7 @@ class _HomeScreenMobileContentState extends State<HomeScreenMobileContent> {
             vm.setPlay();
           },
           child: CustomScrollView(
-        // physics:const ClampingScrollPhysics(),
+        physics:const ClampingScrollPhysics(),
             controller: vm.scrollController,
             slivers: [
 
