@@ -47,26 +47,44 @@
 
     <!-- Splash Styles -->
     <style>
+        <!--        html {-->
+        <!--     scroll-behavior: smooth;-->
+        <!--     -webkit-overflow-scrolling: touch;-->
+        <!--   }-->
+        <!--  html, body {-->
+        <!--    overscroll-behavior: none;-->
+        <!--    touch-action: none;-->
+        <!--    overflow: hidden;-->
+        <!--    height: 100%;-->
+        <!--    margin: 0;-->
+        <!--  }-->
 
-        html, body {
-          margin: 0;
-          padding: 0;
-          height: 100%;
-          overflow: hidden;
-          background-color: black;
-          overscroll-behavior: contain;
-          touch-action: none;
-        }
+        <!--  #flutter_view {-->
+        <!--    overflow: auto;-->
+        <!--    height: 100vh;-->
+        <!--    -webkit-overflow-scrolling: touch;-->
+        <!--    touch-action: auto;-->
+        <!--  }-->
 
-        #flutter-view {
-          height: 100%;
-          overflow-y: auto;
-          -webkit-overflow-scrolling: touch;
-          overscroll-behavior: contain;
-          touch-action: pan-y;
-          display: block;
-        }
+          html, body {
+            height: 100%;
+            scroll-behavior: smooth;
+            margin: 0;
+            padding: 0;
+            overscroll-behavior-y: contain; /* Chặn overscroll trên Y */
+        <!--    touch-action: pan-x;            /* Cho phép pan ngang, chặn vuốt dọc */-->
+            overscroll-behavior: contain; /* CHẶN hiệu ứng bounce cả hai chiều */
+            background-color: black; /* hoặc màu nền Flutter Web app bạn dùng */
+            touch-action: none;
+          }
 
+            #flutter-view {
+             height: 100%;
+            overflow: auto;
+            -webkit-overflow-scrolling: touch;
+            touch-action: pan-y;
+              display: block;
+            }
 
           #scroll-wrapper {
            position: fixed;
@@ -140,47 +158,36 @@
 </head>
 
 <body>
-<!--<script>-->
-<!--    document.addEventListener('touchmove', function (e) {-->
-<!--      // chỉ cho scroll trong scroll-wrapper-->
-<!--      if (!e.target.closest('#scroll-wrapper')) {-->
-<!--        e.preventDefault();-->
-<!--      }-->
-<!--    }, { passive: false });-->
-<!--</script>-->
+<script>
+    document.addEventListener('touchmove', function (e) {
+      // chỉ cho scroll trong scroll-wrapper
+      if (!e.target.closest('#scroll-wrapper')) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+</script>
 
 <script>
+
+
     let startY = 0;
- let isTouching = false;
 
- const flutterView = document.getElementById("flutter-view");
+    const wrapper = document.getElementById("scroll-wrapper");
 
- flutterView.addEventListener("touchstart", function (e) {
-   isTouching = true;
-   startY = e.touches[0].clientY;
- }, { passive: true });
+    wrapper.addEventListener('touchstart', function (e) {
+      startY = e.touches[0].clientY;
+    }, { passive: true });
 
- flutterView.addEventListener("touchmove", function (e) {
-   if (!isTouching) return;
+    wrapper.addEventListener('touchmove', function (e) {
+      const currentY = e.touches[0].clientY;
+      const deltaY = currentY - startY;
 
-   const currentY = e.touches[0].clientY;
-   const deltaY = currentY - startY;
+      // ✅ Chỉ chặn khi scroll-wrapper ở đầu và người dùng kéo mạnh xuống
+      if (wrapper.scrollTop <= 0 && deltaY > 25) {
+        e.preventDefault(); // Ngăn dismiss WebView
+      }
+    }, { passive: false });
 
-   // 🧠 Điều kiện chặn gesture xuống
-   const isAtTop = flutterView.scrollTop <= 0;
-   const isPullingDown = deltaY > 20;
-
-   // ❗ THÊM điều kiện nội dung phải dài hơn vùng hiển thị
-   const contentTooShort = flutterView.scrollHeight <= flutterView.clientHeight;
-
-   if ((isAtTop && isPullingDown) || contentTooShort) {
-     e.preventDefault(); // ✅ Ngăn dismiss WebView
-   }
- }, { passive: false });
-
- flutterView.addEventListener("touchend", function () {
-   isTouching = false;
- });
 
 </script>
 
@@ -189,9 +196,9 @@
 
 <script src="flutter_bootstrap.js" async></script>
 
-<!--<div id="scroll-wrapper" style="height: 100vh; overflow-y: auto; -webkit-overflow-scrolling: touch;">-->
-<!--    <flutter-view id="flutter_view"></flutter-view>-->
-<!--</div>-->
+<div id="scroll-wrapper" style="height: 100vh; overflow-y: auto; -webkit-overflow-scrolling: touch;">
+    <flutter-view id="flutter_view"></flutter-view>
+</div>
 <!-- Splash screen -->
 <div id="loading-splash">
     <img src="/assets/json_gif.gif" alt="Logo"/>
