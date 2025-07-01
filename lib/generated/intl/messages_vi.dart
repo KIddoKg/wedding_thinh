@@ -73,8 +73,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "item_two_name": MessageLookupByLibrary.simpleMessage("Lễ Rước Dâu"),
         "know_name":
             MessageLookupByLibrary.simpleMessage("Tôi biết bạn tên gì nè?"),
-        "line_four": MessageLookupByLibrary.simpleMessage(
+        "line_event_schedule": MessageLookupByLibrary.simpleMessage(
             "Cùng xem các mốc quan trọng trong lễ cưới – từ lễ đón dâu, lễ nhà thờ đến tiệc cưới tại nhà hàng."),
+        "line_four": MessageLookupByLibrary.simpleMessage(
+            "Mời bạn cùng ngắm nhìn những thước ảnh ghi lại hành trình yêu thương của tụi mình."),
         "line_one": MessageLookupByLibrary.simpleMessage(
             "Hân hoan thông báo lễ thành hôn của chúng mình! Rất mong bạn sẽ đến chung vui vào ngày trọng đại.\n Thời gian đang đếm ngược đến khoảnh khắc thiêng liêng nhất của tụi mình. Đừng bỏ lỡ nhé!"),
         "line_six": MessageLookupByLibrary.simpleMessage(
@@ -91,7 +93,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Bạn sẽ đi cùng bao nhiêu người?"),
         "menu_comfirm":
             MessageLookupByLibrary.simpleMessage("Bạn có đến không nè"),
-        "menu_info": MessageLookupByLibrary.simpleMessage("Thông tin liên lạc"),
+        "menu_info": MessageLookupByLibrary.simpleMessage(
+            "Những lời chúc chân thành nhất"),
         "menu_love":
             MessageLookupByLibrary.simpleMessage("Khoảnh khắc tình yêu"),
         "menu_ok": MessageLookupByLibrary.simpleMessage("(Gửi xác nhận)"),

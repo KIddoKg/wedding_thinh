@@ -22,19 +22,19 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "attend": MessageLookupByLibrary.simpleMessage("I will attend"),
+        "attend": MessageLookupByLibrary.simpleMessage("I’ll be there!"),
         "back": MessageLookupByLibrary.simpleMessage("Back"),
-        "boy_small": MessageLookupByLibrary.simpleMessage("Ut Nam"),
+        "boy_small": MessageLookupByLibrary.simpleMessage("Youngest son"),
         "comment": MessageLookupByLibrary.simpleMessage("Your comment"),
         "countdown": MessageLookupByLibrary.simpleMessage(
-            "Countdown to the wedding day"),
+            "Counting down to our wedding day."),
         "day": MessageLookupByLibrary.simpleMessage("Day"),
         "dont_skip":
             MessageLookupByLibrary.simpleMessage("😢 Don’t skip this part..."),
         "enter_wish": MessageLookupByLibrary.simpleMessage(
             "Write a wish or a memory you have with us!"),
         "event_schedule":
-            MessageLookupByLibrary.simpleMessage("Event schedule"),
+            MessageLookupByLibrary.simpleMessage(" Moments of Love"),
         "ex_comment":
             MessageLookupByLibrary.simpleMessage("Enter your message"),
         "ex_enter_wish":
@@ -43,54 +43,55 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("What’s your name?"),
         "ex_who_sending_love": MessageLookupByLibrary.simpleMessage(
             "E.g.: Aunt Út, Uncle 6, Little Bảo,..."),
-        "girl_small": MessageLookupByLibrary.simpleMessage("Ut Nu"),
+        "girl_small": MessageLookupByLibrary.simpleMessage("Youngest daughter"),
         "give_mess": MessageLookupByLibrary.simpleMessage("Leave a message"),
         "give_say": MessageLookupByLibrary.simpleMessage(
             "Notes about food, allergies, seating, arrival time... anything that helps us make the party perfect for you!"),
         "hour": MessageLookupByLibrary.simpleMessage("Hour"),
-        "hundred_years_of_love":
-            MessageLookupByLibrary.simpleMessage("A hundred years of love"),
+        "hundred_years_of_love": MessageLookupByLibrary.simpleMessage(
+            "Tying the knot for a lifetime of love"),
         "item_one_address": MessageLookupByLibrary.simpleMessage(
             "15 Tran Phu St., Ward 3, Da Lat"),
         "item_one_date":
             MessageLookupByLibrary.simpleMessage("5:00 PM, July 11, 2025"),
         "item_one_detail": MessageLookupByLibrary.simpleMessage(
-            "A sacred ceremony witnessed by God."),
+            "A sacred ceremony blessed under the witness of God."),
         "item_one_name": MessageLookupByLibrary.simpleMessage("Holy Matrimony"),
         "item_three_address": MessageLookupByLibrary.simpleMessage(
             "19 Nguyen Du, Ward 9, Da Lat City"),
         "item_three_date":
             MessageLookupByLibrary.simpleMessage("11:30 AM, July 14, 2025"),
         "item_three_detail": MessageLookupByLibrary.simpleMessage(
-            "A cozy party with friends and family."),
+            "A warm and joyful celebration with our dear friends and family."),
         "item_three_name":
-            MessageLookupByLibrary.simpleMessage("Wedding Reception"),
+            MessageLookupByLibrary.simpleMessage("A warm celebration"),
         "item_two_address": MessageLookupByLibrary.simpleMessage(
             "10 Ngo Thi Sy - Ward 4, Da Lat City"),
         "item_two_date":
             MessageLookupByLibrary.simpleMessage("8:00 AM, July 14, 2025"),
         "item_two_detail": MessageLookupByLibrary.simpleMessage(
-            "Meeting the families & officially bringing the bride home."),
+            "A heartfelt gathering of two families, and the official moment we bring the bride home."),
         "item_two_name":
             MessageLookupByLibrary.simpleMessage("Bridal Procession"),
-        "know_name":
-            MessageLookupByLibrary.simpleMessage("May we know your name?"),
+        "know_name": MessageLookupByLibrary.simpleMessage("What\'s your name?"),
+        "line_event_schedule": MessageLookupByLibrary.simpleMessage(
+            "Take a look at the special milestones of our wedding — from the traditional procession and church ceremony to the celebration banquet."),
         "line_four": MessageLookupByLibrary.simpleMessage(
-            "Let’s look back on the photos capturing our love journey."),
+            "Come take a look at the captured moments from our journey of love."),
         "line_one": MessageLookupByLibrary.simpleMessage(
-            "We are delighted to announce our wedding! We sincerely hope you can join us on our big day. \n Time is ticking down to our most sacred moment. Don’t miss it!"),
+            "With joy in our hearts, we’re happy to announce our wedding! We sincerely hope you’ll be there to celebrate this special day with us.\n The countdown has begun to one of the most meaningful moments in our lives. Don’t miss it!!"),
         "line_six": MessageLookupByLibrary.simpleMessage(
             "Our happiness will be more complete with you by our side."),
         "line_six_edd": MessageLookupByLibrary.simpleMessage(
             "Please let us know if you will be able to join us!"),
         "line_three": MessageLookupByLibrary.simpleMessage(
-            "Every wish is a precious gift that we will always cherish."),
+            "Every wish is a precious gift to our hearts — something we’ll always hold dear."),
         "line_three_add": MessageLookupByLibrary.simpleMessage(
-            "Thank you for sending us your sincere and sweetest wishes on this special day."),
+            "Thank you for sending us your sweetest and most heartfelt messages on this special day."),
         "line_two": MessageLookupByLibrary.simpleMessage(
-            "Two people, one journey. We have found each other and are now ready to begin a new chapter – marriage."),
+            "Two hearts, one journey. We’ve found each other, and now we’re ready to begin a new chapter — marriage."),
         "many_people": MessageLookupByLibrary.simpleMessage(
-            "How many people will come with you?"),
+            "How many guests will be joining you?"),
         "menu_comfirm": MessageLookupByLibrary.simpleMessage("Will you come?"),
         "menu_info":
             MessageLookupByLibrary.simpleMessage("Contact Information"),
@@ -99,7 +100,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "menu_schedule": MessageLookupByLibrary.simpleMessage("Event Schedule"),
         "min": MessageLookupByLibrary.simpleMessage("Minute"),
         "moment_of_love":
-            MessageLookupByLibrary.simpleMessage("Moments of love"),
+            MessageLookupByLibrary.simpleMessage("Moments of Love"),
         "my_love_story":
             MessageLookupByLibrary.simpleMessage("Our love story…"),
         "n_girl_boy": MessageLookupByLibrary.simpleMessage("Nguyen Thi"),
@@ -115,7 +116,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "name_show": MessageLookupByLibrary.simpleMessage("Display name"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
         "no_attend": MessageLookupByLibrary.simpleMessage(
-            "Sorry, I won’t be able to attend"),
+            "So sorry,  I won’t be able to attend."),
         "note_skip": MessageLookupByLibrary.simpleMessage(
             "Just a few words are enough, as long as we know who you are."),
         "note_thanks": MessageLookupByLibrary.simpleMessage(
@@ -125,24 +126,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "restauration_name_break":
             MessageLookupByLibrary.simpleMessage("(La’ Muse Hall)"),
         "see_instructions":
-            MessageLookupByLibrary.simpleMessage("See instructions"),
+            MessageLookupByLibrary.simpleMessage("Click to view"),
         "send_now": MessageLookupByLibrary.simpleMessage("Send now"),
-        "sending_love":
-            MessageLookupByLibrary.simpleMessage("Who\'s sending love here?"),
-        "step_arrangement":
-            MessageLookupByLibrary.simpleMessage("is about to turn a new page"),
+        "sending_love": MessageLookupByLibrary.simpleMessage(
+            "Who’s sending us all this love?"),
+        "step_arrangement": MessageLookupByLibrary.simpleMessage(
+            "is about to begin a new chapter."),
         "thanks": MessageLookupByLibrary.simpleMessage(
             "🎉 Thank you for your wishes"),
         "to_say": MessageLookupByLibrary.simpleMessage(
-            "Is there anything we should know?"),
+            "Anything you\'d like to share with us?"),
         "watch_now": MessageLookupByLibrary.simpleMessage("Watch now"),
-        "will_you_attend": MessageLookupByLibrary.simpleMessage(
-            "Will you attend our wedding?"),
+        "will_you_attend":
+            MessageLookupByLibrary.simpleMessage("Let us know you’re coming"),
         "will_you_come":
-            MessageLookupByLibrary.simpleMessage("Will you\n join us?"),
+            MessageLookupByLibrary.simpleMessage("Will you\n be join us?"),
         "will_you_come_st":
-            MessageLookupByLibrary.simpleMessage("Will you join us?"),
-        "wishes_loves":
-            MessageLookupByLibrary.simpleMessage("Wishes from our beloved ones")
+            MessageLookupByLibrary.simpleMessage("Confirm your attendance?"),
+        "wishes_loves": MessageLookupByLibrary.simpleMessage(
+            "Words of love from our dearest ones")
       };
 }

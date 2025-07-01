@@ -60,10 +60,10 @@ class S {
     );
   }
 
-  /// `is about to turn a new page`
+  /// `is about to begin a new chapter.`
   String get step_arrangement {
     return Intl.message(
-      'is about to turn a new page',
+      'is about to begin a new chapter.',
       name: 'step_arrangement',
       desc: '',
       args: [],
@@ -80,20 +80,20 @@ class S {
     );
   }
 
-  /// `Countdown to the wedding day`
+  /// `Counting down to our wedding day.`
   String get countdown {
     return Intl.message(
-      'Countdown to the wedding day',
+      'Counting down to our wedding day.',
       name: 'countdown',
       desc: '',
       args: [],
     );
   }
 
-  /// `We are delighted to announce our wedding! We sincerely hope you can join us on our big day. \n Time is ticking down to our most sacred moment. Don’t miss it!`
+  /// `With joy in our hearts, we’re happy to announce our wedding! We sincerely hope you’ll be there to celebrate this special day with us.\n The countdown has begun to one of the most meaningful moments in our lives. Don’t miss it!!`
   String get line_one {
     return Intl.message(
-      'We are delighted to announce our wedding! We sincerely hope you can join us on our big day. \n Time is ticking down to our most sacred moment. Don’t miss it!',
+      'With joy in our hearts, we’re happy to announce our wedding! We sincerely hope you’ll be there to celebrate this special day with us.\n The countdown has begun to one of the most meaningful moments in our lives. Don’t miss it!!',
       name: 'line_one',
       desc: '',
       args: [],
@@ -130,80 +130,80 @@ class S {
     );
   }
 
-  /// `A hundred years of love`
+  /// `Tying the knot for a lifetime of love`
   String get hundred_years_of_love {
     return Intl.message(
-      'A hundred years of love',
+      'Tying the knot for a lifetime of love',
       name: 'hundred_years_of_love',
       desc: '',
       args: [],
     );
   }
 
-  /// `Two people, one journey. We have found each other and are now ready to begin a new chapter – marriage.`
+  /// `Two hearts, one journey. We’ve found each other, and now we’re ready to begin a new chapter — marriage.`
   String get line_two {
     return Intl.message(
-      'Two people, one journey. We have found each other and are now ready to begin a new chapter – marriage.',
+      'Two hearts, one journey. We’ve found each other, and now we’re ready to begin a new chapter — marriage.',
       name: 'line_two',
       desc: '',
       args: [],
     );
   }
 
-  /// `Ut Nam`
+  /// `Youngest son`
   String get boy_small {
     return Intl.message(
-      'Ut Nam',
+      'Youngest son',
       name: 'boy_small',
       desc: '',
       args: [],
     );
   }
 
-  /// `Ut Nu`
+  /// `Youngest daughter`
   String get girl_small {
     return Intl.message(
-      'Ut Nu',
+      'Youngest daughter',
       name: 'girl_small',
       desc: '',
       args: [],
     );
   }
 
-  /// `Wishes from our beloved ones`
+  /// `Words of love from our dearest ones`
   String get wishes_loves {
     return Intl.message(
-      'Wishes from our beloved ones',
+      'Words of love from our dearest ones',
       name: 'wishes_loves',
       desc: '',
       args: [],
     );
   }
 
-  /// `Every wish is a precious gift that we will always cherish.`
+  /// `Every wish is a precious gift to our hearts — something we’ll always hold dear.`
   String get line_three {
     return Intl.message(
-      'Every wish is a precious gift that we will always cherish.',
+      'Every wish is a precious gift to our hearts — something we’ll always hold dear.',
       name: 'line_three',
       desc: '',
       args: [],
     );
   }
 
-  /// `Thank you for sending us your sincere and sweetest wishes on this special day.`
+  /// `Thank you for sending us your sweetest and most heartfelt messages on this special day.`
   String get line_three_add {
     return Intl.message(
-      'Thank you for sending us your sincere and sweetest wishes on this special day.',
+      'Thank you for sending us your sweetest and most heartfelt messages on this special day.',
       name: 'line_three_add',
       desc: '',
       args: [],
     );
   }
 
-  /// `Who's sending love here?`
+  /// `Who’s sending us all this love?`
   String get sending_love {
     return Intl.message(
-      'Who\'s sending love here?',
+      'Who’s sending us all this love?',
       name: 'sending_love',
       desc: '',
       args: [],
@@ -250,31 +250,41 @@ class S {
     );
   }
 
-  /// `Moments of love`
+  /// `Moments of Love`
   String get moment_of_love {
     return Intl.message(
-      'Moments of love',
+      'Moments of Love',
       name: 'moment_of_love',
       desc: '',
       args: [],
     );
   }
 
-  /// `Let’s look back on the photos capturing our love journey.`
+  /// `Come take a look at the captured moments from our journey of love.`
   String get line_four {
     return Intl.message(
-      'Let’s look back on the photos capturing our love journey.',
+      'Come take a look at the captured moments from our journey of love.',
       name: 'line_four',
       desc: '',
       args: [],
     );
   }
 
-  /// `Event schedule`
+  /// ` Moments of Love`
   String get event_schedule {
     return Intl.message(
-      'Event schedule',
+      ' Moments of Love',
       name: 'event_schedule',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Take a look at the special milestones of our wedding — from the traditional procession and church ceremony to the celebration banquet.`
+  String get line_event_schedule {
+    return Intl.message(
+      'Take a look at the special milestones of our wedding — from the traditional procession and church ceremony to the celebration banquet.',
+      name: 'line_event_schedule',
       desc: '',
       args: [],
     );
@@ -310,20 +320,20 @@ class S {
     );
   }
 
-  /// `A sacred ceremony witnessed by God.`
+  /// `A sacred ceremony blessed under the witness of God.`
   String get item_one_detail {
     return Intl.message(
-      'A sacred ceremony witnessed by God.',
+      'A sacred ceremony blessed under the witness of God.',
       name: 'item_one_detail',
       desc: '',
       args: [],
     );
   }
 
-  /// `See instructions`
+  /// `Click to view`
   String get see_instructions {
     return Intl.message(
-      'See instructions',
+      'Click to view',
       name: 'see_instructions',
       desc: '',
       args: [],
@@ -360,20 +370,20 @@ class S {
     );
   }
 
-  /// `Meeting the families & officially bringing the bride home.`
+  /// `A heartfelt gathering of two families, and the official moment we bring the bride home.`
   String get item_two_detail {
     return Intl.message(
-      'Meeting the families & officially bringing the bride home.',
+      'A heartfelt gathering of two families, and the official moment we bring the bride home.',
       name: 'item_two_detail',
       desc: '',
       args: [],
     );
   }
 
-  /// `Wedding Reception`
+  /// `A warm celebration`
   String get item_three_name {
     return Intl.message(
-      'Wedding Reception',
+      'A warm celebration',
       name: 'item_three_name',
       desc: '',
       args: [],
@@ -400,30 +410,30 @@ class S {
     );
   }
 
-  /// `A cozy party with friends and family.`
+  /// `A warm and joyful celebration with our dear friends and family.`
   String get item_three_detail {
     return Intl.message(
-      'A cozy party with friends and family.',
+      'A warm and joyful celebration with our dear friends and family.',
       name: 'item_three_detail',
       desc: '',
       args: [],
     );
   }
 
-  /// `Will you\n join us?`
+  /// `Will you\n be join us?`
   String get will_you_come {
     return Intl.message(
-      'Will you\n join us?',
+      'Will you\n be join us?',
       name: 'will_you_come',
       desc: '',
       args: [],
     );
   }
 
-  /// `Will you attend our wedding?`
+  /// `Let us know you’re coming`
   String get will_you_attend {
     return Intl.message(
-      'Will you attend our wedding?',
+      'Let us know you’re coming',
       name: 'will_you_attend',
       desc: '',
       args: [],
@@ -450,60 +460,60 @@ class S {
     );
   }
 
-  /// `May we know your name?`
+  /// `What's your name?`
   String get know_name {
     return Intl.message(
-      'May we know your name?',
+      'What\'s your name?',
       name: 'know_name',
       desc: '',
       args: [],
     );
   }
 
-  /// `Will you join us?`
+  /// `Confirm your attendance?`
   String get will_you_come_st {
     return Intl.message(
-      'Will you join us?',
+      'Confirm your attendance?',
       name: 'will_you_come_st',
       desc: '',
       args: [],
     );
   }
 
-  /// `I will attend`
+  /// `I’ll be there!`
   String get attend {
     return Intl.message(
-      'I will attend',
+      'I’ll be there!',
       name: 'attend',
       desc: '',
       args: [],
     );
   }
 
-  /// `Sorry, I won’t be able to attend`
+  /// `So sorry,  I won’t be able to attend.`
   String get no_attend {
     return Intl.message(
-      'Sorry, I won’t be able to attend',
+      'So sorry,  I won’t be able to attend.',
       name: 'no_attend',
       desc: '',
       args: [],
     );
   }
 
-  /// `How many people will come with you?`
+  /// `How many guests will be joining you?`
   String get many_people {
     return Intl.message(
-      'How many people will come with you?',
+      'How many guests will be joining you?',
       name: 'many_people',
       desc: '',
       args: [],
     );
   }
 
-  /// `Is there anything we should know?`
+  /// `Anything you'd like to share with us?`
   String get to_say {
     return Intl.message(
-      'Is there anything we should know?',
+      'Anything you\'d like to share with us?',
       name: 'to_say',
       desc: '',
       args: [],
