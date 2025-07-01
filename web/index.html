@@ -160,23 +160,24 @@
 </script>
 
 <script>
-    let startY = 0;
-    let currentY = 0;
+    <script>
+   let startY = 0;
 
-    document.addEventListener("touchstart", function (e) {
-      startY = e.touches[0].clientY;
-    }, { passive: true });
+   document.addEventListener('touchstart', (e) => {
+     startY = e.touches[0].clientY;
+   }, { passive: true });
 
-    document.addEventListener("touchmove", function (e) {
-      currentY = e.touches[0].clientY;
+   document.addEventListener('touchmove', (e) => {
+     const currentY = e.touches[0].clientY;
+     const deltaY = currentY - startY;
 
-      const deltaY = currentY - startY;
+     // Nếu ở đầu trang và kéo mạnh xuống
+     if (window.scrollY === 0 && deltaY > 25) {
+       e.preventDefault(); // Ngăn WebView bị dismiss
+     }
+   }, { passive: false });
+</script>
 
-      // Nếu người dùng vuốt nhanh xuống (deltaY lớn), chặn nó
-      if (deltaY > 30) {
-        e.preventDefault(); // Ngăn WebView hiểu là dismiss gesture
-      }
-    }, { passive: false });
 </script>
 
 
