@@ -109,7 +109,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "name": MessageLookupByLibrary.simpleMessage("Gia Thịnh & Bảo Hân"),
         "name_boy": MessageLookupByLibrary.simpleMessage("Gia Thịnh"),
         "name_boy_full": MessageLookupByLibrary.simpleMessage("Lê Gia Thịnh"),
-        "name_boy_one": MessageLookupByLibrary.simpleMessage("Gia Thịnh"),
+        "name_boy_one": MessageLookupByLibrary.simpleMessage("Thịnh"),
         "name_girl": MessageLookupByLibrary.simpleMessage("Bảo Hân"),
         "name_girl_full":
             MessageLookupByLibrary.simpleMessage("Nguyễn Thị Bảo Hân"),
