@@ -47,111 +47,93 @@
 
     <!-- Splash Styles -->
     <style>
-<!--        html {-->
-<!--     scroll-behavior: smooth;-->
-<!--     -webkit-overflow-scrolling: touch;-->
-<!--   }-->
-<!--  html, body {-->
-<!--    overscroll-behavior: none;-->
-<!--    touch-action: none;-->
-<!--    overflow: hidden;-->
-<!--    height: 100%;-->
-<!--    margin: 0;-->
-<!--  }-->
 
-<!--  #flutter_view {-->
-<!--    overflow: auto;-->
-<!--    height: 100vh;-->
-<!--    -webkit-overflow-scrolling: touch;-->
-<!--    touch-action: auto;-->
-<!--  }-->
+        html, body {
+          margin: 0;
+          padding: 0;
+          height: 100%;
+          overflow: hidden;
+          background-color: black;
+          overscroll-behavior: contain;
+          touch-action: none;
+        }
 
-  html, body {
-    height: 100%;
-    scroll-behavior: smooth;
-    margin: 0;
-    padding: 0;
-    overscroll-behavior-y: contain; /* Chặn overscroll trên Y */
-<!--    touch-action: pan-x;            /* Cho phép pan ngang, chặn vuốt dọc */-->
-    overscroll-behavior: contain; /* CHẶN hiệu ứng bounce cả hai chiều */
-    background-color: black; /* hoặc màu nền Flutter Web app bạn dùng */
-    touch-action: none;
-  }
-
-    #flutter-view {
-     height: 100%;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-    touch-action: pan-y;
-      display: block;
-    }
-
-  #scroll-wrapper {
-   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior: contain;
-  touch-action: pan-y;
-  }
+        #flutter-view {
+          height: 100%;
+          overflow-y: auto;
+          -webkit-overflow-scrolling: touch;
+          overscroll-behavior: contain;
+          touch-action: pan-y;
+          display: block;
+        }
 
 
-
-        #loading-splash {
-          position: fixed;
+          #scroll-wrapper {
+           position: fixed;
           top: 0;
           left: 0;
-          width: 100vw;
-          height: 100vh;
-          background-color: white;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          z-index: 9999;
-          opacity: 1;
-          transition: opacity 0.5s ease-out;
+          right: 0;
+          bottom: 0;
+          overflow-y: auto;
+          -webkit-overflow-scrolling: touch;
+          overscroll-behavior: contain;
+          touch-action: pan-y;
+          }
 
-          /* Dành cho mobile GPU rendering */
+
+
+                #loading-splash {
+                  position: fixed;
+                  top: 0;
+                  left: 0;
+                  width: 100vw;
+                  height: 100vh;
+                  background-color: white;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  justify-content: center;
+                  z-index: 9999;
+                  opacity: 1;
+                  transition: opacity 0.5s ease-out;
+
+                  /* Dành cho mobile GPU rendering */
+                  transform: none;
+                  animation: none;
+                  will-change: opacity;
+                  backface-visibility: hidden;
+                  -webkit-transform: translateZ(0); /* Tối ưu cho Safari mobile */
+                }
+         #loading-splash img,
+         #loading-text,
+         #loading-date {
           transform: none;
           animation: none;
-          will-change: opacity;
           backface-visibility: hidden;
-          -webkit-transform: translateZ(0); /* Tối ưu cho Safari mobile */
-        }
- #loading-splash img,
- #loading-text,
- #loading-date {
-  transform: none;
-  animation: none;
-  backface-visibility: hidden;
-  -webkit-transform: translateZ(0); /* Tắt phóng to tự động Safari */
- }
+          -webkit-transform: translateZ(0); /* Tắt phóng to tự động Safari */
+         }
 
 
-                 #loading-splash img {
-                   width: 80px;
-                   height: 80px;
-                   margin-bottom: 16px;
-                 }
+                         #loading-splash img {
+                           width: 80px;
+                           height: 80px;
+                           margin-bottom: 16px;
+                         }
 
-              #loading-text {
-          font-family: 'Imperial Script', cursive;
-          font-size: 40px;
-          color: #1E2B20;
-          margin-bottom: 4px;
-          text-align: center; /* 👈 Cái này là để chữ canh giữa theo chiều ngang */
-        }
+                      #loading-text {
+                  font-family: 'Imperial Script', cursive;
+                  font-size: 40px;
+                  color: #1E2B20;
+                  margin-bottom: 4px;
+                  text-align: center; /* 👈 Cái này là để chữ canh giữa theo chiều ngang */
+                }
 
 
-                 #loading-date {
-                   font-family: 'Cormorant Infant', serif;
-                   font-size: 25px;
-                   color: #333;
-                 }
+                         #loading-date {
+                           font-family: 'Cormorant Infant', serif;
+                           font-size: 25px;
+                           color: #333;
+                         }
 
 
     </style>
@@ -169,20 +151,37 @@
 
 <script>
     let startY = 0;
-    const wrapper = document.getElementById("flutter-view");
+ let isTouching = false;
 
-    wrapper.addEventListener('touchstart', function (e) {
-      startY = e.touches[0].clientY;
-    }, { passive: true });
+ const flutterView = document.getElementById("flutter-view");
 
-    wrapper.addEventListener('touchmove', function (e) {
-      const currentY = e.touches[0].clientY;
-      const deltaY = currentY - startY;
+ flutterView.addEventListener("touchstart", function (e) {
+   isTouching = true;
+   startY = e.touches[0].clientY;
+ }, { passive: true });
 
-      if (wrapper.scrollTop <= 0 && deltaY > 25) {
-        e.preventDefault(); // ✅ Chặn gesture hệ thống
-      }
-    }, { passive: false });
+ flutterView.addEventListener("touchmove", function (e) {
+   if (!isTouching) return;
+
+   const currentY = e.touches[0].clientY;
+   const deltaY = currentY - startY;
+
+   // 🧠 Điều kiện chặn gesture xuống
+   const isAtTop = flutterView.scrollTop <= 0;
+   const isPullingDown = deltaY > 20;
+
+   // ❗ THÊM điều kiện nội dung phải dài hơn vùng hiển thị
+   const contentTooShort = flutterView.scrollHeight <= flutterView.clientHeight;
+
+   if ((isAtTop && isPullingDown) || contentTooShort) {
+     e.preventDefault(); // ✅ Ngăn dismiss WebView
+   }
+ }, { passive: false });
+
+ flutterView.addEventListener("touchend", function () {
+   isTouching = false;
+ });
+
 </script>
 
 
