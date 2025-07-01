@@ -67,21 +67,21 @@
 <!--  }-->
 
   html, body {
-    height: 100%;
+    height: 150%;
     scroll-behavior: smooth;
     margin: 0;
     padding: 0;
-    overflow: hidden;
-    touch-action: none;
     overscroll-behavior-y: contain; /* Chặn overscroll trên Y */
 <!--    touch-action: pan-x;            /* Cho phép pan ngang, chặn vuốt dọc */-->
+    overscroll-behavior: contain; /* CHẶN hiệu ứng bounce cả hai chiều */
+    background-color: black; /* hoặc màu nền Flutter Web app bạn dùng */
+    touch-action: none;
   }
 
   #scroll-wrapper {
-    height: 100%;
-    overflow-y: scroll;
+    height: 150%;
+    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-     overscroll-behavior: contain;
     touch-action: pan-y;
   }
 
@@ -155,52 +155,23 @@
 </script>
 
 <script>
-<!--    let startY = 0;-->
-<!--    let currentY = 0;-->
+    let startY = 0;
+    let currentY = 0;
 
-<!--    document.addEventListener("touchstart", function (e) {-->
-<!--      startY = e.touches[0].clientY;-->
-<!--    }, { passive: true });-->
+    document.addEventListener("touchstart", function (e) {
+      startY = e.touches[0].clientY;
+    }, { passive: true });
 
-<!--    document.addEventListener("touchmove", function (e) {-->
-<!--      currentY = e.touches[0].clientY;-->
+    document.addEventListener("touchmove", function (e) {
+      currentY = e.touches[0].clientY;
 
-<!--      const deltaY = currentY - startY;-->
+      const deltaY = currentY - startY;
 
-<!--      // Nếu người dùng vuốt nhanh xuống (deltaY lớn), chặn nó-->
-<!--      if (deltaY > 30) {-->
-<!--        e.preventDefault(); // Ngăn WebView hiểu là dismiss gesture-->
-<!--      }-->
-<!--    }, { passive: false });-->
-
-  let startY = 0;
-  let deltaY = 0;
-
-  document.addEventListener('touchstart', (e) => {
-    startY = e.touches[0].clientY;
-  }, { passive: true });
-
-  document.addEventListener('touchmove', (e) => {
-    const currentY = e.touches[0].clientY;
-    deltaY = currentY - startY;
-
-    const scrollTop = document.getElementById("scroll-wrapper").scrollTop;
-
-    // Nếu ở đầu trang và kéo xuống quá mạnh, chặn
-    if (scrollTop <= 0 && deltaY > 25) {
-      e.preventDefault(); // Chặn dismiss WebView
-    }
-  }, { passive: false });
-
-
-const flutterDiv = document.getElementById("flutter-view") || document.body;
-
-// Ngăn overscroll đầu trang
-flutterDiv.addEventListener("touchmove", function (e) {
-  if (window.scrollY === 0 && e.touches[0].clientY - startY > 25) {
-    e.preventDefault();
-  }
-}, { passive: false });
+      // Nếu người dùng vuốt nhanh xuống (deltaY lớn), chặn nó
+      if (deltaY > 30) {
+        e.preventDefault(); // Ngăn WebView hiểu là dismiss gesture
+      }
+    }, { passive: false });
 </script>
 
 
