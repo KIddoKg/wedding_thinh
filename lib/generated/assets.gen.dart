@@ -51,8 +51,11 @@ class $AssetsMp3Gen {
   /// File path: assets/mp3/golden_hour.mp3
   String get goldenHour => 'assets/mp3/golden_hour.mp3';
 
+  /// File path: assets/mp3/love_cover.mp3
+  String get loveCover => 'assets/mp3/love_cover.mp3';
+
   /// List of all assets
-  List<String> get values => [goldenHour];
+  List<String> get values => [goldenHour, loveCover];
 }
 
 class $AssetsPngGen {

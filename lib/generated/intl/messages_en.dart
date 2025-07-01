@@ -51,7 +51,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hundred_years_of_love": MessageLookupByLibrary.simpleMessage(
             "Tying the knot for a lifetime of love"),
         "item_one_address": MessageLookupByLibrary.simpleMessage(
-            "15 Tran Phu St., Ward 3, Da Lat"),
+            "40 Tran Phu St., Ward 3, Da Lat"),
         "item_one_date":
             MessageLookupByLibrary.simpleMessage("5:00 PM, July 11, 2025"),
         "item_one_detail": MessageLookupByLibrary.simpleMessage(

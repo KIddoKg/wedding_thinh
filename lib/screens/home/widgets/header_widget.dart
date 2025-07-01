@@ -445,53 +445,43 @@ class _HeaderWidgetState extends State<_HeaderWidget>
                 bottom: 0,
                 right: 0,
                 left: 0,
-                child:  MouseRegion(
-                  hitTestBehavior: HitTestBehavior.translucent,
-                  onEnter: (_) => vm.setHover(true),
-                  onExit: (_) => vm.setHover(false),
-                  child:    AnimatedScale(
-                    duration: const Duration(milliseconds: 200),
-                    scale:  vm.isHover ? 1.1 : 1.0,
-                    child:  Column(
-                      children: [
-                        KSInkWellUnFocus(
-                          onTap: (){
-                            vm.scrollToTarget(vm.timeKey);
-                          },
-                          child: Container(
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                  color: Colors.white,
-                                  //                   <--- border color
-                                  width: 1.0,
-                                ),
-                              ),
-                              child: Padding(
-                                padding: AppStyle.padding_all_8(),
-                                child: SvgPicture.asset(
-                                  Assets.svg.svgArrowDown.keyName,
-                                  width: 35,
-                                ),
-                              )),
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Text(
-                          S.current.watch_now,
-                          style: KSTextStyle()
-                              .style(
-                            20,
-                            FontWeight.w400,
-                            fontBuilder: GoogleFonts.cormorantInfant,
-                          )
-                              .copyWith(color: AppStyle.whiteBg),
-                        ),
-                      ],
+                child:  Column(
+                  children: [
+                    KSInkWellUnFocus(
+                      onTap: (){
+                        vm.scrollToTarget(vm.timeKey);
+                      },
+                      child: Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: Colors.white,
+                              //                   <--- border color
+                              width: 1.0,
+                            ),
+                          ),
+                          child: Padding(
+                            padding: AppStyle.padding_all_8(),
+                            child: SvgPicture.asset(
+                              Assets.svg.svgArrowDown.keyName,
+                              width: 35,
+                            ),
+                          )),
                     ),
-                  ),
-
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Text(
+                      S.current.watch_now,
+                      style: KSTextStyle()
+                          .style(
+                        20,
+                        FontWeight.w400,
+                        fontBuilder: GoogleFonts.cormorantInfant,
+                      )
+                          .copyWith(color: AppStyle.whiteBg),
+                    ),
+                  ],
                 ),
               ),
             ],

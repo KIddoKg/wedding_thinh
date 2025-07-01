@@ -50,7 +50,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hundred_years_of_love":
             MessageLookupByLibrary.simpleMessage("Kết duyên trăm năm"),
         "item_one_address": MessageLookupByLibrary.simpleMessage(
-            "15 Đ. Trần Phú, Phường 3, Đà Lạt"),
+            "40 Đ. Trần Phú, Phường 3, Đà Lạt"),
         "item_one_date":
             MessageLookupByLibrary.simpleMessage("17h00 Ngày 11/07/2025"),
         "item_one_detail": MessageLookupByLibrary.simpleMessage(
@@ -71,8 +71,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "item_two_detail": MessageLookupByLibrary.simpleMessage(
             "Gặp gỡ hai gia đình & chính thức rước nàng về dinh."),
         "item_two_name": MessageLookupByLibrary.simpleMessage("Lễ Rước Dâu"),
-        "know_name":
-            MessageLookupByLibrary.simpleMessage("Tôi biết bạn tên gì nè?"),
+        "know_name": MessageLookupByLibrary.simpleMessage("Bạn tên gì nè?"),
         "line_event_schedule": MessageLookupByLibrary.simpleMessage(
             "Cùng xem các mốc quan trọng trong lễ cưới – từ lễ đón dâu, lễ nhà thờ đến tiệc cưới tại nhà hàng."),
         "line_four": MessageLookupByLibrary.simpleMessage(

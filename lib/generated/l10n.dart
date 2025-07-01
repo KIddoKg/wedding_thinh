@@ -310,10 +310,10 @@ class S {
     );
   }
 
-  /// `15 Tran Phu St., Ward 3, Da Lat`
+  /// `40 Tran Phu St., Ward 3, Da Lat`
   String get item_one_address {
     return Intl.message(
-      '15 Tran Phu St., Ward 3, Da Lat',
+      '40 Tran Phu St., Ward 3, Da Lat',
       name: 'item_one_address',
       desc: '',
       args: [],

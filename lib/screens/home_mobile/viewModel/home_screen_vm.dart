@@ -393,7 +393,7 @@ class HomeScreenMobileVm extends ChangeNotifier {
     if (!isb) {
       print("objecta");
       if (_player.audioSource == null) {
-        await _player.setAsset(Assets.mp3.goldenHour);
+        await _player.setAsset(Assets.mp3.loveCover);
         await _player.setLoopMode(LoopMode.one);
       }
       _player.play();
@@ -420,7 +420,7 @@ class HomeScreenMobileVm extends ChangeNotifier {
         print("dừng");
       } else {
         if (_player.audioSource == null) {
-          await _player.setAsset(Assets.mp3.goldenHour);
+          await _player.setAsset(Assets.mp3.loveCover);
           await _player.setLoopMode(LoopMode.one);
         }
 
