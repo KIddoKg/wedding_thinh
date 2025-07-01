@@ -158,37 +158,31 @@
 </head>
 
 <body>
+<!--<script>-->
+<!--    document.addEventListener('touchmove', function (e) {-->
+<!--      // chỉ cho scroll trong scroll-wrapper-->
+<!--      if (!e.target.closest('#scroll-wrapper')) {-->
+<!--        e.preventDefault();-->
+<!--      }-->
+<!--    }, { passive: false });-->
+<!--</script>-->
+
 <script>
-    document.addEventListener('touchmove', function (e) {
-      // chỉ cho scroll trong scroll-wrapper
-      if (!e.target.closest('#scroll-wrapper')) {
-        e.preventDefault();
+    let startY = 0;
+    const wrapper = document.getElementById("flutter-view");
+
+    wrapper.addEventListener('touchstart', function (e) {
+      startY = e.touches[0].clientY;
+    }, { passive: true });
+
+    wrapper.addEventListener('touchmove', function (e) {
+      const currentY = e.touches[0].clientY;
+      const deltaY = currentY - startY;
+
+      if (wrapper.scrollTop <= 0 && deltaY > 25) {
+        e.preventDefault(); // ✅ Chặn gesture hệ thống
       }
     }, { passive: false });
-</script>
-
-<script>
-
-
-      let startY = 0;
-
-      const wrapper = document.getElementById("scroll-wrapper");
-
-      wrapper.addEventListener('touchstart', function (e) {
-        startY = e.touches[0].clientY;
-      }, { passive: true });
-
-      wrapper.addEventListener('touchmove', function (e) {
-        const currentY = e.touches[0].clientY;
-        const deltaY = currentY - startY;
-
-        // ✅ Chỉ chặn khi scroll-wrapper ở đầu và người dùng kéo mạnh xuống
-        if (wrapper.scrollTop <= 0 && deltaY > 25) {
-          e.preventDefault(); // Ngăn dismiss WebView
-        }
-      }, { passive: false });
-
-
 </script>
 
 
@@ -196,9 +190,9 @@
 
 <script src="flutter_bootstrap.js" async></script>
 
-<div id="scroll-wrapper" style="height: 100vh; overflow-y: auto; -webkit-overflow-scrolling: touch;">
-    <flutter-view id="flutter_view"></flutter-view>
-</div>
+<!--<div id="scroll-wrapper" style="height: 100vh; overflow-y: auto; -webkit-overflow-scrolling: touch;">-->
+<!--    <flutter-view id="flutter_view"></flutter-view>-->
+<!--</div>-->
 <!-- Splash screen -->
 <div id="loading-splash">
     <img src="/assets/json_gif.gif" alt="Logo"/>
